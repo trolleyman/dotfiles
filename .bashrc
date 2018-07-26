@@ -1,47 +1,86 @@
-echo ~/.bashrc run.
+(set -o igncr) 2>/dev/null && set -o igncr; # this comment is needed
+# ^ For CRLF-unfriendly systems
 
-source ~/work/lib/git-prompt.sh
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# Git prompt
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
+#source ~/git-prompt.sh
 
-PS1="\[\e[0;36m\]\t \[\e[0;31m\][bash] \[\e[0;33m\]\$(if ! ([ -z \"$SSH_CONNECTION\" ] || [ -z \"$SSH_CLIENT\" ] || [ -z \"$SSH_TTY\" ]); then echo \"[ssh]\"; fi)\[\e[0;32m\]\u@\[\e[0;37m\]\h \$(if [[ \$? == 0 ]]; then echo \"\[\033[0;32m\]\$?\"; else echo \"\[\033[1;31m\]\$?\"; fi) \[\e[0;33m\]\w\$(__git_ps1)\[\e[0;1;32m\] \$ \[\e[39;49m\]"
+# == PS1 ==
+#PS1="\[\e[0;36m\]\t \[\e[0;31m\][bash] \[\e[0;33m\]\$(if ! ([ -z \"$SSH_CONNECTION\" ] || [ -z \"$SSH_CLIENT\" ] || [ -z \"$SSH_TTY\" ]); then echo \"[ssh]\"; fi)\[\e[0;32m\]\u@\[\e[0;37m\]\h \$(if [[ \$? == 0 ]]; then echo \"\[\033[0;32m\]\$?\"; else echo \"\[\033[1;31m\]\$?\"; fi) \[\e[0;33m\]\w\$(__git_ps1)\[\e[0;1;32m\] \$ \[\e[39;49m\]"
 
+_CLR_RED='\[\e[1;31m\]'
+_CLR_GRAY='\[\e[0;37m\]'
+_CLR_BLU='\[\e[0;36m\]'
+_CLR_DGRN='\[\e[0;32m\]'
+_CLR_GRN='\[\e[0;1;32m\]'
+_CLR_DYLW='\[\e[0;33m\]'
+_CLR_RST='\[\e[0m\]'
+
+_PS1_RET="\$( if [[ \$? == 0 ]]; then echo \"$_CLR_DGRN\$?\"; else echo \"$_CLR_RED\$?\"; fi )"
+
+_PS1_PROMPT="$_CLR_GRN\\$ $_CLR_RST"
+
+# Demo: 
+#PS1="$_CLR_BLU\t $_CLR_DGRN\u@$_CLR_GRAY\h $_PS1_RET $_CLR_DYLW\w\$(__git_ps1)\n$_PS1_PROMPT"
+
+# Demo: 
+#PS1="$_CLR_BLU\t $_CLR_DGRN\u@$_CLR_GRAY\h $_PS1_RET $_CLR_DYLW\w\n$_PS1_PROMPT"
+
+# == Helpful Settings ==
+# For rm **/*.pyc, etc.
+shopt -s globstar
+
+export PATH=$PATH:~/.local/bin
+
+# Make vim the default editor
+export EDITOR=/usr/bin/vim
+
+# Make Ctrl-D not end shell
+set -o ignoreeof
+
+# == Aliases ==
 alias cls=clear
-alias note=notepad
-alias np=notepad
+
+# ll alias
 alias ll="ls -lXkh --color"
-alias ssh-cs="ssh cxt510@tw.cs.bham.ac.uk"
-alias ssh-csb="ssh -t cxt510@tw.cs.bham.ac.uk 'bash'"
+alias ll='ls -Flh --group-directories-first'
+
+alias ssh-cs='ssh cxt510@tw.cs.bham.ac.uk'
+alias ssh-csb='ssh -t cxt510@tw.cs.bham.ac.uk "bash"'
+
+alias ssh-bb='ssh -t tolleyc@bluebear "bash --rcfile ~/.rcforssh"'
+alias ssh-bbn='ssh -t tolleyc@bluebear "bash"'
 function be {
 	bash
 	exit
 }
 
-yell() { echo "$0: $*" >&2; }
-die() { yell "$*"; exit 1; }
-try() { "$@" || die "cannot $*"; }
+# Needs further improvement -- swatch
+alias swatch="watch squeue -O jobarrayid:.20,name:30,account:20,state:15,starttime:10,timeleft:10,exit_code:.3,partition:20,priority:4,qos:8,cpuspertask:.3,maxnodes:.2,numcpus:.2,numnodes:.2"
 
-#alias git-graph="git log --graph --oneline --decorate"
-
+# Helpful Git aliases
+git config --global alias.co checkout
+git config --global alias.st status
+git config --global alias.br branch
+git config --global alias.ct commit
+git config --global alias.unstage "reset HEAD --"
 git config --global alias.plog "log --decorate --oneline"
-git config --global alias.tree "log --decorate --oneline --graph --all --color"
+git config --global alias.tree "log --oneline --decorate --color --graph"
+git config --global alias.treea "log --oneline --decorate --color --graph --all"
+git config --global alias.graph "log --oneline --decorate --color --graph"
+git config --global alias.grapha "log --oneline --decorate --color --graph --all"
+git config --global alias.pullall "!f(){ git pull "$@" && git submodule update --init --recursive; }; f"
 
-alias subl=sublime_text
-alias st=sublime_text
+# Bash script to print out total line count for users, in src/ directory
+# git ls-tree -r HEAD --name-only | grep '^src/*' | xargs -I {} git blame --line-porcelain {} | sed -n 's/^author-mail //p' | sort | uniq -c | sort -rn
 
-export RUST_BACKTRACE=1
-export DEV=~/work/HD/Dev/
-export PATH=$PATH:$DEV/bin
-export LIBRARY_PATH=$LIBRARY_PATH:$DEV/pkg-config/SDL2/lib/
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:$DEV/SDL2/include/
-#:$DEV/Rust/rust-std-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib
-export CARGO_HOME=$DEV/Rust/.cargo
-
-export MULTIRUST_HOME=$DEV/.multirust
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$DEV/pkg-config/
-
-export equ=$DEV/Rust/Projects/Equator/
-export por=$DEV/Rust/Projects/Portal/
-export dev=$DEV
-export HD=~/work/HD/
-
+if [ -t 1 ]; then
+	# This is attached to a terminal
+	echo ~/.bashrc run.
+fi
