@@ -12,13 +12,13 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 #source ~/git-prompt.sh
 
 # == PS1 ==
-_CLR_RED='\e[1;31m'
-_CLR_GRAY='\e[0;37m'
-_CLR_BLU='\e[0;36m'
-_CLR_DGRN='\e[0;32m'
-_CLR_GRN='\e[0;1;32m'
-_CLR_DYLW='\e[0;33m'
-_CLR_RST='\e[0m'
+_CLR_RED='\[\e[1;31m\]'
+_CLR_GRAY='\[\e[0;37m\]'
+_CLR_BLU='\[\e[0;36m\]'
+_CLR_DGRN='\[\e[0;32m\]'
+_CLR_GRN='\[\e[0;1;32m\]'
+_CLR_DYLW='\[\e[0;33m\]'
+_CLR_RST='\[\e[0m\]'
 
 _PS1_SHELL=''
 #_PS1_SHELL='\[\e[0;31m\][bash] '
