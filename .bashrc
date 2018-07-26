@@ -3,7 +3,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-        . /etc/bashrc
+	. /etc/bashrc
 fi
 
 # Git prompt
@@ -12,25 +12,30 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 #source ~/git-prompt.sh
 
 # == PS1 ==
-#PS1="\[\e[0;36m\]\t \[\e[0;31m\][bash] \[\e[0;33m\]\$(if ! ([ -z \"$SSH_CONNECTION\" ] || [ -z \"$SSH_CLIENT\" ] || [ -z \"$SSH_TTY\" ]); then echo \"[ssh]\"; fi)\[\e[0;32m\]\u@\[\e[0;37m\]\h \$(if [[ \$? == 0 ]]; then echo \"\[\033[0;32m\]\$?\"; else echo \"\[\033[1;31m\]\$?\"; fi) \[\e[0;33m\]\w\$(__git_ps1)\[\e[0;1;32m\] \$ \[\e[39;49m\]"
+_CLR_RED='\e[1;31m'
+_CLR_GRAY='\e[0;37m'
+_CLR_BLU='\e[0;36m'
+_CLR_DGRN='\e[0;32m'
+_CLR_GRN='\e[0;1;32m'
+_CLR_DYLW='\e[0;33m'
+_CLR_RST='\e[0m'
 
-_CLR_RED='\[\e[1;31m\]'
-_CLR_GRAY='\[\e[0;37m\]'
-_CLR_BLU='\[\e[0;36m\]'
-_CLR_DGRN='\[\e[0;32m\]'
-_CLR_GRN='\[\e[0;1;32m\]'
-_CLR_DYLW='\[\e[0;33m\]'
-_CLR_RST='\[\e[0m\]'
+_PS1_SHELL=''
+#_PS1_SHELL='\[\e[0;31m\][bash] '
 
+#_PS1_SSH=''
+_PS1_SSH="$_CLR_DYLW\$(if ! ([ -z \"$SSH_CONNECTION\" ] || [ -z \"$SSH_CLIENT\" ] || [ -z \"$SSH_TTY\" ]); then echo '[ssh] '; fi)"
+
+#_PS1_RET=''
 _PS1_RET="\$( if [[ \$? == 0 ]]; then echo \"$_CLR_DGRN\$?\"; else echo \"$_CLR_RED\$?\"; fi )"
 
-_PS1_PROMPT="$_CLR_GRN\\$ $_CLR_RST"
+_PS1_GIT=''
+#_PS1_GIT="\$(__git_ps1)"
 
-# Demo: 
-#PS1="$_CLR_BLU\t $_CLR_DGRN\u@$_CLR_GRAY\h $_PS1_RET $_CLR_DYLW\w\$(__git_ps1)\n$_PS1_PROMPT"
+#_PS1_PROMPT=" $_CLR_GRN\\$ $_CLR_RST" # no newline
+_PS1_PROMPT="\n$_CLR_GRN\\$ $_CLR_RST" # newline
 
-# Demo: 
-#PS1="$_CLR_BLU\t $_CLR_DGRN\u@$_CLR_GRAY\h $_PS1_RET $_CLR_DYLW\w\n$_PS1_PROMPT"
+PS1="$_CLR_BLU\t $_CLR_DGRN\u@$_CLR_GRAY\h $_PS1_RET $_CLR_DYLW\w$_PS1_GIT$_PS1_PROMPT"
 
 # == Helpful Settings ==
 # For rm **/*.pyc, etc.
