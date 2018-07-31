@@ -1,58 +1,6 @@
-execute pathogen#infect()
+let mapleader = ","
 
-" == Plugins ==
-" DetectIndent
-let g:detectindent_preferred_indent = 4
-autocmd BufReadPost * :DetectIndent
+source ~/.vim/config/plugins.vim
 
-" vim-flake8 config
-let g:flake8_show_in_gutter = 1
-" autocmd BufWritePost *.py call Flake8() " This calls flake 8 after each save
-
-" vim-autopep8 config
-"   - Set F8 as the key to call autopep
-autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
-let g:autopep8_diff_type='vertical'
-let g:autopep8_disable_show_diff=1 " Disables showing the diff
-
-" == User Settings ==
-" Turn on syntax highlighting
-syntax on
-filetype plugin indent on
-
-" Colour scheme
-colorscheme elflord
-
-" Start in INSERT mode
-au BufRead,BufNewFile * start
-
-" Turn on filetype detection
-filetype on
-
-" Turn on line numbers
-set number
-
-" Allow mouse selection that doesn't include the line numbers
-set mouse+=a
-
-" F11 to toggle paste mode
-map <F11> :set invpaste<CR>
-set pastetoggle=<F11>
-
-" Turn on incremental searching (highlights search as you type)
-set incsearch
-
-" Turn on search highlighting
-" To clear this, use ':nohls'
-set nohlsearch
-
-" Wildmenu options (<Tab> command completion)
-set wildmenu
-set wildmode=longest:list,full
-
-" Customize statusline with the path to the file
-set laststatus=2
-set statusline+=%f
-
-" Set tabstop to 4 (default)
-set tabstop=4
+source ~/.vim/config/settings.vim
+source ~/.vim/config/statusline.vim

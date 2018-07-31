@@ -33,7 +33,4 @@ ln -s $opts ~/.dotfiles/inputrc ~/.inputrc
 # Vim
 ln -s $opts ~/.dotfiles/vim/vimrc ~/.vimrc
 
-mkdir -p ~/.vim/autoload/
-ln -s $opts ~/.dotfiles/vim/pathogen.vim ~/.vim/autoload/pathogen.vim
-
-ln -s $opts ~/.dotfiles/vim/bundle/ ~/.vim/bundle/
+ln -s $opts ~/.dotfiles/vim ~/.vim
