@@ -6,6 +6,9 @@ $include /etc/inputrc
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 
+# Turn off bell
+set bell-style none
+
 # Show ambiguous options immediately, instead of waiting for a second
 # time before proceeding
 set show-all-if-ambiguous on
