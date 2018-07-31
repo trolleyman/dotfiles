@@ -1,1 +1,39 @@
-# TODO
+#!/bin/bash
+
+usage() {
+    echo "Usage: $0 [-f]" 1>&2
+    echo "       -f: force (remove existing files)" 1>&2
+    exit 1
+}
+
+opts=
+while getopts ":hf" o; do
+    case "${o}" in
+        f)
+            opts='-f'
+            ;;
+        h)
+            usage
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+
+set -ex
+
+# Bash
+ln -s $opts ~/.dotfiles/bash/bashrc ~/.bashrc
+ln -s $opts ~/.dotfiles/bash/bash_profile ~/.bash_profile
+
+# Inputrc
+ln -s $opts ~/.dotfiles/inputrc ~/.inputrc
+
+# Vim
+ln -s $opts ~/.dotfiles/vim/vimrc ~/.vimrc
+
+mkdir -p ~/.vim/autoload/
+ln -s $opts ~/.dotfiles/vim/pathogen.vim ~/.vim/autoload/pathogen.vim
+
+ln -s $opts ~/.dotfiles/vim/bundle/ ~/.vim/bundle/

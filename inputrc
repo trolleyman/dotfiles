@@ -1,0 +1,21 @@
+
+$include /etc/inputrc
+
+# https://coderwall.com/p/oqtj8w/the-single-most-useful-thing-in-bash
+# Make up/down work like CTRL-R
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Show ambiguous options immediately, instead of waiting for a second
+# time before proceeding
+set show-all-if-ambiguous on
+
+# Ignore case when autocompleting
+set completion-ignore-case on
+
+# '-' and '_' are treated as equivalent
+set completion-map-case on
+
+# When displaying <TAB> completion, don't display prefix that has been
+# already typed, if longer than 3 characters
+set completion-prefix-display-length 16
