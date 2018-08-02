@@ -22,7 +22,7 @@ bash_prompt() {
 
     # reset
     local RESET="\[\033[0;37m\]"
-    
+
     #_PS1_RET=''
     _PS1_RET="\$( if [[ \$? == 0 ]]; then echo \"$G\$?\"; else echo \"$BR\$?\"; fi )"
 
@@ -35,7 +35,7 @@ bash_prompt() {
     _PS1_PROMPT="\n$G\\$ $RESET" # newline
 
     export CONTEXT="whoami; hostname; echo 2"
-    PS1="$B\t $W\u$(context-color -p)@$W\h $_PS1_RET $Y\w$_PS1_GIT$_PS1_PROMPT"
+    PS1="$C\t $W\u$(context-color -p)@$W\h $_PS1_RET $Y\w$_PS1_GIT$_PS1_PROMPT"
 }
 
 bash_prompt
