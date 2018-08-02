@@ -1,6 +1,11 @@
 (set -o igncr) 2>/dev/null && set -o igncr; # this comment is needed
 # ^ For CRLF-unfriendly systems
 
+# If we are a slurm job, don't load anything.
+if [[ ! -z "${SLURM_JOB_ID}" ]]; then
+	return
+fi
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
