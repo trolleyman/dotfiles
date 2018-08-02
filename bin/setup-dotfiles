@@ -26,6 +26,7 @@ set -ex
 # Bash
 ln -s $opts ~/.dotfiles/bash/bashrc ~/.bashrc
 ln -s $opts ~/.dotfiles/bash/bash_profile ~/.bash_profile
+ln -s $opts ~/.dotfiles/bash/bash_logout ~/.bash_logout
 
 # Inputrc
 ln -s $opts ~/.dotfiles/inputrc ~/.inputrc
