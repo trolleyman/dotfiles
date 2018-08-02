@@ -34,7 +34,7 @@ bash_prompt() {
     #_PS1_PROMPT=" $G\\$ $RESET" # no newline
     local _PS1_PROMPT="\n$G\\$ $RESET" # newline
 
-    PS1="$C\t $W\u$(context-color -p)@$W\h $_PS1_RET $(context-color -p)\w$_PS1_GIT$_PS1_PROMPT"
+    PS1="$C\t $W\u$G@$W\h $_PS1_RET $Y\w$_PS1_GIT$_PS1_PROMPT"
 }
 
 bash_prompt
