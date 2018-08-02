@@ -6,11 +6,11 @@ usage() {
     exit 1
 }
 
-opts=
+force=
 while getopts ":hf" o; do
     case "${o}" in
         f)
-            opts='-f'
+            force=1
             ;;
         h)
             usage
@@ -21,17 +21,29 @@ while getopts ":hf" o; do
     esac
 done
 
-set -ex
+
+
+function do_link() {
+    if [[ -L "$2" ]]; then
+        (set -x; unlink "$2")
+    fi
+    if [[ -n "$force" && -e "$2" ]]; then
+        (set -x; rm -rf "$2")
+    fi
+    (set -x; ln -s "$1" "$2")
+}
+
+set -e
 
 # Bash
-ln -s $opts ~/.dotfiles/bash/bashrc ~/.bashrc
-ln -s $opts ~/.dotfiles/bash/bash_profile ~/.bash_profile
-ln -s $opts ~/.dotfiles/bash/bash_logout ~/.bash_logout
+do_link ~/.dotfiles/bash/bashrc ~/.bashrc
+do_link ~/.dotfiles/bash/bash_profile ~/.bash_profile
+do_link ~/.dotfiles/bash/bash_logout ~/.bash_logout
 
 # Inputrc
-ln -s $opts ~/.dotfiles/inputrc ~/.inputrc
+do_link ~/.dotfiles/inputrc ~/.inputrc
 
 # Vim
-ln -s $opts ~/.dotfiles/vim/vimrc ~/.vimrc
+do_link ~/.dotfiles/vim/vimrc ~/.vimrc
 
-ln -s $opts ~/.dotfiles/vim ~/.vim
+do_link ~/.dotfiles/vim ~/.vim
