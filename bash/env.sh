@@ -6,6 +6,14 @@ shopt -s globstar
 # Make Ctrl-D not end shell
 set -o ignoreeof
 
+# Append to history, don't rewrite it
+shopt -s histappend
+
+# History env
+export HISTFILESIZE=20000
+export HISTSIZE=5000
+export HISTTIMEFORMAT='%F %T '
+
 # == Env ==
 # Make vim the default editor
 export EDITOR=/usr/bin/vim
