@@ -1,28 +1,42 @@
 
-_CLR_RED='\[\e[1;31m\]'
-_CLR_GRAY='\[\e[0;37m\]'
-_CLR_BLU='\[\e[0;36m\]'
-_CLR_DGRN='\[\e[0;32m\]'
-_CLR_GRN='\[\e[0;1;32m\]'
-_CLR_DYLW='\[\e[0;33m\]'
-_CLR_RST='\[\e[0m\]'
+bash_prompt() {
+    # regular colors
+    local K="\[\033[0;30m\]"    # black
+    local R="\[\033[0;31m\]"    # red
+    local G="\[\033[0;32m\]"    # green
+    local Y="\[\033[0;33m\]"    # yellow
+    local B="\[\033[0;34m\]"    # blue
+    local M="\[\033[0;35m\]"    # magenta
+    local C="\[\033[0;36m\]"    # cyan
+    local W="\[\033[0;37m\]"    # white
 
-_PS1_SHELL=''
-#_PS1_SHELL='\[\e[0;31m\][bash] '
+    # emphasized (bolded) colors
+    local BK="\[\033[1;30m\]"
+    local BR="\[\033[1;31m\]"
+    local BG="\[\033[1;32m\]"
+    local BY="\[\033[1;33m\]"
+    local BB="\[\033[1;34m\]"
+    local BM="\[\033[1;35m\]"
+    local BC="\[\033[1;36m\]"
+    local BW="\[\033[1;37m\]"
 
-#_PS1_SSH=''
-_PS1_SSH="$_CLR_DYLW\$(if ! ([ -z \"$SSH_CONNECTION\" ] || [ -z \"$SSH_CLIENT\" ] || [ -z \"$SSH_TTY\" ]); then echo '[ssh] '; fi)"
+    # reset
+    local RESET="\[\033[0;37m\]"
+    
+    #_PS1_RET=''
+    _PS1_RET="\$( if [[ \$? == 0 ]]; then echo \"$G\$?\"; else echo \"$BR\$?\"; fi )"
 
-#_PS1_RET=''
-_PS1_RET="\$( if [[ \$? == 0 ]]; then echo \"$_CLR_DGRN\$?\"; else echo \"$_CLR_RED\$?\"; fi )"
+    _PS1_GIT=''
+    if [[ "`whoami`" -ne "tolleyc" ]]; then
+        _PS1_GIT="\$(__git_ps1)"
+    fi
 
-_PS1_GIT=''
-if [[ `whoami` -ne 'tolleyc' ]]; then
-    _PS1_GIT="\$(__git_ps1)"
-fi
+    #_PS1_PROMPT=" $G\\$ $RESET" # no newline
+    _PS1_PROMPT="\n$G\\$ $RESET" # newline
 
-#_PS1_PROMPT=" $_CLR_GRN\\$ $_CLR_RST" # no newline
-_PS1_PROMPT="\n$_CLR_GRN\\$ $_CLR_RST" # newline
+    export CONTEXT="whoami; hostname; echo 2"
+    PS1="$B\t $W\u$(context-color -p)@$W\h $_PS1_RET $Y\w$_PS1_GIT$_PS1_PROMPT"
+}
 
-export CONTEXT='hostname; whoami; echo "1"'
-PS1="$_CLR_BLU\t $(context-color -p)\u$_CLR_DGRN@$_CLR_GRAY\h $_PS1_RET $_CLR_DYLW\w$_PS1_GIT$_PS1_PROMPT"
+bash_prompt
+unset bash_prompt
