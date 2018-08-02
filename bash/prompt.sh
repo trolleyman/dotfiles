@@ -24,4 +24,5 @@ fi
 #_PS1_PROMPT=" $_CLR_GRN\\$ $_CLR_RST" # no newline
 _PS1_PROMPT="\n$_CLR_GRN\\$ $_CLR_RST" # newline
 
-PS1="$_CLR_BLU\t $_CLR_DGRN\u@$_CLR_GRAY\h $_PS1_RET $_CLR_DYLW\w$_PS1_GIT$_PS1_PROMPT"
+export CONTEXT='hostname; whoami; echo "1"'
+PS1="$_CLR_BLU\t $(context-color -p)\u$_CLR_DGRN@$_CLR_GRAY\h $_PS1_RET $_CLR_DYLW\w$_PS1_GIT$_PS1_PROMPT"

@@ -19,7 +19,7 @@ export HISTTIMEFORMAT='%F %T '
 export EDITOR=/usr/bin/vim
 
 # Local binaries
-export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.local/bin:~/.dotfiles/bin
 
 # == Git ==
 git config --global submodule.recurse true
