@@ -47,8 +47,8 @@ set ignorecase smartcase              " Case-insensitive unless we include upper
 set history=10000
 
 " Hide away backup and swap files
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swapfiles//
 
 " Reload file without prompting if it has changed on disk
 " Will still prompt if there is unsaved text in the buffer
