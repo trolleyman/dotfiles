@@ -1,6 +1,6 @@
 [submodule "vim/bundle/detectident"]
 	path = vim/bundle/detectident
-	url = https://github.com/ciaranm/detectindent
+	url = https://github.com/trolleyman/detectindent
 [submodule "vim/bundle/vim-autopep8"]
 	path = vim/bundle/vim-autopep8
 	url = https://github.com/tell-k/vim-autopep8
