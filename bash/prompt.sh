@@ -24,18 +24,18 @@ bash_prompt() {
     local RESET="\[\033[0;37m\]"
 
     #_PS1_RET=''
-    _PS1_RET="\$( if [[ \$? == 0 ]]; then echo \"$G\$?\"; else echo \"$BR\$?\"; fi )"
+    local _PS1_RET="\$( if [[ \$? == 0 ]]; then echo \"$G\$?\"; else echo \"$BR\$?\"; fi )"
 
-    _PS1_GIT=''
+    local _PS1_GIT=''
     if [[ "`whoami`" -ne "tolleyc" ]]; then
         _PS1_GIT="\$(__git_ps1)"
     fi
 
     #_PS1_PROMPT=" $G\\$ $RESET" # no newline
-    _PS1_PROMPT="\n$G\\$ $RESET" # newline
+    local _PS1_PROMPT="\n$G\\$ $RESET" # newline
 
-    export CONTEXT="whoami; hostname; echo 2"
-    PS1="$C\t $W\u$(context-color -p)@$W\h $_PS1_RET $Y\w$_PS1_GIT$_PS1_PROMPT"
+    local CCLR=$(context-color -p)
+    PS1="$C\t $W\u$CCLR@$W\h $_PS1_RET $CCLR\w$_PS1_GIT$_PS1_PROMPT"
 }
 
 bash_prompt
