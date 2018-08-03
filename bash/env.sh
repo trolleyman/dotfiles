@@ -22,5 +22,7 @@ export EDITOR=/usr/bin/vim
 export PATH=$PATH:~/.local/bin:~/.dotfiles/bin
 
 # == Git ==
-git config --global submodule.recurse true
-git config --global credential.helper 'cache --timeout=3600'
+git config --global submodule.recurse true                    # Recurse through submodules when pulling
+git config --global credential.helper 'cache --timeout=7200'  # Cache passwords for 2 hours
+git config --global core.preloadIndex true                    # Preload index -- helps on NFS
+
