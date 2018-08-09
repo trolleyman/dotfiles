@@ -45,5 +45,8 @@ do_link ~/.dotfiles/inputrc ~/.inputrc
 
 # Vim
 do_link ~/.dotfiles/vim/vimrc ~/.vimrc
-
 do_link ~/.dotfiles/vim ~/.vim
+
+# tmux
+do_link ~/.dotfiles/tmux.conf ~/.tmux.conf
+
