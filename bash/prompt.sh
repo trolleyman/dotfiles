@@ -21,7 +21,7 @@ bash_prompt() {
     local BW="\[\033[1;37m\]"
 
     # reset
-    local RESET="\[\033[0;37m\]"
+    local RESET="\[\033[0m\]"
 
     #_PS1_RET=''
     local _PS1_RET="\$( if [[ \$? == 0 ]]; then echo \"$G\$?\"; else echo \"$BR\$?\"; fi )"
@@ -31,10 +31,7 @@ bash_prompt() {
         _PS1_GIT="\$(__git_ps1)"
     fi
 
-    #_PS1_PROMPT=" $G\\$ $RESET" # no newline
-    local _PS1_PROMPT="\n$G\\$ $RESET" # newline
-
-    PS1="$C\t $W\u$G@$W\h $_PS1_RET $Y\w$_PS1_GIT$_PS1_PROMPT"
+    PS1="$C\t $W\u$G@$W\h $_PS1_RET $Y\w$_PS1_GIT\n$G\\$ $BW$RESET"
 }
 
 bash_prompt
