@@ -19,15 +19,11 @@ function treedu() {
 	fi
 }
 
-function reload {
-	bash
-	exit
-}
+alias reload='exec bash'
 
 alias cls=clear
 
-alias ll="ls -lXkh --color"
-alias ll='ls -Flh --group-directories-first'
+alias ll='ls -lXhF --color --group-directories-first'
 
 # SSH
 alias ssh-cs='ssh cxt510@tw.cs.bham.ac.uk'
