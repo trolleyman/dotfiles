@@ -19,6 +19,7 @@ fi
 function check_dotfiles() (
 	set -e
 	pushd ~/.dotfiles 2>&1 1>/dev/null
+	
 	UPSTREAM=${1:-'@{u}'}
 	LOCAL=$(git rev-parse @{0})
 	REMOTE=$(git rev-parse "$UPSTREAM")
@@ -33,6 +34,11 @@ function check_dotfiles() (
 	else
 		printf "\e[93mWarning: ~/.dotfiles has diverged from upstream\e[0m\n"
 	fi
+	
+	# Do this in the background so there's no waiting -- we'll
+	# get the warning next time we reload
+	git fetch --no-recurse-submodules 2>&1 1>/dev/null &
+	
 	popd 2>&1 1>/dev/null
 )
 
