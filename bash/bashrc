@@ -16,6 +16,22 @@ fi
 . ~/.dotfiles/bash/completion.sh
 . ~/.dotfiles/bash/prompt.sh
 
+# Detect whether or not ~/.dotfiles is out of date
+UPSTREAM=${1:-'@{u}'}
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse "$UPSTREAM")
+BASE=$(git merge-base @ "$UPSTREAM")
+
+if [ $LOCAL = $REMOTE ]; then
+	# Up-to-date
+elif [ $LOCAL = $BASE ]; then
+	printf "\e[93mWarning: Need to git pull ~/.dotfiles\e[0m\n"
+elif [ $REMOTE = $BASE ]; then
+	printf "\e[93mWarning: Need to git push ~/.dotfiles\e[0m\n"
+else
+	printf "\e[93mWarning: ~/.dotfiles has diverged from upstream\e[0m\n"
+fi
+
 if [ -t 1 ]; then
 	# This is attached to a terminal
 	echo ~/.bashrc run.
