@@ -1,4 +1,24 @@
 
+function treedu() {
+	local depth=''
+
+	while getopts "hL:" opt ; do
+		case "$opt" in
+			L) depth="$OPTARG" ;;
+			h) echo "Usage: $0 [-h] [-L level] <path>" 1>&2; exit 1;;
+		esac
+	done
+
+	shift "$((OPTIND-1))"
+
+	if [ -z "$depth" ] ; then
+		tree --du -d -shaC "$@"
+	else
+		local PATTERN='(  *[^ ]* ){'"$depth"'}\['
+		tree --du -d -shaC "$@" | grep -Ev "$PATTERN"
+	fi
+}
+
 function reload {
 	bash
 	exit
@@ -20,7 +40,7 @@ alias ssh-bbn='ssh -t tolleyc@bluebear.bham.ac.uk "bash"'
 alias path='echo $PATH | tr -s ":" "\n"'
 
 # Slurm
-alias swatch="watch -n 1.0 \"showq -o '%14i %20P %10T %.3C %.3D %.11b %9u %10q %30j %7M %9l %19S %R'\""
+alias swatch="watch -n 1.0 \"showq -o '%17i %20P %10T %.3C %.3D %.11b %9u %10q %30j %7M %9l %19S %R'\""
 
 # Helpful Git config aliases
 git config --global alias.co checkout
