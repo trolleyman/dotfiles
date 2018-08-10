@@ -7,6 +7,3 @@
 [submodule "vim/bundle/vim-flake8"]
 	path = vim/bundle/vim-flake8
 	url = https://github.com/nvie/vim-flake8
-[submodule "bash/lib/context-color"]
-	path = bash/lib/context-color
-	url = https://github.com/ramnes/context-color
