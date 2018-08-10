@@ -49,3 +49,4 @@ if [ -t 1 ]; then
 	# Info that the bashrc ran
 	echo ~/.bashrc run.
 fi
+
