@@ -13,8 +13,8 @@ alias ll='ls -Flh --group-directories-first'
 alias ssh-cs='ssh cxt510@tw.cs.bham.ac.uk'
 alias ssh-csb='ssh -t cxt510@tw.cs.bham.ac.uk "bash"'
 
-alias ssh-bb='ssh -t tolleyc@bluebear "bash --rcfile ~/.rcforssh"'
-alias ssh-bbn='ssh -t tolleyc@bluebear "bash"'
+alias ssh-bb='ssh -t tolleyc@bluebear.bham.ac.uk "bash --rcfile ~/.rcforssh"'
+alias ssh-bbn='ssh -t tolleyc@bluebear.bham.ac.uk "bash"'
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
