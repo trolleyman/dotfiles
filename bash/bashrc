@@ -16,13 +16,13 @@ fi
 . ~/.dotfiles/bash/completion.sh
 . ~/.dotfiles/bash/prompt.sh
 
-if [ -t 1 ]; then
-	# Detect whether or not ~/.dotfiles is out of date
+function check_dotfiles() (
+	set -e
 	pushd ~/.dotfiles 2>&1 1>/dev/null
 	UPSTREAM=${1:-'@{u}'}
-	LOCAL=$(git rev-parse @)
+	LOCAL=$(git rev-parse @{0})
 	REMOTE=$(git rev-parse "$UPSTREAM")
-	BASE=$(git merge-base @ "$UPSTREAM")
+	BASE=$(git merge-base @{0} "$UPSTREAM")
 	
 	if [[ "$LOCAL" == "$REMOTE" ]]; then
 		: # Up-to-date
@@ -34,6 +34,11 @@ if [ -t 1 ]; then
 		printf "\e[93mWarning: ~/.dotfiles has diverged from upstream\e[0m\n"
 	fi
 	popd 2>&1 1>/dev/null
+)
+
+if [ -t 1 ]; then
+	# Detect whether or not ~/.dotfiles is out of date
+	check_dotfiles
 	
 	# Info that the bashrc ran
 	echo ~/.bashrc run.
