@@ -1,5 +1,8 @@
 
 # == Shell options ==
+# umask
+umask 027
+
 # For rm **/*.pyc, etc.
 shopt -s globstar
 
@@ -19,10 +22,9 @@ export HISTTIMEFORMAT='%F %T '
 export EDITOR=/usr/bin/vim
 
 # Local binaries
-export PATH=$PATH:~/.local/bin:~/.dotfiles/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/.dotfiles/bin:$HOME/bin
 
 # == Git ==
 git config --global submodule.recurse true                    2>&1 > /dev/null # Recurse through submodules when pulling
 git config --global credential.helper 'cache --timeout=7200'  2>&1 > /dev/null # Cache passwords for 2 hours
 git config --global core.preloadIndex true                    2>&1 > /dev/null # Preload index -- helps on NFS
-

@@ -5,15 +5,3 @@ if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
 
-# User specific environment and startup programs
-PATH=$PATH:$HOME/.local/bin:$HOME/bin
-
-export PATH
-
-TMPDIR=/tmp
-export TMPDIR
-
-OMP_NUM_THREADS=1
-export OMP_NUM_THREADS
-
-umask 022
