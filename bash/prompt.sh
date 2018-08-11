@@ -31,7 +31,8 @@ bash_prompt() {
         _PS1_GIT="\$(__git_ps1)"
     fi
 
-    PS1="$C\t $W\u$G@$W\h $_PS1_RET $Y\w$_PS1_GIT\n$G\\$ $BW$RESET"
+    local CX=$(context-color)
+    PS1="$CX\t $W\u$CX@$W\h $_PS1_RET $Y\w$_PS1_GIT\n$G\\$ $BW$RESET"
 }
 
 bash_prompt
