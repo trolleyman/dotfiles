@@ -9,4 +9,4 @@
 	url = https://github.com/nvie/vim-flake8
 [submodule "bash/lib/context-color"]
 	path = bash/lib/context-color
-	url = https://github.com/trolleyman/context-color
+	url = git@github.com:trolleyman/context-color
