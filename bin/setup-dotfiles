@@ -40,6 +40,10 @@ do_link ~/.dotfiles/bash/bashrc ~/.bashrc
 do_link ~/.dotfiles/bash/bash_profile ~/.bash_profile
 do_link ~/.dotfiles/bash/bash_logout ~/.bash_logout
 
+# SSH
+mkdir -p ~/.ssh/
+do_link ~/.dotfiles/ssh/config ~/.ssh/config
+
 # Inputrc
 do_link ~/.dotfiles/inputrc ~/.inputrc
 
