@@ -27,7 +27,7 @@ bash_prompt() {
     local _PS1_RET="\$( if [[ \$? == 0 ]]; then echo \"$G\$?\"; else echo \"$BR\$?\"; fi )"
 
     local _PS1_GIT=''
-    if [[ "`whoami`" -ne "tolleyc" ]]; then
+    if [[ "`whoami`" != "tolleyc" ]]; then
         _PS1_GIT="\$(__git_ps1)"
     fi
 
