@@ -43,12 +43,26 @@ set hlsearch                          " Highlight results
 set incsearch                         " Search-as-you-type
 set ignorecase smartcase              " Case-insensitive unless we include uppercase
 
+" Adds <Alt-Up/Down> keys that move a block of text up/down a line
+nnoremap <A-Down> :m .+1<CR>==
+nnoremap <A-Up> :m .-2<CR>==
+inoremap <A-Down> <Esc>:m .+1<CR>==gi
+inoremap <A-Up> <Esc>:m .-2<CR>==gi
+vnoremap <A-Down> :m '>+1<CR>gv=gv
+vnoremap <A-Up> :m '<-2<CR>gv=gv
+
 " More persistent command history
 set history=10000
 
 " Hide away backup and swap files
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swapfiles//
+set backupdir=$HOME/.vim/backup/
+set directory=$HOME/.vim/swapfiles/
+
+" Enable persistent undo
+if has('persistent_undo')         " Check if vim supports it
+	set undofile                  " Turn on the feature
+	set undodir=$HOME/.vim/undo/  " Directory where the undo files will be stored
+endif
 
 " Reload file without prompting if it has changed on disk
 " Will still prompt if there is unsaved text in the buffer
