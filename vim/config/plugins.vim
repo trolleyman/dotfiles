@@ -10,6 +10,9 @@ filetype plugin indent on
 let g:detectindent_preferred_indent = 4
 autocmd BufReadPost * :DetectIndent
 
+" vim-airline
+let g:airline_powerline_fonts = 1
+
 " vim-flake8
 let g:flake8_show_in_gutter = 1
 " autocmd BufWritePost *.py call Flake8() " This calls flake 8 after each save

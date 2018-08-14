@@ -10,3 +10,6 @@
 [submodule "bash/lib/context-color"]
 	path = bash/lib/context-color
 	url = git@github.com:trolleyman/context-color
+[submodule "vim/bundle/vim-airline"]
+	path = vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline
