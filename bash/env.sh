@@ -26,9 +26,8 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/.dotfiles/bin:$HOME/bin
 
 # X11 DISPLAY variable
 if [[ -z "$DISPLAY" ]]; then
-	set DISPLAY=localhost:0
+	export DISPLAY=localhost:0
 fi
-export DISPLAY
 
 # == Git ==
 git config --global submodule.recurse true                    2>&1 > /dev/null # Recurse through submodules when pulling
