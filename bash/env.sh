@@ -25,7 +25,7 @@ export EDITOR=/usr/bin/vim
 export PATH=$PATH:$HOME/.local/bin:$HOME/.dotfiles/bin:$HOME/bin
 
 # X11 DISPLAY variable
-if [[ -z '$DISPLAY' ]]; then
+if [[ -z "$DISPLAY" ]]; then
 	set DISPLAY=localhost:0
 fi
 export DISPLAY
