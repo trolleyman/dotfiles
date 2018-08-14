@@ -24,6 +24,12 @@ export EDITOR=/usr/bin/vim
 # Local binaries
 export PATH=$PATH:$HOME/.local/bin:$HOME/.dotfiles/bin:$HOME/bin
 
+# X11 DISPLAY variable
+if [[ -z '$DISPLAY' ]]; then
+	set DISPLAY=localhost:0
+fi
+export DISPLAY
+
 # == Git ==
 git config --global submodule.recurse true                    2>&1 > /dev/null # Recurse through submodules when pulling
 git config --global credential.helper 'cache --timeout=7200'  2>&1 > /dev/null # Cache passwords for 2 hours
