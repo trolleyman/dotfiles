@@ -73,6 +73,7 @@ alias swatch="watch -n 1.0 \"showq -o '%17i %20P %10T %.3C %.3D %.11b %9u %10q %
 	git config --global alias.grapha 'log --oneline --decorate --color --graph --all'
 
 	git config --global alias.pullall '!f(){ git pull "$@" && git submodule update --init --recursive; }; f'
+	git config --global alias.prune-all "!bash -c \"f(){ git fetch -p && (git branch -r | awk '{print \\\$1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print \\\$1}' | xargs -r git branch -d); }; f\""
 ) 2>&1 >/dev/null
 
 # TODO: Bash script to print out total line count for users, in src/ directory
