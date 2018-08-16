@@ -45,7 +45,7 @@ function check_dotfiles() (
 if [ -t 1 ]; then
 	# Detect whether or not ~/.dotfiles is out of date
 	pushd ~/.dotfiles 2>&1 >/dev/null
-	if [[ ! git remote -v | grep fetch | grep -q https:// ]]; then
+	if [[ -z "$( git remote -v | grep fetch | grep https:// )" ]]; then
 		check_dotfiles
 	fi
 	popd 2>&1 >/dev/null
