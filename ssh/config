@@ -10,7 +10,12 @@ HostName             bluebear.bham.ac.uk
 ForwardX11           yes
 ForwardX11Trusted    yes
 
-Host                 github
+Host                 172.31.8.69
+HostName             172.31.8.69
+ForwardX11           yes
+ForwardX11Trusted    yes
+
+Host                 github.com
 HostName             github.com
 IdentityFile         ~/.ssh/id_rsa
 
