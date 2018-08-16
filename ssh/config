@@ -3,22 +3,24 @@ Host *
 ServerAliveInterval   15
 ServerAliveCountMax   3
 EscapeChar            `
+XAuthLocation         /usr/bin/xauth
 
-Host           bluebear bluebear.bham.ac.uk
-HostName       bluebear.bham.ac.uk
-ForwardX11     yes
+Host                 bluebear bluebear.bham.ac.uk
+HostName             bluebear.bham.ac.uk
+ForwardX11           yes
+ForwardX11Trusted    yes
 
-Host           github
-HostName       github.com
-IdentityFile   ~/.ssh/id_rsa
+Host                 github
+HostName             github.com
+IdentityFile         ~/.ssh/id_rsa
 
-Host           callumgtolley.uk
-HostName       callumgtolley.uk
-IdentityFile   ~/.ssh/id_trolleyman.org
-User           root
+Host                 callumgtolley.uk
+HostName             callumgtolley.uk
+IdentityFile         ~/.ssh/id_trolleyman.org
+User                 root
 
-Host           trolleyman.org
-HostName       trolleyman.org
-IdentityFile   ~/.ssh/id_trolleyman.org
-User           root
+Host                 trolleyman.org
+HostName             trolleyman.org
+IdentityFile         ~/.ssh/id_trolleyman.org
+User                 root
 
