@@ -31,7 +31,7 @@ bash_prompt() {
         _PS1_GIT="\$(__git_ps1)"
     fi
 
-    local CX=$(context-color)
+    local CX=$(context-color -p)
     PS1="$CX\t $W\u$CX@$W\h $_PS1_RET $Y\w$_PS1_GIT\n$G\\$ $BW$RESET"
 }
 
