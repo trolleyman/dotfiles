@@ -9,6 +9,9 @@ shopt -s globstar
 # Make Ctrl-D not end shell
 set -o ignoreeof
 
+#so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
+stty -ixon
+
 # Append to history, don't rewrite it
 shopt -s histappend
 
