@@ -61,6 +61,11 @@ nnoremap <C-s> :w<CR>
 inoremap <C-s> <C-o>:w<CR>
 vnoremap <C-s> <ESC>:w<CR>gv
 
+" Make Ctrl-Z undo
+nnoremap <C-z> :u<CR>
+inoremap <C-z> <C-o>:u<CR>
+vnoremap <C-z> <ESC>:i<CR>gv
+
 " More persistent command history
 set history=10000
 
