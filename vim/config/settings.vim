@@ -66,6 +66,9 @@ nnoremap <C-z> :u<CR>
 inoremap <C-z> <C-o>:u<CR>
 vnoremap <C-z> <ESC>:i<CR>gv
 
+"vnoremap <Tab> ><CR>gv
+"vnoremap <Tab> <<CR>gv
+
 " More persistent command history
 set history=10000
 

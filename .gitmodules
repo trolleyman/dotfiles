@@ -14,3 +14,6 @@
 [submodule "vim/bundle/vim-javascript"]
 	path = vim/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
+[submodule "vim/bundle/vim-fixkey"]
+	path = vim/bundle/vim-fixkey
+	url = https://github.com/drmikehenry/vim-fixkey
