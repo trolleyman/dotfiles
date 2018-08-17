@@ -13,7 +13,7 @@
 	url = https://github.com/trolleyman/context-color
 [submodule "vim/bundle/vim-javascript"]
 	path = vim/bundle/vim-javascript
-	url = https://github.com/pangloss/vim-javascript.git
+	url = https://github.com/pangloss/vim-javascript
 [submodule "vim/bundle/vim-fixkey"]
 	path = vim/bundle/vim-fixkey
-	url = https://github.com/drmikehenry/vim-fixkey
+	url = https://github.com/trolleyman/vim-fixkey
