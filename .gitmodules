@@ -11,3 +11,6 @@
 [submodule "bash/lib/context-color"]
 	path = bash/lib/context-color
 	url = https://github.com/trolleyman/context-color
+[submodule "vim/bundle/vim-javascript"]
+	path = vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
