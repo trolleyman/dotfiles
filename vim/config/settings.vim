@@ -51,6 +51,16 @@ inoremap <A-Up> <Esc>:m .-2<CR>==gi
 vnoremap <A-Down> :m '>+1<CR>gv=gv
 vnoremap <A-Up> :m '<-2<CR>gv=gv
 
+" Make Ctrl-Q quit
+nnoremap <C-q> :q<CR>
+inoremap <C-q> <C-o>:q<CR>
+vnoremap <C-q> <ESC>:q<CR>
+
+" Make Ctrl-S save
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <C-o>:w<CR>
+vnoremap <C-s> <ESC>:w<CR>gv
+
 " More persistent command history
 set history=10000
 
