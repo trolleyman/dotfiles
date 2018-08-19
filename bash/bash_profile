@@ -1,6 +1,9 @@
 # .bash_profile
 
-# Get the aliases and functions
+# motd
+#echo "motd"
+
+# Source normal bashrc file
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
