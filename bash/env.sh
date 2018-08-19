@@ -21,6 +21,9 @@ export HISTSIZE=5000
 export HISTTIMEFORMAT='%F %T '
 
 # == Env ==
+# GPG
+export GPG_TTY=$(tty)
+
 # Make vim the default editor
 export EDITOR=/usr/bin/vim
 
