@@ -21,76 +21,82 @@ __colour_enabled() {
 }
 unset __colourise_prompt && __colour_enabled && __colourise_prompt=1
 
+if [[ $__colourise_prompt ]]; then
+	export GIT_PS1_SHOWCOLORHINTS=1
+
+	# Wrap the colour codes between \[ and \], so that
+	# bash counts the correct number of characters for line wrapping:
+	# regular colors
+	__COL_K="\[\033[0;30m\]"    # black
+	__COL_R="\[\033[0;31m\]"    # red
+	__COL_G="\[\033[0;32m\]"    # green
+	__COL_Y="\[\033[0;33m\]"    # yellow
+	__COL_B="\[\033[0;34m\]"    # blue
+	__COL_M="\[\033[0;35m\]"    # magenta
+	__COL_C="\[\033[0;36m\]"    # cyan
+	__COL_W="\[\033[0;37m\]"    # white
+
+	# emphasized (bolded) colors
+	__COL_BK="\[\033[1;30m\]"
+	__COL_BR="\[\033[1;31m\]"
+	__COL_BG="\[\033[1;32m\]"
+	__COL_BY="\[\033[1;33m\]"
+	__COL_BB="\[\033[1;34m\]"
+	__COL_BM="\[\033[1;35m\]"
+	__COL_BC="\[\033[1;36m\]"
+	__COL_BW="\[\033[1;37m\]"
+
+	# reset
+	__COL_RESET="\[\033[0m\]"
+	
+	__COL_CX=$(context-color -p)
+else # No color
+	unset GIT_PS1_SHOWCOLORHINTS
+	
+	__COL_K=''
+	__COL_R=''
+	__COL_G=''
+	__COL_Y=''
+	__COL_B=''
+	__COL_M=''
+	__COL_C=''
+	__COL_W=''
+
+	# emphasized (bolded) colors
+	__COL_BK=''
+	__COL_BR=''
+	__COL_BG=''
+	__COL_BY=''
+	__COL_BB=''
+	__COL_BM=''
+	__COL_BC=''
+	__COL_BW=''
+
+	# reset
+	__COL_RESET=''
+	
+	__COL_CX=''
+fi
+
 __set_bash_prompt()
 {
 	local exit="$?" # Save the exit status of the last command
 
 	if [[ $__colourise_prompt ]]; then
 		export GIT_PS1_SHOWCOLORHINTS=1
-
-		# Wrap the colour codes between \[ and \], so that
-		# bash counts the correct number of characters for line wrapping:
-		# regular colors
-		local K="\[\033[0;30m\]"    # black
-		local R="\[\033[0;31m\]"    # red
-		local G="\[\033[0;32m\]"    # green
-		local Y="\[\033[0;33m\]"    # yellow
-		local B="\[\033[0;34m\]"    # blue
-		local M="\[\033[0;35m\]"    # magenta
-		local C="\[\033[0;36m\]"    # cyan
-		local W="\[\033[0;37m\]"    # white
-
-		# emphasized (bolded) colors
-		local BK="\[\033[1;30m\]"
-		local BR="\[\033[1;31m\]"
-		local BG="\[\033[1;32m\]"
-		local BY="\[\033[1;33m\]"
-		local BB="\[\033[1;34m\]"
-		local BM="\[\033[1;35m\]"
-		local BC="\[\033[1;36m\]"
-		local BW="\[\033[1;37m\]"
-
-		# reset
-		local RESET="\[\033[0m\]"
-		
-		local CX=$(context-color -p)
-	else # No color
+	else
 		unset GIT_PS1_SHOWCOLORHINTS
-		
-		local K=''
-		local R=''
-		local G=''
-		local Y=''
-		local B=''
-		local M=''
-		local C=''
-		local W=''
-
-		# emphasized (bolded) colors
-		local BK=''
-		local BR=''
-		local BG=''
-		local BY=''
-		local BB=''
-		local BM=''
-		local BC=''
-		local BW=''
-
-		# reset
-		local RESET=''
-		
-		local CX=''
 	fi
 
 	if [[ $exit != 0 ]]; then
-		local exitString='$BR$exit'
+		local exitString="$__COL_BR$exit"
 	else
-		local exitString='$G$exit'
+		local exitString="$__COL_G$exit"
 	fi
 
 	# PS1 is made from $preGitPS1 + <git-status> + $postGitPS1
-	local preGitPS1="$CX\t $W\u$CX@$W\h $exitString$BY\w$BW "
-	local postGitPS1="\n$G\\$ $BW$RESET"
+	local preGitPS1="$__COL_CX\t $__COL_W\u$__COL_CX@$__COL_W\h $exitString$__COL_Y\w $__COL_BW"
+	local postGitPS1="\n$__COL_G\\$ $__COL_BW$__COL_RESET"
 
 	# Set PS1 from $preGitPS1 + <git-status> + $postGitPS1
 	__git_ps1 "$preGitPS1" "$postGitPS1" '(%s)'
