@@ -89,7 +89,7 @@ __set_bash_prompt()
 	fi
 
 	# PS1 is made from $preGitPS1 + <git-status> + $postGitPS1
-	local preGitPS1="$CX\t $W\u$CX@$W\h $exitString $Y\w"
+	local preGitPS1="$CX\t $W\u$CX@$W\h $exitString$BY\w$BW "
 	local postGitPS1="\n$G\\$ $BW$RESET"
 
 	# Set PS1 from $preGitPS1 + <git-status> + $postGitPS1
