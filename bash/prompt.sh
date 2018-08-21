@@ -35,5 +35,6 @@ bash_prompt() {
     PS1="$CX\t $W\u$CX@$W\h $_PS1_RET $Y\w$_PS1_GIT\n$G\\$ $BW$RESET"
 }
 
-bash_prompt
+# Only set prompt if interactive
+[[ $- == *i* ]] && bash_prompt
 unset bash_prompt

@@ -3,6 +3,9 @@
 # motd
 #echo "motd"
 
+# Run git config, as we only want this when we login
+~/.dotfiles/bash/git_config.sh >/dev/null 2>&1
+
 # Source normal bashrc file
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc

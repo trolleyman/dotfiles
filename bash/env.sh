@@ -9,8 +9,8 @@ shopt -s globstar
 # Make Ctrl-D not end shell
 set -o ignoreeof
 
-#so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
-stty -ixon
+# So as not to be disturbed by Ctrl-S ctrl-Q in terminals (interactive only):
+[[ $- == *i* ]] && stty -ixon
 
 # Append to history, don't rewrite it
 shopt -s histappend
@@ -35,8 +35,3 @@ if [[ -z "$DISPLAY" ]]; then
 	export DISPLAY=localhost:0
 fi
 
-# == Git ==
-git config --global submodule.recurse true                    2>&1 > /dev/null # Recurse through submodules when pulling
-git config --global credential.helper 'cache --timeout=7200'  2>&1 > /dev/null # Cache passwords for 2 hours
-git config --global core.preloadIndex true                    2>&1 > /dev/null # Preload index -- helps on NFS
-git config --global push.default simple                       2>&1 > /dev/null # Adopt new pushing format
