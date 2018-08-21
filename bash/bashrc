@@ -11,9 +11,11 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-. ~/.dotfiles/bash/aliases.sh
 . ~/.dotfiles/bash/env.sh
+
+. ~/.dotfiles/bash/aliases.sh
 . ~/.dotfiles/bash/completion.sh
+
 . ~/.dotfiles/bash/prompt.sh
 
 function check_dotfiles() (

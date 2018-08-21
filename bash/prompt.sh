@@ -1,5 +1,5 @@
 
-# Select git info displayed, see /usr/lib/git-core/git-sh-prompt for more
+# Select git info displayed, see ~/.dotfiles/bash/lib/git-prompt.sh for more
 export GIT_PS1_SHOWDIRTYSTATE=1           # '*' = unstaged, '+' = staged
 export GIT_PS1_SHOWSTASHSTATE=1           # '$' = stashed
 export GIT_PS1_SHOWUNTRACKEDFILES=1       # '%' = untracked
@@ -10,6 +10,9 @@ export GIT_PS1_DESCRIBE_STYLE="describe"  # detached HEAD style:
 #  branch        relative to newer tag or branch (master~4)
 #  describe      relative to older annotated tag (v1.6.3.1-13-gdd42c2f)
 #  default       exactly eatching tag
+
+# Source __git_ps1
+source ~/.dotfiles/bash/lib/git-prompt.sh
 
 # Check if we support colours
 __colour_enabled() {
