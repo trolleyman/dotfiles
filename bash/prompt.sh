@@ -26,10 +26,10 @@ bash_prompt() {
     #_PS1_RET=''
     local _PS1_RET="\$( if [[ \$? == 0 ]]; then echo \"$G\$?\"; else echo \"$BR\$?\"; fi )"
 
-    local _PS1_GIT=''
-    if [[ "`whoami`" != "tolleyc" ]]; then
-        _PS1_GIT="\$(__git_ps1)"
-    fi
+    local _PS1_GIT="\$(__git_ps1)"
+    #if [[ "`whoami`" == "tolleyc" ]]; then
+    #    _PS1_GIT=''
+    #fi
 
     local CX=$(context-color -p)
     PS1="$CX\t $W\u$CX@$W\h $_PS1_RET $Y\w$_PS1_GIT\n$G\\$ $BW$RESET"
