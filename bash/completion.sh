@@ -8,11 +8,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # Git prompt
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUPSTREAM="verbose"
-export GIT_PS1_SHOWCOLORHINTS=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
 source ~/.dotfiles/bash/lib/git-prompt.sh
 
 # Git bash completion
