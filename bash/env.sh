@@ -24,6 +24,9 @@ export HISTTIMEFORMAT='%F %T '
 # GPG
 export GPG_TTY=$(tty)
 
+# Set default less options
+export LESS=-Rq
+
 # Make vim the default editor
 export EDITOR=/usr/bin/vim
 
