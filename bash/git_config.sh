@@ -25,6 +25,7 @@ git config --global alias.prune-all "!bash -c \"f(){ git fetch -p && (git branch
 # git ls-tree -r HEAD --name-only | grep '^src/*' | xargs -I {} git blame --line-porcelain {} | sed -n 's/^author-mail //p' | sort | uniq -c | sort -rn
 
 # Git config
+git config --global color.ui always                             # Enable colors
 git config --global submodule.recurse true                      # Recurse through submodules when pulling
 git config --global credential.helper 'cache --timeout=7200'    # Cache passwords for 2 hours
 git config --global core.preloadIndex true                      # Preload index -- helps on NFS
