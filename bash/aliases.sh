@@ -48,8 +48,8 @@ alias cls=clear
 alias ll='ls -lXhF --color --group-directories-first'
 
 # Mistyping helpers
-alias ..=cd ..
-alias cd..=cd ..
+alias ..='cd ..'
+alias cd..='cd ..'
 
 alias gti=git
 
