@@ -40,11 +40,21 @@ extract () {
 	fi
 }
 
+# Helpers
 alias reload='exec bash'
 
 alias cls=clear
 
 alias ll='ls -lXhF --color --group-directories-first'
+
+# Mistyping helpers
+alias ..=cd ..
+alias cd..=cd ..
+
+alias gti=git
+
+# Git alias
+alias g=git
 
 # SSH
 alias ssh-cs='ssh cxt510@tw.cs.bham.ac.uk'
