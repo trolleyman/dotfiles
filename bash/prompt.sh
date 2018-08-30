@@ -48,11 +48,11 @@ if [[ $__colourise_prompt ]]; then
 
 	# reset
 	__COL_RESET="\[\033[0m\]"
-	
+
 	__COL_CX=$(context-color -p)
 else # No color
 	unset GIT_PS1_SHOWCOLORHINTS
-	
+
 	__COL_K=''
 	__COL_R=''
 	__COL_G=''
@@ -78,9 +78,44 @@ else # No color
 	__COL_CX=''
 fi
 
-__set_bash_prompt()
-{
+__compute_time() {
+	local START=$1
+	local END=$2
+
+	# TODO
+}
+
+# Executed before each command is run in bash
+__pre_cmd() {
+	# Set title to command that's currently running
+	local cmd="${BASH_COMMAND}"
+	if [[ ! "$cmd" =~ ^_.* ]]; then
+		printf "\e]0;%s\007" "$cmd"
+	fi
+
+	# This is to prevent us running this script multiple times between prompts
+	if [ -z "$_JUST_AFTER_PROMPT" ]; then
+		return
+	fi
+	unset _JUST_AFTER_PROMPT
+
+	_COMMAND_START_TIME=$(date +%s.%N)
+}
+trap __pre_cmd DEBUG
+
+__set_bash_prompt() {
 	local exit="$?" # Save the exit status of the last command
+
+	local _COMMAND_END_TIME=$(date +%s.%N)
+
+	__compute_time $_COMMAND_START_TIME $_COMMAND_END_TIME
+	unset _COMMAND_END_TIME
+
+	# Set _JUST_AFTER_PROMPT, so that we know when the prompt has just been set
+	_JUST_AFTER_PROMPT=1
+
+	# Set title
+	printf "\e]0;%s\007" "bash"
 
 	if [[ $__colourise_prompt ]]; then
 		export GIT_PS1_SHOWCOLORHINTS=1
@@ -105,10 +140,10 @@ __set_bash_prompt()
 	__git_ps1 "$preGitPS1" "$postGitPS1" '(%s)'
 }
 
+# Only set prompt if interactive
 if [[ $- == *i* ]]; then
-	# Only set prompt if interactive
-	
 	PS1=''
+
 	# This tells bash to reinterpret PS1 after every command, which we
 	# need because __git_ps1 will return different text and colors
 	PROMPT_COMMAND=__set_bash_prompt
