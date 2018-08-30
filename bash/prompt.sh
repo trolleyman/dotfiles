@@ -89,9 +89,16 @@ __compute_time() {
 __pre_cmd() {
 	# Set title to command that's currently running
 	local cmd="${BASH_COMMAND}"
+	if [[ "$cmd" == "__set_bash_prompt" ]]; then
+		# We aren't after a command
+		return
+	fi
+
 	if [[ ! "$cmd" =~ ^_.* ]]; then
 		printf "\e]0;%s\007" "$cmd"
 	fi
+
+	_JUST_AFTER_COMMAND=1
 
 	# This is to prevent us running this script multiple times between prompts
 	if [ -z "$_JUST_AFTER_PROMPT" ]; then
@@ -110,6 +117,7 @@ __set_bash_prompt() {
 
 	__compute_time $_COMMAND_START_TIME $_COMMAND_END_TIME
 	unset _COMMAND_END_TIME
+	unset _COMMAND_START_TIME
 
 	# Set _JUST_AFTER_PROMPT, so that we know when the prompt has just been set
 	_JUST_AFTER_PROMPT=1
@@ -129,11 +137,20 @@ __set_bash_prompt() {
 		local exitString="$__COL_G$exit"
 	fi
 
-	local dirstackn=$(( $(dirs -p | wc -l) - 1 ))
-	local dirstack=$(for i in `seq $dirstackn`; do echo -n +; done)
+	local dirstackn="\$(( \$(dirs -p | wc -l) - 1 ))"
+	local dirstack="\$(for i in \$(seq $dirstackn); do echo -n +; done)"
+
+	if [ ! -z "$_JUST_AFTER_COMMAND" ]; then
+		unset _JUST_AFTER_COMMAND
+		local infoStr="something 123456"
+		local infoStr=" [$infoStr] "
+		local infoStrPS1="$__COL_RESET$__COL_C${infoStr//?/ }\e[\${COLUMNS}C\e[\$(( ${#infoStr} - 1 ))D$infoStr"
+	else
+		local infoStrPS1=''
+	fi
 
 	# PS1 is made from $preGitPS1 + <git-status> + $postGitPS1
-	local preGitPS1="$__COL_CX\t $__COL_W\u$__COL_CX@$__COL_W\h $exitString $__COL_Y\w $__COL_BW"
+	local preGitPS1="$infoStrPS1$__COL_CX\t $__COL_W\u$__COL_CX@$__COL_W\h $exitString $__COL_Y\w $__COL_BW"
 	local postGitPS1="\n$__COL_Y$dirstack$__COL_G\\$ $__COL_BW$__COL_RESET"
 
 	# Set PS1 from $preGitPS1 + <git-status> + $postGitPS1
