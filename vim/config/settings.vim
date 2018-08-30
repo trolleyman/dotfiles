@@ -28,6 +28,10 @@ set showcmd                           " Show partially typed command sequences
 set visualbell                        " Don't beep
 set wrap                              " Soft wrap
 
+" Automatically save and reload sessions for files
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
+
 " Wildmenu (<Tab> command completion)
 set wildmenu
 set wildmode=longest:list,full
