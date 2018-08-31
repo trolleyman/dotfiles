@@ -3,7 +3,7 @@ Host *
 ServerAliveInterval  15
 ServerAliveCountMax  3
 EscapeChar           `
-XAuthLocation        /usr/bin/xauth
+XauthLocation        /usr/bin/xauth
 ControlMaster        auto
 ControlPath          ~/.ssh/control-master/%r@%h:%p.socket
 ControlPersist       30s
@@ -33,6 +33,8 @@ Host                 trolleyman.org callumgtolley.uk
 HostName             %h
 IdentityFile         ~/.ssh/id_trolleyman.org
 User                 root
+ForwardX11           yes
+ForwardX11Trusted    yes
 
 Host                 tinky-winky.cs.bham.ac.uk
 HostName             cs
