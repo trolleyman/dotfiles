@@ -106,18 +106,14 @@ __pre_cmd() {
 	fi
 	unset _JUST_AFTER_PROMPT
 
-	_COMMAND_START_TIME=$(date +%s.%N)
+	_COMMAND_START_TIME=$(date +%s%N)
 }
 trap __pre_cmd DEBUG
 
 __set_bash_prompt() {
 	local exit="$?" # Save the exit status of the last command
 
-	local _COMMAND_END_TIME=$(date +%s.%N)
-
-	__compute_time $_COMMAND_START_TIME $_COMMAND_END_TIME
-	unset _COMMAND_END_TIME
-	unset _COMMAND_START_TIME
+	local _COMMAND_END_TIME=$(date +%s%N)
 
 	# Set _JUST_AFTER_PROMPT, so that we know when the prompt has just been set
 	_JUST_AFTER_PROMPT=1
@@ -140,11 +136,43 @@ __set_bash_prompt() {
 	local dirstackn="\$(( \$(dirs -p | wc -l) - 1 ))"
 	local dirstack="\$(for i in \$(seq $dirstackn); do echo -n +; done)"
 
-	if [ ! -z "$_JUST_AFTER_COMMAND" ]; then
+	if [ ! -z "$_JUST_AFTER_COMMAND" ] && [ ! -z "$_COMMAND_START_TIME" ]; then
 		unset _JUST_AFTER_COMMAND
-		local infoStr="something 123456"
-		local infoStr=" [$infoStr] "
-		local infoStrPS1="$__COL_RESET$__COL_C${infoStr//?/ }\e[\${COLUMNS}C\e[\$(( ${#infoStr} - 1 ))D$infoStr"
+
+		local nanos=$(( $_COMMAND_END_TIME - $_COMMAND_START_TIME ))
+		unset _COMMAND_START_TIME
+		unset _COMMAND_END_TIME
+
+		local MSEC=1000000
+		local SEC=$(($MSEC * 1000))
+		local MIN=$((60 * $SEC))
+		local HOUR=$((60 * $MIN))
+		local DAY=$((24 * $HOUR))
+
+		local numDays=$(($nanos / $DAY))
+		local numHours=$(($nanos % $DAY / $HOUR))
+		local numMins=$(($nanos % $HOUR / $MIN))
+		local numSecs=$(($nanos % $MIN / $SEC))
+		local numMs=$(($nanos % $SEC / $MSEC))
+
+		local timeStr=""
+		#local numMsPretty="$( printf '%03d' "$numMs" )"
+		local numMsPretty="$numMs"
+		if [ $numDays -gt 0 ]; then
+			timeStr="${numDays}d ${numHours}h ${numMins}m ${numSecs}s ${numMsPretty}ms"
+		elif [ $numHours -gt 0 ]; then
+			timeStr="${numHours}h ${numMins}m ${numSecs}s ${numMsPretty}ms"
+		elif [ $numMins -gt 0 ]; then
+			timeStr="${numMins}m ${numSecs}s ${numMsPretty}ms"
+		elif [ $numSecs -gt 0 ]; then
+			timeStr="${numSecs}s ${numMsPretty}ms"
+		else
+			timeStr="${numMsPretty}ms"
+		fi
+
+		local infoStr=" [ $timeStr ] "
+		local infoStrCol=" \e[38;5;39m[ $timeStr ] "
+		local infoStrPS1="$__COL_RESET\[${infoStr//?/ }\e[\${COLUMNS}C\e[\$(( ${#infoStr} - 1 ))D$infoStrCol\]"
 	else
 		local infoStrPS1=''
 	fi
