@@ -11,7 +11,7 @@ set pastetoggle=<F11>
 set tabstop=4
 
 syntax on                             " Syntax highlighting
-color elflord                         " Default color scheme
+colorscheme molokai                   " Default color scheme
 
 au BufRead,BufNewFile * start         " Start in INSERT mode
 set mouse+=a                          " Allow mouse selection
