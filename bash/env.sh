@@ -1,4 +1,9 @@
 
+# == Dir colors ==
+if [ -r ~/.dir_colors ]; then
+	eval `dircolors ~/.dir_colors`
+fi
+
 # == Shell options ==
 # umask
 umask 027
