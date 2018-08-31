@@ -2,7 +2,7 @@
 Host *
 ServerAliveInterval  15
 ServerAliveCountMax  3
-EscapeChar           ¬
+EscapeChar           `
 XAuthLocation        /usr/bin/xauth
 ControlMaster        auto
 ControlPath          ~/.ssh/control-master/%r@%h:%p.socket
@@ -10,6 +10,7 @@ ControlPersist       30s
 
 Host                 bluebear bb
 HostName             bluebear.bham.ac.uk
+User                 tolleyc
 ForwardX11           yes
 ForwardX11Trusted    yes
 
@@ -20,6 +21,7 @@ ForwardX11Trusted    yes
 
 Host                 django
 HostName             172.31.8.69
+User                 centos
 ForwardX11           yes
 ForwardX11Trusted    yes
 
@@ -29,6 +31,7 @@ IdentityFile         ~/.ssh/id_rsa
 
 Host                 trolleyman.org callumgtolley.uk
 HostName             %h
+user                 root
 IdentityFile         ~/.ssh/id_trolleyman.org
 User                 root
 

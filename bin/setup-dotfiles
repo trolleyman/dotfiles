@@ -42,6 +42,7 @@ do_link ~/.dotfiles/bash/bash_logout ~/.bash_logout
 
 # SSH
 mkdir -p ~/.ssh/
+mkdir -p ~/.ssh/control-master/
 do_link ~/.dotfiles/ssh/config ~/.ssh/config
 
 # Inputrc
