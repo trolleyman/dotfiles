@@ -178,7 +178,11 @@ __set_bash_prompt() {
 	fi
 
 	# PS1 is made from $preGitPS1 + <git-status> + $postGitPS1
-	local preGitPS1="$infoStrPS1$__COL_CX\t $__COL_W\u$__COL_CX@$__COL_W\h $exitString $__COL_Y\w $__COL_BW"
+	local venv=''
+	if [[ ! -z "$VIRTUAL_ENV" ]]; then
+		venv="($VIRTUAL_ENV) "
+	fi
+	local preGitPS1="$infoStrPS1$__COL_BW$venv$__COL_CX\t $__COL_W\u$__COL_CX@$__COL_W\h $exitString $__COL_Y\w $__COL_BW"
 	local postGitPS1="\n$__COL_Y$dirstack$__COL_G\\$ $__COL_BW$__COL_RESET"
 
 	# Set PS1 from $preGitPS1 + <git-status> + $postGitPS1
