@@ -36,7 +36,7 @@ function do_link() {
 set -e
 
 # Dircolors
-do_link ~/.dotfiles/dircolors-solarized/dircolors.256dark ~/.dir_colors
+do_link ~/.dotfiles/dir_colors ~/.dir_colors
 
 # Bash
 do_link ~/.dotfiles/bash/bashrc ~/.bashrc
