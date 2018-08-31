@@ -17,3 +17,6 @@
 [submodule "vim/bundle/vim-fixkey"]
 	path = vim/bundle/vim-fixkey
 	url = https://github.com/trolleyman/vim-fixkey
+[submodule "dircolors-solarized"]
+	path = dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized
