@@ -1,11 +1,14 @@
 
 Host *
-ServerAliveInterval   15
-ServerAliveCountMax   3
-EscapeChar            `
-XAuthLocation         /usr/bin/xauth
+ServerAliveInterval  15
+ServerAliveCountMax  3
+EscapeChar           ¬
+XAuthLocation        /usr/bin/xauth
+ControlMaster        auto
+ControlPath          ~/.ssh/control-master/%r@%h:%p.socket
+ControlPersist       30s
 
-Host                 bluebear bluebear.bham.ac.uk
+Host                 bluebear bb
 HostName             bluebear.bham.ac.uk
 ForwardX11           yes
 ForwardX11Trusted    yes
@@ -15,7 +18,7 @@ HostName             bb2login04
 ForwardX11           yes
 ForwardX11Trusted    yes
 
-Host                 172.31.8.69 django
+Host                 django
 HostName             172.31.8.69
 ForwardX11           yes
 ForwardX11Trusted    yes
@@ -24,13 +27,8 @@ Host                 github.com
 HostName             github.com
 IdentityFile         ~/.ssh/id_rsa
 
-Host                 callumgtolley.uk
-HostName             callumgtolley.uk
-IdentityFile         ~/.ssh/id_trolleyman.org
-User                 root
-
-Host                 trolleyman.org
-HostName             trolleyman.org
+Host                 trolleyman.org callumgtolley.uk
+HostName             %h
 IdentityFile         ~/.ssh/id_trolleyman.org
 User                 root
 
