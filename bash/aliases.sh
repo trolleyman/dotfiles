@@ -56,15 +56,6 @@ alias gti=git
 # Git alias
 alias g=git
 
-# SSH
-alias ssh-cs='ssh cxt510@tw.cs.bham.ac.uk'
-alias ssh-csb='ssh -t cxt510@tw.cs.bham.ac.uk "bash --login"'
-
-alias ssh-bb='ssh -t tolleyc@bluebear.bham.ac.uk "bash --login --rcfile ~/.rcforssh"'
-alias ssh-bbn='ssh -t tolleyc@bluebear.bham.ac.uk "bash --login"'
-
-alias ssh-django='ssh -t centos@172.31.8.69 bash'
-
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 

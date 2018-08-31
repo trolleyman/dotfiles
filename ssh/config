@@ -31,7 +31,12 @@ IdentityFile         ~/.ssh/id_rsa
 
 Host                 trolleyman.org callumgtolley.uk
 HostName             %h
-user                 root
 IdentityFile         ~/.ssh/id_trolleyman.org
 User                 root
+
+Host                 tw.cs.bham.ac.uk
+HostName             cs
+User                 cxt510
+ForwardX11           yes
+ForwardX11Trusted    yes
 
