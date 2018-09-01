@@ -52,8 +52,6 @@ man() {
             man "$@"
 }
 
-Screenshot of Terminal showing the zsh manpage with the above customizations.
-
 # Helpers
 alias reload='exec bash'
 
