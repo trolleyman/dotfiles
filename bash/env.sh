@@ -36,7 +36,7 @@ export LESS=-Rq
 export EDITOR=/usr/bin/vim
 
 # Local binaries
-export PATH=$PATH:$HOME/.local/bin:$HOME/.dotfiles/bin:$HOME/bin
+export PATH=$HOME/.dotfiles/bin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$PATH
 
 # X11 DISPLAY variable
 if [[ -z "$DISPLAY" ]]; then
