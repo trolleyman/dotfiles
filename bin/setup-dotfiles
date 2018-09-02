@@ -60,4 +60,5 @@ do_link ~/.dotfiles/tmux.conf ~/.tmux.conf
 
 # GDB
 do_link ~/.dotfiles/gdbinit/gdbinit ~/.gdbinit
+do_link ~/.dotfiles/gdbinit.local ~/.gdbinit.local
 
