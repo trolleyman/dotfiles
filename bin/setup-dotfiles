@@ -58,3 +58,6 @@ do_link ~/.dotfiles/vim ~/.vim
 # tmux
 do_link ~/.dotfiles/tmux.conf ~/.tmux.conf
 
+# GDB
+do_link ~/.dotfiles/gdbinit/gdbinit ~/.gdbinit
+
