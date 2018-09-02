@@ -1,5 +1,6 @@
 
-Host *
+# = All host defaults =
+Host                 *
 ServerAliveInterval  15
 ServerAliveCountMax  3
 EscapeChar           `
@@ -8,38 +9,42 @@ ControlMaster        auto
 ControlPath          ~/.ssh/control-master/%r@%h:%p.socket
 ControlPersist       30s
 
-Host                 bluebear bb
-HostName             bluebear.bham.ac.uk
-User                 tolleyc
+# = Semi-trusted host defaults =
+Host                 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk
+ForwardX11           yes
+
+# = Trusted host defaults =
+Host                 bluebear bb bluebear.bham.ac.uk bb2login04 django 172.31.8.69 trolleyman.org callumgtolley.uk
+ForwardAgent         yes
 ForwardX11           yes
 ForwardX11Trusted    yes
 
+# = Work hosts =
+Host                 bluebear bb
+HostName             bluebear.bham.ac.uk
+User                 tolleyc
+
 Host                 bb2login04
 HostName             bb2login04
-ForwardX11           yes
-ForwardX11Trusted    yes
 
 Host                 django
 HostName             172.31.8.69
 User                 centos
-ForwardX11           yes
-ForwardX11Trusted    yes
 
+# = GitHub =
 Host                 github.com
 HostName             github.com
 IdentityFile         ~/.ssh/id_rsa
 User                 git
 
+# = Personal hosts =
 Host                 trolleyman.org callumgtolley.uk
 HostName             %h
 IdentityFile         ~/.ssh/id_trolleyman.org
 User                 root
-ForwardX11           yes
-ForwardX11Trusted    yes
 
-Host                 tinky-winky.cs.bham.ac.uk
-HostName             cs
+# = CS hosts =
+Host                 cs tw.cs.bham.ac.uk
+HostName             tinky-winky.cs.bham.ac.uk
 User                 cxt510
-ForwardX11           yes
-ForwardX11Trusted    yes
 
