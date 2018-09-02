@@ -64,6 +64,8 @@ alias ..='cd ..'
 alias cd..='cd ..'
 
 alias gti=git
+alias itg=git
+alias igt=git
 
 # Git alias
 alias g=git
