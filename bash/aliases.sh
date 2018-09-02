@@ -70,6 +70,9 @@ alias igt=git
 # Git alias
 alias g=git
 
+# Helper to fix fake xauth generation warning
+alias fix-xauth='xauth generate $DISPLAY'
+
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
