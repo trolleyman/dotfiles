@@ -28,6 +28,7 @@ ForwardX11Trusted    yes
 Host                 github.com
 HostName             github.com
 IdentityFile         ~/.ssh/id_rsa
+User                 git
 
 Host                 trolleyman.org callumgtolley.uk
 HostName             %h

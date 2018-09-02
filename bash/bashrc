@@ -39,7 +39,7 @@ function check_dotfiles() (
 	
 	# Do this in the background so there's no waiting -- we'll
 	# get the warning next time we reload
-	( git fetch --no-recurse-submodules 2>&1 1>/dev/null & ) 2>&1 1>/dev/null
+	( git fetch --quiet --no-recurse-submodules &>/dev/null </dev/null & ) &>/dev/null </dev/null
 	
 	popd 2>&1 1>/dev/null
 )
