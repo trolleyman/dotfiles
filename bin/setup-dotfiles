@@ -48,6 +48,10 @@ mkdir -p ~/.ssh/
 mkdir -p ~/.ssh/control-master/
 do_link ~/.dotfiles/ssh/config ~/.ssh/config
 
+# gpg
+mkdir -p ~/.gnupg/
+do_link ~/.dotfiles/gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+
 # Inputrc
 do_link ~/.dotfiles/inputrc ~/.inputrc
 
