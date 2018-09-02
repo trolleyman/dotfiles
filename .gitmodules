@@ -20,3 +20,6 @@
 [submodule "vim/bundle/colorschemes"]
 	path = vim/bundle/colorschemes
 	url = https://github.com/flazz/vim-colorschemes.git
+[submodule "gdbinit"]
+	path = gdbinit
+	url = https://github.com/gdbinit/gdbinit
