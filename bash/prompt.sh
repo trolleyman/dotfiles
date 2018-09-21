@@ -95,7 +95,7 @@ __pre_cmd() {
 	fi
 
 	if [[ ! "$cmd" =~ ^_.* ]]; then
-		printf "\e]0;%s\007" "$cmd"
+		printf "\e]0;%s\007" "bash - $cmd"
 	fi
 
 	_JUST_AFTER_COMMAND=1
