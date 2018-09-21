@@ -1,0 +1,4 @@
+
+alias -a -- db=dashboard
+alias -a -- exit=quit
+
