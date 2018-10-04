@@ -1,4 +1,9 @@
 
+if ! shopt -o login_shell; then
+	# Don't set prompt if we aren't a login shell
+	return
+fi
+
 # Select git info displayed, see ~/.dotfiles/bash/lib/git-prompt.sh for more
 export GIT_PS1_SHOWDIRTYSTATE=1           # '*' = unstaged, '+' = staged
 export GIT_PS1_SHOWSTASHSTATE=1           # '$' = stashed
