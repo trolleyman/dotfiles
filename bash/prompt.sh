@@ -1,5 +1,5 @@
 
-if ! shopt -o login_shell; then
+if ! shopt -q login_shell; then
 	# Don't set prompt if we aren't a login shell
 	return
 fi
