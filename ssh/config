@@ -30,7 +30,8 @@ HostName             bb2login04
 Host                 django
 HostName             172.31.8.69
 User                 centos
-ForwardX11           no # xauth not included on the remote host
+# Don't forward X11 as xauth not installed
+ForwardX11           no
 ForwardX11Trusted    no
 
 # = GitHub =
