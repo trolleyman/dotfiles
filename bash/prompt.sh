@@ -1,9 +1,4 @@
 
-if ! shopt -q login_shell; then
-	# Don't set prompt if we aren't a login shell
-	return
-fi
-
 # Select git info displayed, see ~/.dotfiles/bash/lib/git-prompt.sh for more
 export GIT_PS1_SHOWDIRTYSTATE=1           # '*' = unstaged, '+' = staged
 export GIT_PS1_SHOWSTASHSTATE=1           # '$' = stashed
@@ -141,7 +136,8 @@ __set_bash_prompt() {
 	local dirstackn="\$(( \$(dirs -p | wc -l) - 1 ))"
 	local dirstack="\$(for i in \$(seq $dirstackn); do echo -n +; done)"
 
-	if [ ! -z "$_JUST_AFTER_COMMAND" ] && [ ! -z "$_COMMAND_START_TIME" ]; then
+	if [[ $- == *i* ]] && [ ! -z "$_JUST_AFTER_COMMAND" ] && [ ! -z "$_COMMAND_START_TIME" ]; then
+		# If interactive, and a command has just been run, setup the time info string
 		unset _JUST_AFTER_COMMAND
 
 		local nanos=$(( $_COMMAND_END_TIME - $_COMMAND_START_TIME ))
