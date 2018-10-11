@@ -78,13 +78,6 @@ else # No color
 	__COL_CX=''
 fi
 
-__compute_time() {
-	local START=$1
-	local END=$2
-
-	# TODO
-}
-
 # Executed before each command is run in bash
 __pre_cmd() {
 	# Set title to command that's currently running
@@ -94,7 +87,7 @@ __pre_cmd() {
 		return
 	fi
 
-	if [[ ! "$cmd" =~ ^_.* ]]; then
+	if [[ $- == *i* ]] && [[ ! "$cmd" =~ ^_.* ]]; then
 		printf "\e]0;%s\007" "bash - $cmd"
 	fi
 
@@ -119,7 +112,9 @@ __set_bash_prompt() {
 	_JUST_AFTER_PROMPT=1
 
 	# Set title
-	printf "\e]0;%s\007" "bash"
+	if [[ $- == *i* ]]; then
+		printf "\e]0;%s\007" "bash"
+	fi
 
 	if [[ $__colourise_prompt ]]; then
 		export GIT_PS1_SHOWCOLORHINTS=1
