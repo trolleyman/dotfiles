@@ -77,5 +77,5 @@ alias fix-xauth='xauth generate $DISPLAY'
 alias path='echo $PATH | tr -s ":" "\n"'
 
 # Slurm
-alias swatch="watch -n 1.0 \"showq -o '%17i %20P %10T %.3C %.3D %.11b %9u %10q %30j %7M %9l %19S %R'\""
+alias swatch="watch -n 1.0 \"showq -o '%17i %20P %10T %.3C %.3D %11b %.9u %10q %30j %7M %9l %19S %R'\""
 
