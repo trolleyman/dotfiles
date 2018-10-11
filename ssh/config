@@ -14,7 +14,7 @@ Host                 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk
 ForwardX11           yes
 
 # = Trusted host defaults =
-Host                 bluebear bb bluebear.bham.ac.uk bb2login04 django 172.31.8.69 trolleyman.org callumgtolley.uk
+Host                 bluebear bb bluebear.bham.ac.uk bb2login04 trolleyman.org callumgtolley.uk
 ForwardAgent         yes
 ForwardX11           yes
 ForwardX11Trusted    yes
@@ -30,9 +30,6 @@ HostName             bb2login04
 Host                 django
 HostName             172.31.8.69
 User                 centos
-# Don't forward X11 as xauth not installed
-ForwardX11           no
-ForwardX11Trusted    no
 
 # = GitHub =
 Host                 github.com
