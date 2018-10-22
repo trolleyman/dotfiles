@@ -1,6 +1,8 @@
 (set -o igncr) 2>/dev/null && set -o igncr; # this comment is needed
 # ^ For CRLF-unfriendly systems
 
+export SHELL=/bin/bash
+
 # If we are a slurm job, don't load anything.
 if [[ ! -z "${SLURM_JOB_ID}" ]]; then
 	return
