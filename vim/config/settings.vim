@@ -28,6 +28,13 @@ set showcmd                           " Show partially typed command sequences
 set visualbell                        " Don't beep
 set wrap                              " Soft wrap
 
+set nocompatible                      " Not compatible with vi
+set digraph                           " Allows for entering of ä with 'a' + CTRL-H + ':'
+set esckeys                           " Enables recognition of arrow keys that start with ESC
+
+set nostartofline                     " Prevents the cursor from changing the current column when jumping to other lines in the window
+set ww=<,>,h,l                        " Allows you to wrap the cursor on cursor left/right
+
 " Automatically save and reload sessions for files
 au BufWinLeave ?* mkview
 au BufWinEnter ?* silent loadview
