@@ -43,3 +43,10 @@ if [[ -z "$DISPLAY" ]]; then
 	export DISPLAY=localhost:0
 fi
 
+# SSH -- start ssh-agent if not already started
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+	eval `ssh-agent`
+	ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+
