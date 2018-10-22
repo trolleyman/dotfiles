@@ -10,8 +10,9 @@ ControlPath          ~/.ssh/control-master/%r@%h:%p.socket
 ControlPersist       30s
 
 # = Semi-trusted host defaults =
-Host                 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk
+Host                 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk
 ForwardX11           yes
+ForwardX11Trusted    yes
 
 # = Trusted host defaults =
 Host                 bluebear bb bluebear.bham.ac.uk bb2login04 trolleyman.org callumgtolley.uk
