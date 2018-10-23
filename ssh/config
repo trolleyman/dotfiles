@@ -11,13 +11,8 @@ ControlPersist       30s
 ForwardX11           no
 ForwardX11Trusted    no
 
-# = Semi-trusted host defaults =
-Host                 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk
-ForwardX11           yes
-ForwardX11Trusted    yes
-
 # = Trusted host defaults =
-Host                 bluebear bb bluebear.bham.ac.uk bb2login04 trolleyman.org callumgtolley.uk
+Host                 trolleyman.org callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk
 ForwardAgent         yes
 ForwardX11           yes
 ForwardX11Trusted    yes
