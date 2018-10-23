@@ -3,14 +3,19 @@
 
 export SHELL=/bin/bash
 
-# If we are a slurm job, don't load anything.
-if [[ ! -z "${SLURM_JOB_ID}" ]]; then
-	return
-fi
-
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
+fi
+
+# Set helper variables
+[[ $- == *i* ]] && _INTERACTIVE_SHELL=true || _INTERACTIVE_SHELL=false
+
+shopt -q login_shell && _LOGIN_SHELL=true || _LOGIN_SHELL=false
+
+# If we are a slurm job, don't load anything.
+if [[ ! -z "${SLURM_JOB_ID}" ]]; then
+	return 0
 fi
 
 . ~/.dotfiles/bash/env.sh
@@ -26,4 +31,7 @@ if $_INTERACTIVE_SHELL; then
 	# Info that the bashrc ran
 	echo ~/.bashrc run.
 fi
+
+unset _INTERACTIVE_SHELL
+unset _LOGIN_SHELL
 

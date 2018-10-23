@@ -1,33 +1,35 @@
 
 # == Dir colors ==
 if [ -r ~/.dir_colors ]; then
-	eval `dircolors ~/.dir_colors`
+	$_INTERACTIVE_SHELL && eval `dircolors ~/.dir_colors`
 fi
 
 # == Shell options ==
 # umask
 umask 027
 
-# For rm **/*.pyc, etc.
-shopt -s globstar
-
-# Make Ctrl-D not end shell
-set -o ignoreeof
-
-# So as not to be disturbed by Ctrl-S ctrl-Q in terminals (interactive only):
-[[ $- == *i* ]] && stty -ixon
-
-# Append to history, don't rewrite it
-shopt -s histappend
-
-# History env
-export HISTFILESIZE=20000
-export HISTSIZE=5000
-export HISTTIMEFORMAT='%F %T '
+if $_INTERACTIVE_SHELL; then
+	# For rm **/*.pyc, etc.
+	shopt -s globstar
+	
+	# Make Ctrl-D not end shell
+	set -o ignoreeof
+	
+	# So as not to be disturbed by Ctrl-S ctrl-Q in terminals
+	stty -ixon
+	
+	# Append to history, don't rewrite it
+	shopt -s histappend
+	
+	# History env
+	export HISTFILESIZE=20000
+	export HISTSIZE=5000
+	export HISTTIMEFORMAT='%F %T '
+fi
 
 # == Env ==
 # GPG
-export GPG_TTY=$(tty)
+$_INTERACTIVE_SHELL && export GPG_TTY=$(tty)
 
 # Set default less options
 export LESS=-Rq

@@ -1,18 +1,20 @@
 
-# Select git info displayed, see ~/.dotfiles/bash/lib/git-prompt.sh for more
-export GIT_PS1_SHOWDIRTYSTATE=1           # '*' = unstaged, '+' = staged
-export GIT_PS1_SHOWSTASHSTATE=1           # '$' = stashed
-export GIT_PS1_SHOWUNTRACKEDFILES=1       # '%' = untracked
-export GIT_PS1_SHOWUPSTREAM="verbose"     # 'u=' = no difference, 'u+1' = ahead by 1 commit
-export GIT_PS1_STATESEPARATOR=''          # No space between branch and index status
-export GIT_PS1_DESCRIBE_STYLE="describe"  # detached HEAD style:
-#  contains      relative to newer annotated tag (v1.6.3.2~35)
-#  branch        relative to newer tag or branch (master~4)
-#  describe      relative to older annotated tag (v1.6.3.1-13-gdd42c2f)
-#  default       exactly eatching tag
+if $_INTERACTIVE_SHELL; then
+	# Select git info displayed, see ~/.dotfiles/bash/lib/git-prompt.sh for more
+	export GIT_PS1_SHOWDIRTYSTATE=1           # '*' = unstaged, '+' = staged
+	export GIT_PS1_SHOWSTASHSTATE=1           # '$' = stashed
+	export GIT_PS1_SHOWUNTRACKEDFILES=1       # '%' = untracked
+	export GIT_PS1_SHOWUPSTREAM="verbose"     # 'u=' = no difference, 'u+1' = ahead by 1 commit
+	export GIT_PS1_STATESEPARATOR=''          # No space between branch and index status
+	export GIT_PS1_DESCRIBE_STYLE="describe"  # detached HEAD style:
+	#  contains      relative to newer annotated tag (v1.6.3.2~35)
+	#  branch        relative to newer tag or branch (master~4)
+	#  describe      relative to older annotated tag (v1.6.3.1-13-gdd42c2f)
+	#  default       exactly eatching tag
 
-# Source __git_ps1
-source ~/.dotfiles/bash/lib/git-prompt.sh
+	# Source __git_ps1
+	source ~/.dotfiles/bash/lib/git-prompt.sh
+fi
 
 # Check if we support colours
 __colour_enabled() {
@@ -80,11 +82,13 @@ fi
 
 # Executed before each command is run in bash
 __pre_cmd() {
+	$_INTERACTIVE_SHELL || return 0
+
 	# Set title to command that's currently running
 	local cmd="${BASH_COMMAND}"
 	if [[ "$cmd" == "__set_bash_prompt" ]]; then
 		# We aren't after a command
-		return
+		return 0
 	fi
 
 	if [[ $- == *i* ]] && [[ ! "$cmd" =~ ^_.* ]]; then
@@ -95,16 +99,18 @@ __pre_cmd() {
 
 	# This is to prevent us running this script multiple times between prompts
 	if [ -z "$_JUST_AFTER_PROMPT" ]; then
-		return
+		return 0
 	fi
 	unset _JUST_AFTER_PROMPT
 
 	_COMMAND_START_TIME=$(date +%s%N)
 }
-trap __pre_cmd DEBUG
+$_INTERACTIVE_SHELL && trap __pre_cmd DEBUG
 
 __set_bash_prompt() {
 	local exit="$?" # Save the exit status of the last command
+
+	$_INTERACTIVE_SHELL || return 0
 
 	local _COMMAND_END_TIME=$(date +%s%N)
 
@@ -131,8 +137,8 @@ __set_bash_prompt() {
 	local dirstackn="\$(( \$(dirs -p | wc -l) - 1 ))"
 	local dirstack="\$(for i in \$(seq $dirstackn); do echo -n +; done)"
 
-	if [[ $- == *i* ]] && [ ! -z "$_JUST_AFTER_COMMAND" ] && [ ! -z "$_COMMAND_START_TIME" ]; then
-		# If interactive, and a command has just been run, setup the time info string
+	if [ ! -z "$_JUST_AFTER_COMMAND" ] && [ ! -z "$_COMMAND_START_TIME" ]; then
+		# If a command has just been run, setup the time info string
 		unset _JUST_AFTER_COMMAND
 
 		local nanos=$(( $_COMMAND_END_TIME - $_COMMAND_START_TIME ))
@@ -186,10 +192,13 @@ __set_bash_prompt() {
 }
 
 # Only set prompt if interactive
-if [[ $- == *i* ]]; then
-	PS1=''
+if $_INTERACTIVE_SHELL; then
+	unset PS1
 
 	# This tells bash to reinterpret PS1 after every command, which we
 	# need because __git_ps1 will return different text and colors
 	PROMPT_COMMAND=__set_bash_prompt
+else
+	unset PS1
+	unset PROMPT_COMMAND
 fi
