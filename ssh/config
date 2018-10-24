@@ -5,11 +5,9 @@ ServerAliveInterval  15
 ServerAliveCountMax  3
 EscapeChar           `
 XauthLocation        /usr/bin/xauth
-ControlMaster        auto
-ControlPath          ~/.ssh/control-master/%r@%h:%p.socket
-ControlPersist       30s
-ForwardX11           no
-ForwardX11Trusted    no
+#ControlMaster        auto
+#ControlPath          ~/.ssh/control-master/%r@%h:%p.socket
+#ControlPersist       30s
 
 # = Trusted host defaults =
 Host                 trolleyman.org callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk
