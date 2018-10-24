@@ -8,6 +8,10 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+if [ -f /etc/bash.bashrc ]; then
+	. /etc/bash.bashrc
+fi
+
 # Set helper variables
 [[ $- == *i* ]] && _INTERACTIVE_SHELL=true || _INTERACTIVE_SHELL=false
 

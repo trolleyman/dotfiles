@@ -1,5 +1,10 @@
 # .bash_profile
 
+# Source global profile file
+if [ -f /etc/profile ]; then
+	. /etc/profile
+fi
+
 # Source normal bashrc file
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
