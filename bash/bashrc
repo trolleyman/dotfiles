@@ -31,7 +31,7 @@ fi
 
 . ~/.dotfiles/bash/prompt.sh
 
-if $_INTERACTIVE_SHELL; then
+if $_INTERACTIVE_SHELL && $_LOGIN_SHELL; then
 	# Info that the bashrc ran
 	echo ~/.bashrc run.
 fi
