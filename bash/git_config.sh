@@ -33,6 +33,5 @@ function config_git {
 	git config --global core.preloadIndex true                      # Preload index -- helps on NFS
 	git config --global push.default simple                         # Adopt new pushing format
 }
-
 $_INTERACTIVE_SHELL && $_LOGIN_SHELL && config_git 2>&1 >/dev/null
 
