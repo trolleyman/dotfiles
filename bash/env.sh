@@ -6,7 +6,7 @@ fi
 
 # == Shell options ==
 # umask
-umask 027
+#umask 027
 
 if $_INTERACTIVE_SHELL; then
 	# For rm **/*.pyc, etc.
