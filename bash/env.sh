@@ -40,8 +40,23 @@ export LESS=-Rq
 # Make vim the default editor
 export EDITOR=/usr/bin/vim
 
+# Anaconda env
+if [[ -r "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
+	. "$HOME/anaconda3/etc/profile.d/conda.sh"
+fi
+
+# CUDA binaries
+export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+# Cargo binaries
+export PATH=$HOME/.cargo/bin${PATH:+:${PATH}}
+
+# .dotfiles binaries
+export PATH=$HOME/.dotfiles/bin${PATH:+:${PATH}}
+
 # Local binaries
-export PATH=$HOME/.dotfiles/bin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # X11 DISPLAY variable
 if [[ -z "$DISPLAY" ]]; then
