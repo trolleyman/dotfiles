@@ -31,6 +31,9 @@ fi
 # GPG
 $_INTERACTIVE_SHELL && export GPG_TTY=$(tty)
 
+# Prevent other users from controlling the terminal
+mesg n || true
+
 # Set default less options
 export LESS=-Rq
 
