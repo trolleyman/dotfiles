@@ -45,6 +45,9 @@ if [[ -r "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
 	. "$HOME/anaconda3/etc/profile.d/conda.sh"
 fi
 
+# snap binaries
+export PATH=/snap/bin${PATH:+:${PATH}}
+
 # CUDA binaries
 export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
