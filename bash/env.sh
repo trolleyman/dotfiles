@@ -52,6 +52,12 @@ export PATH=/snap/bin${PATH:+:${PATH}}
 export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
+# Cargo/rust, if they've been installed manually (i.e. on the CS lab computers)
+if [[ -d ~/rust ]]; then
+	export PATH=~/rust/rustc/bin:~/rust/cargo/bin${PATH:+:${PATH}}
+	export LD_LIBRARY_PATH=~/rust/rustc/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
+
 # Cargo binaries
 export PATH=$HOME/.cargo/bin${PATH:+:${PATH}}
 
