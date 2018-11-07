@@ -55,7 +55,8 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PAT
 # Cargo/rust, if they've been installed manually (i.e. on the CS lab computers)
 if [[ -d ~/rust ]]; then
 	export PATH=~/rust/rustc/bin:~/rust/cargo/bin${PATH:+:${PATH}}
-	export LD_LIBRARY_PATH=~/rust/rustc/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+	#export LD_LIBRARY_PATH=~/rust/rustc/lib:~/rust/rustc/lib/rustlib/x86_64-unknown-linux-gnu/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+	export RUSTFLAGS="-L $HOME/rust/rust-std-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib"
 fi
 
 # Cargo binaries
