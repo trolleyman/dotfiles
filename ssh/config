@@ -18,7 +18,7 @@ ForwardX11Trusted    yes
 # = Songly =
 Host                 songly
 HostName             35.196.137.60
-User                 callum
+User                 cgtrolley
 
 # = Work hosts =
 Host                 bluebear bb
