@@ -20,6 +20,8 @@ function config_git {
 	git config --global alias.graph 'log --oneline --decorate --color --graph --all'
 	git config --global alias.graphq 'log --oneline --decorate --color --graph'
 
+	git config --global alias.sm submodule
+
 	git config --global alias.pullall '!f(){ git pull "$@" && git submodule update --init --recursive; }; f'
 	git config --global alias.prune "!bash -c \"f(){ git fetch -p && (git branch -r | awk '{print \\\$1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print \\\$1}' | xargs -r git branch -d); }; f\""
 
@@ -33,6 +35,5 @@ function config_git {
 	git config --global core.preloadIndex true                      # Preload index -- helps on NFS
 	git config --global push.default simple                         # Adopt new pushing format
 }
-
 $_INTERACTIVE_SHELL && $_LOGIN_SHELL && config_git 2>&1 >/dev/null
 

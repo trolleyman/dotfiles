@@ -6,7 +6,7 @@ fi
 
 # == Shell options ==
 # umask
-umask 027
+#umask 027
 
 if $_INTERACTIVE_SHELL; then
 	# For rm **/*.pyc, etc.
@@ -31,14 +31,42 @@ fi
 # GPG
 $_INTERACTIVE_SHELL && export GPG_TTY=$(tty)
 
+# Prevent other users from controlling the terminal
+mesg n || true
+
 # Set default less options
 export LESS=-Rq
 
 # Make vim the default editor
 export EDITOR=/usr/bin/vim
 
+# Anaconda env
+if [[ -r "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
+	. "$HOME/anaconda3/etc/profile.d/conda.sh"
+fi
+
+# snap binaries
+export PATH=/snap/bin${PATH:+:${PATH}}
+
+# CUDA binaries
+export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+# Cargo/rust, if they've been installed manually (i.e. on the CS lab computers)
+if [[ -d ~/rust ]]; then
+	export PATH=~/rust/rustc/bin:~/rust/cargo/bin${PATH:+:${PATH}}
+	#export LD_LIBRARY_PATH=~/rust/rustc/lib:~/rust/rustc/lib/rustlib/x86_64-unknown-linux-gnu/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+	export RUSTFLAGS="-L $HOME/rust/rust-std-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib"
+fi
+
+# Cargo binaries
+export PATH=$HOME/.cargo/bin${PATH:+:${PATH}}
+
+# .dotfiles binaries
+export PATH=$HOME/.dotfiles/bin${PATH:+:${PATH}}
+
 # Local binaries
-export PATH=$HOME/.dotfiles/bin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # X11 DISPLAY variable
 if [[ -z "$DISPLAY" ]]; then

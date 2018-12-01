@@ -10,6 +10,9 @@ set pastetoggle=<F11>
 " Set tabstop to 4 (default)
 set tabstop=4
 
+" Allow saving of files as sudo
+cmap w!! w !sudo tee > /dev/null %
+
 syntax on                             " Syntax highlighting
 colorscheme molokai                   " Default color scheme
 

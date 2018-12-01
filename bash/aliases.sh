@@ -79,3 +79,70 @@ alias path='echo $PATH | tr -s ":" "\n"'
 # Slurm
 alias swatch="watch -n 1.0 \"showq -o '%17i %20P %10T %.3C %.3D %11b %.9u %10q %30j %7M %9l %19S %R'\""
 
+# ssh (if in CS labs)
+if [[ "$HOST" == tinky-winky ]] || [[ "$HOST" == *.cs.bham.ac.uk ]]; then
+	readonly MAX_CONCURRENT_USERS=3
+	readonly MAX_ATTEMPTS=100
+	readonly CONNECT_TIMEOUT=2
+	readonly SSH_OPTS="-x \
+	                   -o ConnectTimeout=${CONNECT_TIMEOUT}"
+
+	_check_machine_load() {
+		local host=$1
+		local load=$(ssh -q ${SSH_OPTS} ${host} \
+					 "w \
+					 | tail -n +3 \
+					 | cut -d ' ' -f 1 \
+					 | sort -u \
+					 | grep -v ${USER} \
+					 | wc -l")
+		echo $load
+	}
+
+	_check_machine_available() {
+		local host=$1
+		#ssh ${SSH_OPTS} -q $host exit
+		ping -q $host -c 1 -w 3 > /dev/null
+		echo $?
+	}
+
+	_find_available_machine() {
+		local machines=(cca-lg04-0{6{3,4,5,6,9},7{0,1,2,3,4}})
+		local count=${#machines[@]}
+		local host=
+		local attempts=0
+		while [[ $attempts -lt $MAX_ATTEMPTS ]]; do
+			local index=$((RANDOM % ${count}))
+			local candidate=${machines[index]}
+			if [[ $(_check_machine_available $candidate) -ne 0 ]]; then
+				continue
+			fi
+			#local load=$(_check_machine_load $candidate)
+			local load=0
+			if [[ $load -lt $MAX_CONCURRENT_USERS ]]; then
+				host=$candidate
+				break
+			fi
+			((attempts++))
+		done
+		echo $host
+	}
+
+	_ssh_to_machine() {
+		local host=$1
+		local args="${@:2}"
+		ssh ${SSH_OPTS} ${host} ${args}
+	}
+
+	ssh-gpu() {
+		echo "Finding available lab machine..."
+		local host=$(_find_available_machine)
+		if [[ -z $host ]]; then
+			echo "No suitable host could be found! Try again later."
+			return
+		fi
+		echo "Using lab machine '${host}'..."
+		_ssh_to_machine $host "$@"
+	}
+fi
+

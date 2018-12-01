@@ -66,3 +66,6 @@ do_link ~/.dotfiles/tmux.conf ~/.tmux.conf
 do_link ~/.dotfiles/gdb-dashboard/.gdbinit ~/.gdbinit
 do_link ~/.dotfiles/gdbinit.d ~/.gdbinit.d
 
+# ZSH
+do_link ~/.dotfiles/zsh/zshrc ~/.zshrc
+

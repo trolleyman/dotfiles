@@ -10,10 +10,15 @@ XauthLocation        /usr/bin/xauth
 #ControlPersist       30s
 
 # = Trusted host defaults =
-Host                 trolleyman.org callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk
+Host                 trolleyman.org callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk songly 35.196.137.60
 ForwardAgent         yes
 ForwardX11           yes
 ForwardX11Trusted    yes
+
+# = Songly =
+Host                 songly
+HostName             35.196.137.60
+User                 cgtrolley
 
 # = Work hosts =
 Host                 bluebear bb
