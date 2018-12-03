@@ -19,3 +19,4 @@ let g:flake8_show_in_gutter = 1
 autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
 let g:autopep8_diff_type='vertical'
 let g:autopep8_disable_show_diff=1 " Disables showing the diff
+
