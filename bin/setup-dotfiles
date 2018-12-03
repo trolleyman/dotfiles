@@ -69,3 +69,7 @@ do_link ~/.dotfiles/gdbinit.d ~/.gdbinit.d
 # ZSH
 do_link ~/.dotfiles/zsh/zshrc ~/.zshrc
 
+# Fish
+mkdir -p ~/.config/fish/
+do_link ~/.dotfiles/fish/config.fish ~/.config/fish/config.fish
+
