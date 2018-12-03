@@ -48,9 +48,11 @@ fi
 # snap binaries
 export PATH=/snap/bin${PATH:+:${PATH}}
 
-# CUDA binaries
-export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# CUDA
+if [[ -d /usr/local/cuda ]]; then
+	export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+	export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
 
 # Cargo/rust, if they've been installed manually (i.e. on the CS lab computers)
 if [[ -d ~/rust ]]; then
