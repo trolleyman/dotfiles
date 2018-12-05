@@ -79,6 +79,15 @@ nnoremap <C-z> :u<CR>
 inoremap <C-z> <C-o>:u<CR>
 vnoremap <C-z> <ESC>:i<CR>gv
 
+" Make Ctrl-C copy to the + buffer
+vmap <C-c> "+y
+
+" Make Ctrl-P paste from the + register while in cmd mode
+map <C-v> "+p
+
+" Make Ctrl-P to paste from the + register while editing
+imap <C-v> <esc><C-v>
+
 "vnoremap <Tab> ><CR>gv
 "vnoremap <Tab> <<CR>gv
 
