@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -ex
+
+cd ~/.dotfiles
+git pull
+git submodule init
+git submodule sync
+git submodule update
+
+~/.dotfiles/bin/setup-dotfiles
+

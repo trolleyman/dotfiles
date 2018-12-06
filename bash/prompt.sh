@@ -185,7 +185,7 @@ __set_bash_prompt() {
 		venv="($(basename $VIRTUAL_ENV)) "
 	fi
 	local preGitPS1="$infoStrPS1$__COL_BW$CONDA_PROMPT_MODIFIER$venv$__COL_CX\t $__COL_W\u$__COL_CX@$__COL_W\h $exitString $__COL_Y\w $__COL_BW"
-	local postGitPS1="\n$__COL_Y$dirstack$__COL_G\\$ $__COL_BW$__COL_RESET"
+	local postGitPS1="\n$__COL_Y$dirstack$__COL_G\\\$$__COL_RESET "
 
 	# Set PS1 from $preGitPS1 + <git-status> + $postGitPS1
 	__git_ps1 "$preGitPS1" "$postGitPS1" '(%s)'
