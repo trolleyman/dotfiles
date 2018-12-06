@@ -70,6 +70,11 @@ alias igt=git
 # Git alias
 alias g=git
 
+# Color grep
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
 # Helper to fix fake xauth generation warning
 alias fix-xauth='xauth generate $DISPLAY'
 
