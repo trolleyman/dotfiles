@@ -35,8 +35,10 @@ User                 centos
 # = GitHub =
 Host                 github.com
 HostName             github.com
-IdentityFile         ~/.ssh/id_rsa
 User                 git
+ForwardAgent         no
+ForwardX11           no
+ForwardX11Trusted    no
 
 # = Personal hosts =
 Host                 trolleyman.org callumgtolley.uk
