@@ -43,8 +43,11 @@ ForwardX11Trusted    no
 # = Personal hosts =
 Host                 trolleyman.org callumgtolley.uk
 HostName             %h
-IdentityFile         ~/.ssh/id_trolleyman.org
 User                 root
+
+Host                 mc.trolleyman.org mc.callumgtolley.uk
+HostName             %h
+User                 cgtrolley
 
 # = CS hosts =
 Host                 cs tw.cs.bham.ac.uk
