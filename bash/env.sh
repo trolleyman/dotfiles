@@ -73,3 +73,8 @@ if [[ -z "$DISPLAY" ]]; then
 	export DISPLAY=localhost:0
 fi
 
+# Docker, but only for Desktop PC
+if [[ "$(hostname)" == "Callums-PC" ]]; then
+	export DOCKER_HOST=localhost:2375
+fi
+
