@@ -60,6 +60,8 @@ do_link ~/.dotfiles/inputrc ~/.inputrc
 # Vim
 do_link ~/.dotfiles/vim/vimrc ~/.vimrc
 do_link ~/.dotfiles/vim ~/.vim
+# Update
+vim +PlugUpgrade +PlugUpdate +qa!
 
 # tmux
 do_link ~/.dotfiles/tmux.conf ~/.tmux.conf
