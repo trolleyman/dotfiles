@@ -3,9 +3,9 @@ set encoding=utf-8
 " Turn on syntax highlighting
 syntax on
 
-" F11 to toggle paste mode
-map <F11> :set invpaste<CR>
-set pastetoggle=<F11>
+" F6 to toggle paste mode
+noremap <F6> :set invpaste<CR>
+set pastetoggle=<F6>
 
 " Set tabstop to 4 (default)
 set tabstop=4
@@ -79,8 +79,15 @@ nnoremap <C-z> :u<CR>
 inoremap <C-z> <C-o>:u<CR>
 vnoremap <C-z> <ESC>:i<CR>gv
 
-"vnoremap <Tab> ><CR>gv
-"vnoremap <Tab> <<CR>gv
+" Make Ctrl-C copy to the + buffer
+vmap <C-c> "+y
+
+" Make Ctrl-V paste from the + register while in cmd mode
+nmap <C-v> "+p
+" Make Ctrl-V paste from the + register while editing
+imap <C-v> <ESC>"+pi
+" Make Ctrl-V paste from the + register while in visual mode (doesn't really work)
+vmap <C-v> "+p
 
 " More persistent command history
 set history=10000

@@ -3,15 +3,15 @@ function check_dotfiles() (
 	set -e
 	pushd ~/.dotfiles 2>&1 1>/dev/null
 	
-	UPSTREAM=${1:-'@{u}'}
-	LOCAL=$(git rev-parse @{0})
-	REMOTE=$(git rev-parse "$UPSTREAM")
-	BASE=$(git merge-base @{0} "$UPSTREAM")
+	local UPSTREAM=${1:-'@{u}'}
+	local LOCAL=$(git rev-parse @{0})
+	local REMOTE=$(git rev-parse "$UPSTREAM")
+	local BASE=$(git merge-base @{0} "$UPSTREAM")
 	
 	if [[ "$LOCAL" == "$REMOTE" ]]; then
 		: # Up-to-date
 	elif [[ "$LOCAL" == "$BASE" ]]; then
-		printf "\e[93mWarning: Need to git pull ~/.dotfiles\e[0m\n"
+		printf "\e[93mWarning: Out of date dotfiles: Run update-dotfiles\e[0m\n"
 	elif [[ "$REMOTE" == "$BASE" ]]; then
 		printf "\e[93mWarning: Need to git push ~/.dotfiles\e[0m\n"
 	else
@@ -20,7 +20,7 @@ function check_dotfiles() (
 	
 	# Do this in the background so there's no waiting -- we'll
 	# get the warning next time we reload
-	( git fetch -j 8 --quiet --no-recurse-submodules &>/dev/null </dev/null & ) &>/dev/null </dev/null
+	( git fetch -j 8 --quiet --no-recurse-submodules 2>&1 >/dev/null </dev/null & ) 2>&1 >/dev/null </dev/null
 	
 	popd 2>&1 1>/dev/null
 )

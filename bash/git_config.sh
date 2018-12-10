@@ -30,7 +30,7 @@ function config_git {
 
 	# Git config
 	git config --global color.ui auto                               # Enable colors
-	git config --global submodule.recurse true                      # Recurse through submodules when pulling
+	git config --global submodule.recurse false                     # Don't recurse through submodules when pulling by default
 	git config --global credential.helper 'cache --timeout=7200'    # Cache passwords for 2 hours
 	git config --global core.preloadIndex true                      # Preload index -- helps on NFS
 	git config --global push.default simple                         # Adopt new pushing format
