@@ -28,6 +28,9 @@ Plug 'https://github.com/cespare/vim-toml'
 " fakeclip: System clipboard access
 Plug 'https://github.com/trolleyman/vim-fakeclip'
 
+" Git gutter
+Plug 'https://github.com/airblade/vim-gitgutter'
+
 " vim-plug end
 call plug#end()
 "filetype plugin indent on
