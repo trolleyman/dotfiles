@@ -14,7 +14,7 @@ set tabstop=4
 cmap w!! w !sudo tee > /dev/null %
 
 syntax on                             " Syntax highlighting
-colorscheme molokai                   " Default color scheme
+silent! colorscheme molokai           " Default color scheme. Ignore errors
 
 au BufRead,BufNewFile * start         " Start in INSERT mode
 set mouse+=a                          " Allow mouse selection
