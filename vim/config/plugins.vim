@@ -30,6 +30,8 @@ Plug 'https://github.com/trolleyman/vim-fakeclip'
 
 " Git gutter
 Plug 'https://github.com/airblade/vim-gitgutter'
+" Update on save
+autocmd BufWritePost * GitGutter
 
 " vim-plug end
 call plug#end()
