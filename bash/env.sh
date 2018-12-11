@@ -25,6 +25,7 @@ if $_INTERACTIVE_SHELL; then
 	export HISTFILESIZE=20000
 	export HISTSIZE=5000
 	export HISTTIMEFORMAT='%F %T '
+	export HISTCONTROL=ignorespace
 fi
 
 # == Env ==
