@@ -11,6 +11,13 @@ fi
 if $_INTERACTIVE_SHELL; then
 	# For rm **/*.pyc, etc.
 	shopt -s globstar
+	# If a directory is executed, then cd to that directory
+	shopt -s autocd
+	# Correct minor spelling mistakes as arguments to cd
+	shopt -s cdspell
+	# Check for running jobs before exiting shell. To force exit, run exit again.
+	shopt -s checkjobs
+	
 	
 	# Make Ctrl-D not end shell
 	set -o ignoreeof
