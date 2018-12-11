@@ -60,6 +60,8 @@ do_link ~/.dotfiles/inputrc ~/.inputrc
 # Vim
 do_link ~/.dotfiles/vim/vimrc ~/.vimrc
 do_link ~/.dotfiles/vim ~/.vim
+# Remove old vim bundles
+(set -x; rm -rf ~/.dotfiles/vim/bundle/)
 # Update
 (set -x; vim +PlugUpgrade +PlugUpdate +qa!)
 
