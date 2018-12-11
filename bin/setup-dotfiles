@@ -60,6 +60,10 @@ do_link ~/.dotfiles/inputrc ~/.inputrc
 # Vim
 do_link ~/.dotfiles/vim/vimrc ~/.vimrc
 do_link ~/.dotfiles/vim ~/.vim
+# Remove old vim bundles
+(set -x; rm -rf ~/.dotfiles/vim/bundle/)
+# Update
+(set -x; vim +PlugUpgrade +PlugUpdate +qa!)
 
 # tmux
 do_link ~/.dotfiles/tmux.conf ~/.tmux.conf
@@ -74,4 +78,9 @@ do_link ~/.dotfiles/zsh/zshrc ~/.zshrc
 # Fish
 mkdir -p ~/.config/fish/
 do_link ~/.dotfiles/fish/config.fish ~/.config/fish/config.fish
+
+# Fix all permissions
+group=$(id -gn)
+(set -x; chown -R $USER:$group ~/.dotfiles)
+(set -x; chmod -R og-rwx ~/.dotfiles)
 

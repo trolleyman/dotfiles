@@ -1,22 +1,39 @@
 
-" Pathogen.vim
-" Must turn filetype off and then back on.
-filetype off
-call pathogen#infect()
-call pathogen#helptags()
-filetype plugin indent on
+" vim-plug begin
+call plug#begin('~/.vim/plugged')
 
-" DetectIndent
+" Color schemes
+Plug 'https://github.com/flazz/vim-colorschemes', { 'commit': '2f532d0564534accf09cecfa9a1e3639865367ee' }
+
+" DetectIdent fork
+Plug 'https://github.com/trolleyman/detectindent'
 let g:detectindent_preferred_indent = 4
 autocmd BufReadPost * :DetectIndent
 
-" vim-flake8
-let g:flake8_show_in_gutter = 1
-" autocmd BufWritePost *.py call Flake8() " This calls flake 8 after each save
+" Rust
+Plug 'https://github.com/rust-lang/rust.vim'
 
-" vim-autopep8
-"   - Set F8 as the key to call autopep
-autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
-let g:autopep8_diff_type='vertical'
-let g:autopep8_disable_show_diff=1 " Disables showing the diff
+" Fish shell
+Plug 'https://github.com/dag/vim-fish'
+
+" Fixes some keys with vim
+Plug 'https://github.com/trolleyman/vim-fixkey'
+
+" JavaScript
+Plug 'https://github.com/pangloss/vim-javascript'
+
+" TOML
+Plug 'https://github.com/cespare/vim-toml'
+
+" fakeclip: System clipboard access
+Plug 'https://github.com/trolleyman/vim-fakeclip'
+
+" Git gutter
+Plug 'https://github.com/airblade/vim-gitgutter'
+" Update on save
+autocmd BufWritePost * GitGutter
+
+" vim-plug end
+call plug#end()
+"filetype plugin indent on
 
