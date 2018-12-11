@@ -5,8 +5,8 @@ if [ -r ~/.dir_colors ]; then
 fi
 
 # == Shell options ==
-# umask
-#umask 027
+# prevent other users from writing to my files by default
+umask go-w
 
 if $_INTERACTIVE_SHELL; then
 	# For rm **/*.pyc, etc.
@@ -17,7 +17,6 @@ if $_INTERACTIVE_SHELL; then
 	shopt -s cdspell
 	# Check for running jobs before exiting shell. To force exit, run exit again.
 	shopt -s checkjobs
-	
 	
 	# Make Ctrl-D not end shell
 	set -o ignoreeof
