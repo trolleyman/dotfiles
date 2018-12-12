@@ -29,12 +29,17 @@ HostName             %h
 User                 cgtrolley
 
 # = CS hosts =
-Host                 cs tw.cs.bham.ac.uk
+Host                 cs csgpu tw.cs.bham.ac.uk
 HostName             tinky-winky.cs.bham.ac.uk
 User                 cxt510
 
+Host                 csgpu
+HostName             cca-lg04-070
+RequestTTY           force
+ProxyCommand         ssh cs
+
 # = Trusted host defaults =
-Host                 mc.trolleyman.org trolleyman.org mc.callumgtolley.uk callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk
+Host                 mc.trolleyman.org trolleyman.org mc.callumgtolley.uk callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs csgpu tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk
 ForwardAgent         yes
 ForwardX11           yes
 ForwardX11Trusted    yes
