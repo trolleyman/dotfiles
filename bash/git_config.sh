@@ -10,6 +10,8 @@ function config_git {
 	git config --global alias.br branch
 	git config --global alias.ct commit
 
+	git config --global alias.pp '!f(){ git pull && git push; }; f'
+
 	git config --global alias.unstage 'reset HEAD --'
 
 	git config --global alias.plog 'log --decorate --oneline'
