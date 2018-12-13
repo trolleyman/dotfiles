@@ -47,6 +47,8 @@ do_link ~/.dotfiles/bash/bash_logout ~/.bash_logout
 mkdir -p ~/.ssh/
 mkdir -p ~/.ssh/control-master/
 do_link ~/.dotfiles/ssh/config ~/.ssh/config
+# Ensure that SSH config has the correct permissions
+chmod 644 ~/.dotfiles/ssh/config
 
 # gpg
 mkdir -p ~/.gnupg/
@@ -58,6 +60,10 @@ do_link ~/.dotfiles/inputrc ~/.inputrc
 # Vim
 do_link ~/.dotfiles/vim/vimrc ~/.vimrc
 do_link ~/.dotfiles/vim ~/.vim
+# Remove old vim bundles
+(set -x; rm -rf ~/.dotfiles/vim/bundle/)
+# Update
+(set -x; vim +PlugUpgrade +PlugUpdate +qa!)
 
 # tmux
 do_link ~/.dotfiles/tmux.conf ~/.tmux.conf
@@ -68,4 +74,13 @@ do_link ~/.dotfiles/gdbinit.d ~/.gdbinit.d
 
 # ZSH
 do_link ~/.dotfiles/zsh/zshrc ~/.zshrc
+
+# Fish
+mkdir -p ~/.config/fish/
+do_link ~/.dotfiles/fish/config.fish ~/.config/fish/config.fish
+
+# Fix all permissions
+group=$(id -gn)
+(set -x; chown -R $USER:$group ~/.dotfiles)
+(set -x; chmod -R og-rwx ~/.dotfiles)
 

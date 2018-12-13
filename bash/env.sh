@@ -5,12 +5,18 @@ if [ -r ~/.dir_colors ]; then
 fi
 
 # == Shell options ==
-# umask
-#umask 027
+# prevent other users from writing to my files by default
+umask go-w
 
 if $_INTERACTIVE_SHELL; then
 	# For rm **/*.pyc, etc.
 	shopt -s globstar
+	# If a directory is executed, then cd to that directory
+	shopt -s autocd
+	# Correct minor spelling mistakes as arguments to cd
+	shopt -s cdspell
+	# Check for running jobs before exiting shell. To force exit, run exit again.
+	shopt -s checkjobs
 	
 	# Make Ctrl-D not end shell
 	set -o ignoreeof
@@ -25,6 +31,7 @@ if $_INTERACTIVE_SHELL; then
 	export HISTFILESIZE=20000
 	export HISTSIZE=5000
 	export HISTTIMEFORMAT='%F %T '
+	export HISTCONTROL=ignorespace
 fi
 
 # == Env ==
@@ -50,9 +57,11 @@ fi
 # snap binaries
 export PATH=/snap/bin${PATH:+:${PATH}}
 
-# CUDA binaries
-export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+# CUDA
+if [[ -d /usr/local/cuda ]]; then
+	export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+	export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
 
 # Cargo/rust, if they've been installed manually (i.e. on the CS lab computers)
 if [[ -d ~/rust ]]; then
@@ -73,5 +82,10 @@ export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 # X11 DISPLAY variable
 if [[ -z "$DISPLAY" ]]; then
 	export DISPLAY=localhost:0
+fi
+
+# Docker, but only for Desktop PC
+if [[ "$(hostname)" == "Callums-PC" ]]; then
+	export DOCKER_HOST=localhost:2375
 fi
 

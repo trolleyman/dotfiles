@@ -1,25 +1,4 @@
 
-# = All host defaults =
-Host                 *
-ServerAliveInterval  15
-ServerAliveCountMax  3
-EscapeChar           `
-XauthLocation        /usr/bin/xauth
-#ControlMaster        auto
-#ControlPath          ~/.ssh/control-master/%r@%h:%p.socket
-#ControlPersist       30s
-
-# = Trusted host defaults =
-Host                 trolleyman.org callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk songly 35.196.137.60
-ForwardAgent         yes
-ForwardX11           yes
-ForwardX11Trusted    yes
-
-# = Songly =
-Host                 songly
-HostName             35.196.137.60
-User                 cgtrolley
-
 # = Work hosts =
 Host                 bluebear bb
 HostName             bluebear.bham.ac.uk
@@ -35,17 +14,38 @@ User                 centos
 # = GitHub =
 Host                 github.com
 HostName             github.com
-IdentityFile         ~/.ssh/id_rsa
 User                 git
+ForwardAgent         no
+ForwardX11           no
+ForwardX11Trusted    no
 
 # = Personal hosts =
 Host                 trolleyman.org callumgtolley.uk
 HostName             %h
-IdentityFile         ~/.ssh/id_trolleyman.org
 User                 root
 
+Host                 mc.trolleyman.org mc.callumgtolley.uk
+HostName             %h
+User                 cgtrolley
+
 # = CS hosts =
-Host                 cs tw.cs.bham.ac.uk
+Host                 cs csgpu tw.cs.bham.ac.uk
 HostName             tinky-winky.cs.bham.ac.uk
 User                 cxt510
+
+# = Trusted host defaults =
+Host                 mc.trolleyman.org trolleyman.org mc.callumgtolley.uk callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs csgpu tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk
+ForwardAgent         yes
+ForwardX11           yes
+ForwardX11Trusted    yes
+
+# = All host defaults =
+Host                 *
+ServerAliveInterval  15
+ServerAliveCountMax  3
+EscapeChar           `
+XauthLocation        /usr/bin/xauth
+#ControlMaster        auto
+#ControlPath          ~/.ssh/control-master/%r@%h:%p.socket
+#ControlPersist       30s
 
