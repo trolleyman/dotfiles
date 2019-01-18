@@ -33,8 +33,12 @@ Host                 cs tw.cs.bham.ac.uk
 HostName             tinky-winky.cs.bham.ac.uk
 User                 cxt510
 
+# = Internal CS hosts =
+Host                 cca-ug04-* cca-*.cs.bham.ac.uk
+StrictHostKeyChecking no
+
 # = Trusted host defaults =
-Host                 mc.trolleyman.org trolleyman.org mc.callumgtolley.uk callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-*.cs.bham.ac.uk
+Host                 mc.trolleyman.org trolleyman.org mc.callumgtolley.uk callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-lg04-* cca-ug04-* cca-*.cs.bham.ac.uk
 ForwardAgent         yes
 ForwardX11           yes
 ForwardX11Trusted    yes

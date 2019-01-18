@@ -86,27 +86,16 @@ alias swatch="watch -n 1.0 \"showq -o '%17i %20P %10T %.3C %.3D %11b %.9u %10q %
 
 # ssh (if in CS labs)
 if [[ "$HOST" == tinky-winky ]] || [[ "$HOST" == *.cs.bham.ac.uk ]]; then
+	alias sshp="sshpass -f '$HOME/private/password.txt' ssh"
+
 	readonly MAX_CONCURRENT_USERS=3
 	readonly MAX_ATTEMPTS=100
 	readonly CONNECT_TIMEOUT=2
 	readonly SSH_OPTS="-x \
 	                   -o ConnectTimeout=${CONNECT_TIMEOUT}"
 
-	_check_machine_load() {
-		local host=$1
-		local load=$(ssh -q ${SSH_OPTS} ${host} \
-					 "w \
-					 | tail -n +3 \
-					 | cut -d ' ' -f 1 \
-					 | sort -u \
-					 | grep -v ${USER} \
-					 | wc -l")
-		echo $load
-	}
-
 	_check_machine_available() {
 		local host=$1
-		#ssh ${SSH_OPTS} -q $host exit
 		ping -q $host -c 1 -w 3 > /dev/null
 		echo $?
 	}
@@ -136,7 +125,7 @@ if [[ "$HOST" == tinky-winky ]] || [[ "$HOST" == *.cs.bham.ac.uk ]]; then
 	_ssh_to_machine() {
 		local host=$1
 		local args="${@:2}"
-		ssh ${SSH_OPTS} ${host} ${args}
+		sshpass -f "$HOME/private/password.txt" ssh ${SSH_OPTS} ${host} ${args}
 	}
 
 	ssh-gpu() {
