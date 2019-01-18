@@ -39,7 +39,9 @@ fi
 $_INTERACTIVE_SHELL && export GPG_TTY=$(tty)
 
 # Prevent other users from controlling the terminal
-mesg n || true
+if [[ $(tty -s ) ]]; then
+	mesg n
+fi
 
 # Set default less options
 export LESS=-Rq

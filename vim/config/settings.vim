@@ -69,6 +69,11 @@ nnoremap <C-q> :q<CR>
 inoremap <C-q> <C-o>:q<CR>
 vnoremap <C-q> <ESC>:q<CR>
 
+" Make Alt-Q force quit
+inoremap <A-q> <C-o>:q!<CR>
+nnoremap <A-q> :q!<CR>
+vnoremap <A-q> <ESC>:q!<CR>
+
 " Make Ctrl-S save
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <C-o>:w<CR>

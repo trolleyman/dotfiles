@@ -10,6 +10,8 @@ function config_git {
 	git config --global alias.br branch
 	git config --global alias.ct commit
 
+	git config --global alias.pp '!f(){ git pull && git push; }; f'
+
 	git config --global alias.unstage 'reset HEAD --'
 
 	git config --global alias.plog 'log --decorate --oneline'
@@ -34,6 +36,8 @@ function config_git {
 	git config --global credential.helper 'cache --timeout=7200'    # Cache passwords for 2 hours
 	git config --global core.preloadIndex true                      # Preload index -- helps on NFS
 	git config --global push.default simple                         # Adopt new pushing format
+
+	git config --global core.excludesFile '~/.dotfiles/git/global_gitignore'
 }
 $_INTERACTIVE_SHELL && $_LOGIN_SHELL && config_git 2>&1 >/dev/null
 
