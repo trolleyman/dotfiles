@@ -69,6 +69,9 @@ alias igt=git
 
 # Git alias
 alias g=git
+alias gss='git stash save'
+alias gsp='git stash pop'
+alias gsa='git stash apply'
 
 # Color grep
 alias grep='grep --color=auto'
