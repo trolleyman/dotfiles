@@ -77,6 +77,9 @@ alias igt=git
 
 # Git alias
 alias g=git
+alias gss='git stash save'
+alias gsp='git stash pop'
+alias gsa='git stash apply'
 
 # Color grep
 alias grep='grep --color=auto'
@@ -85,6 +88,9 @@ alias fgrep='fgrep --color=auto'
 
 # Helper to fix fake xauth generation warning
 alias fix-xauth='xauth generate $DISPLAY'
+
+# Fix terminal
+alias fix='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"'
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
