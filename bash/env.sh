@@ -86,6 +86,13 @@ fi
 
 # Docker, but only for Desktop PC
 if [[ "$(hostname)" == "Callums-PC" ]]; then
-	export DOCKER_HOST=localhost:2375
+	if $_LOGIN_SHELL; then
+		export DOCKER_HOST=localhost:2375
+	fi
+fi
+
+# Set proper umask, but only when on socs computers
+if $_LOGIN_SHELL && [[ "$HOST" == 'tinky-winky' || "$HOST" == *.cs.bham.ac.uk ]]; then
+	umask 077
 fi
 

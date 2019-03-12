@@ -52,6 +52,14 @@ man() {
 			man "$@"
 }
 
+function each() {
+	while read line; do
+		for f in "$@"; do
+			$f $line
+		done
+	done
+}
+
 # Helpers
 alias reload='exec bash'
 
