@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git diff --quiet || (echo 'error: dirty git repo'; exit 1)
+
 set -ex
 
 # Set correct crlf settings
