@@ -17,9 +17,6 @@
 [submodule "vim/bundle/vim-fixkey"]
 	path = vim/bundle/vim-fixkey
 	url = https://github.com/trolleyman/vim-fixkey
-[submodule "vim/bundle/colorschemes"]
-	path = vim/bundle/colorschemes
-	url = https://github.com/flazz/vim-colorschemes.git
 [submodule "gdb-dashboard"]
 	path = gdb-dashboard
 	url = https://github.com/cyrus-and/gdb-dashboard
@@ -35,9 +32,6 @@
 [submodule "zsh/custom/plugins/zsh-syntax-highlighting"]
 	path = zsh/custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "zsh/custom/themes/spaceship-prompt"]
-	path = zsh/custom/themes/spaceship-prompt
-	url = https://github.com/denysdovhan/spaceship-prompt.git
 [submodule "vim/bundle/vim-fish"]
 	path = vim/bundle/vim-fish
 	url = https://github.com/dag/vim-fish
