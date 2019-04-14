@@ -38,7 +38,7 @@ Host                 cca-ug04-* cca-*.cs.bham.ac.uk
 StrictHostKeyChecking no
 
 # = Trusted host defaults =
-Host                 mc.trolleyman.org trolleyman.org mc.callumgtolley.uk callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04 cs tw.cs.bham.ac.uk tinky-winky.cs.bham.ac.uk cca-lg04-* cca-ug04-* cca-*.cs.bham.ac.uk
+Host                 trolleyman.org callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04
 ForwardAgent         yes
 ForwardX11           yes
 ForwardX11Trusted    yes
