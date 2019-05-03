@@ -1,6 +1,6 @@
 
 # Don't source completions if non-interactive
-[[ $- == *i* ]] || return
+$_INTERACTIVE_SHELL || return 0
 
 # Source global bash completions
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
@@ -8,5 +8,5 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # Git bash completion
-source ~/.dotfiles/bash/lib/git-completion.bash
+. ~/.dotfiles/bash/lib/git-completion.bash
 

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+printf "WARNING: This command resets all files in the git repo.\n"
+read -p "Are you sure? [y/n]" -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    exit 1
+fi
+
+set -ex
+
+# Set correct crlf settings
+git config core.autocrlf input
+git config core.eol lf
+
+# Reset current files
+git ls-files -z | xargs -0 rm
+git checkout .
+

@@ -3,15 +3,18 @@ set encoding=utf-8
 " Turn on syntax highlighting
 syntax on
 
-" F11 to toggle paste mode
-map <F11> :set invpaste<CR>
-set pastetoggle=<F11>
+" F6 to toggle paste mode
+noremap <F6> :set invpaste<CR>
+set pastetoggle=<F6>
 
 " Set tabstop to 4 (default)
 set tabstop=4
 
+" Allow saving of files as sudo
+cmap w!! w !sudo tee > /dev/null %
+
 syntax on                             " Syntax highlighting
-colorscheme molokai                   " Default color scheme
+silent! colorscheme molokai           " Default color scheme. Ignore errors
 
 au BufRead,BufNewFile * start         " Start in INSERT mode
 set mouse+=a                          " Allow mouse selection
@@ -28,9 +31,15 @@ set showcmd                           " Show partially typed command sequences
 set visualbell                        " Don't beep
 set wrap                              " Soft wrap
 
+set nocompatible                      " Not compatible with vi
+set esckeys                           " Enables recognition of arrow keys that start with ESC
+
+set nostartofline                     " Prevents the cursor from changing the current column when jumping to other lines in the window
+set ww=<,>,h,l                        " Allows you to wrap the cursor on cursor left/right
+
 " Automatically save and reload sessions for files
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+au BufWinLeave ?* mkview
+au BufWinEnter ?* silent loadview
 
 " Wildmenu (<Tab> command completion)
 set wildmenu
@@ -60,6 +69,11 @@ nnoremap <C-q> :q<CR>
 inoremap <C-q> <C-o>:q<CR>
 vnoremap <C-q> <ESC>:q<CR>
 
+" Make Alt-Q force quit
+inoremap <A-q> <C-o>:q!<CR>
+nnoremap <A-q> :q!<CR>
+vnoremap <A-q> <ESC>:q!<CR>
+
 " Make Ctrl-S save
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <C-o>:w<CR>
@@ -70,8 +84,15 @@ nnoremap <C-z> :u<CR>
 inoremap <C-z> <C-o>:u<CR>
 vnoremap <C-z> <ESC>:i<CR>gv
 
-"vnoremap <Tab> ><CR>gv
-"vnoremap <Tab> <<CR>gv
+" Make Ctrl-C copy to the + buffer
+vmap <C-c> "+y
+
+" Make Ctrl-V paste from the + register while in cmd mode
+nmap <C-v> "+p
+" Make Ctrl-V paste from the + register while editing
+imap <C-v> <ESC>"+pi
+" Make Ctrl-V paste from the + register while in visual mode (doesn't really work)
+vmap <C-v> "+p
 
 " More persistent command history
 set history=10000
