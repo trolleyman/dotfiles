@@ -88,7 +88,7 @@ alias gco='git checkout'
 alias gpl='git pull'
 alias gps='git push'
 alias gph='git push'
-alias gsph='git push'
+alias gpsh='git push'
 alias gpp='git pull && git push'
 
 function gcos() (
