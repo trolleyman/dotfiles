@@ -77,9 +77,25 @@ alias igt=git
 
 # Git alias
 alias g=git
+alias gct='git commit'
+alias gcm='git commit -m'
+alias gap='git add -p'
+alias gaa='git add --all'
 alias gss='git stash save'
 alias gsp='git stash pop'
 alias gsa='git stash apply'
+alias gco='git checkout'
+alias gpl='git pull'
+alias gps='git push'
+alias gph='git push'
+alias gpp='git pull && git push'
+
+function gcos() (
+	set -x
+	git stash save
+	git checkout $@
+	git stash pop
+)
 
 # Color grep
 alias grep='grep --color=auto'
