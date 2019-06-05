@@ -79,6 +79,7 @@ alias igt=git
 alias g=git
 alias gct='git commit'
 alias gcm='git commit -m'
+alias gst='git status'
 alias gap='git add -p'
 alias gaa='git add --all'
 alias gss='git stash save'
@@ -95,6 +96,13 @@ function gcos() (
 	set -x
 	git stash save
 	git checkout $@
+	git stash pop
+)
+
+function gpls() (
+	set -x
+	git stash save
+	git pull $@
 	git stash pop
 )
 
