@@ -78,7 +78,6 @@ alias igt=git
 # Git alias
 alias g=git
 alias gct='git commit'
-alias gcm='git commit -m'
 alias gst='git status'
 alias gap='git add -p'
 alias gaa='git add --all'
@@ -91,6 +90,11 @@ alias gps='git push'
 alias gph='git push'
 alias gpsh='git push'
 alias gpp='git pull && git push'
+alias gtree='git tree'
+
+function gcm() (
+	git commit -m "$@"
+)
 
 function gcos() (
 	set -x
