@@ -93,7 +93,7 @@ alias gpp='git pull && git push'
 alias gtree='git tree'
 
 function gcm() (
-	git commit -m "$@"
+	git commit -m "$(echo "$@")"
 )
 
 function gcos() (
