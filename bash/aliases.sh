@@ -80,6 +80,7 @@ alias g=git
 alias gct='git commit'
 alias gst='git status'
 alias gap='git add -p'
+alias ga='git add'
 alias gaa='git add --all'
 alias gss='git stash save'
 alias gsp='git stash pop'
@@ -91,9 +92,14 @@ alias gph='git push'
 alias gpsh='git push'
 alias gpp='git pull && git push'
 alias gtree='git tree'
+alias gbase='git rebase'
 
 function gcm() (
 	git commit -m "$(echo "$@")"
+)
+
+function gcma() (
+	git commit --amend -m "$(echo "$@")"
 )
 
 function gcos() (
