@@ -101,6 +101,9 @@ function gcm() (
 function gcma() (
 	git commit --amend -m "$(echo "$@")"
 )
+function gcam() (
+	git commit --amend -m "$(echo "$@")"
+)
 
 function gcos() (
 	set -x
