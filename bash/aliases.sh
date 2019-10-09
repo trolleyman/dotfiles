@@ -61,7 +61,7 @@ function each() {
 }
 
 # Helpers
-alias reload='exec bash'
+alias reload='exec bash -l'
 
 alias cls=clear
 
