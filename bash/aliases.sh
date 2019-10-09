@@ -130,6 +130,17 @@ function mkdircd() {
 	echo cd $@
 }
 
+function gpu() (
+	name=$(git rev-parse --abbrev-ref HEAD)
+	if [[ "$name" == HEAD ]]; then
+		echo "error: not on a branch"
+		return 1
+	else
+		echo git push --set-upstream origin "$name"
+		git push --set-upstream origin "$name"
+	fi
+)
+
 # Color grep
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
