@@ -54,6 +54,11 @@ if [[ -r "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
 	. "$HOME/anaconda3/etc/profile.d/conda.sh"
 fi
 
+# Local environment file
+if [[ -r "$HOME/.local/env.sh" ]]; then
+	. "$HOME/.local/env.sh"
+fi
+
 # snap binaries
 export PATH=/snap/bin${PATH:+:${PATH}}
 
