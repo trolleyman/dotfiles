@@ -119,6 +119,17 @@ function gpls() (
 	git stash pop
 )
 
+function mkcd() {
+	mkdircd $@
+}
+
+function mkdircd() {
+	mkdir $@
+	echo mkdir $@
+	cd $@
+	echo cd $@
+}
+
 # Color grep
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
