@@ -1,4 +1,7 @@
 
+# _complete_alias function
+. ~/.dotfiles/bash/lib/complete-alias/bash_completion.sh
+
 function treedu() {
 	local depth=''
 
@@ -66,33 +69,55 @@ alias reload='exec bash -l'
 alias cls=clear
 
 alias ll='ls -lXhF --color --group-directories-first'
+complete -F _complete_alias ll
 
 # Mistyping helpers
 alias ..='cd ..'
 alias cd..='cd ..'
 
 alias gti=git
+complete -F _complete_alias gti
 alias itg=git
+complete -F _complete_alias itg
 alias igt=git
+complete -F _complete_alias igt
 
 # Git alias
 alias g=git
+complete -F _complete_alias g
 alias gct='git commit'
+complete -F _complete_alias gct
 alias gst='git status'
+complete -F _complete_alias gst
 alias gap='git add -p'
+complete -F _complete_alias gap
 alias ga='git add'
+complete -F _complete_alias ga
 alias gaa='git add --all'
+complete -F _complete_alias gaa
 alias gss='git stash save'
+complete -F _complete_alias gss
 alias gsp='git stash pop'
+complete -F _complete_alias gsp
 alias gsa='git stash apply'
+complete -F _complete_alias gsa
 alias gco='git checkout'
+complete -F _complete_alias gco
 alias gpl='git pull'
+complete -F _complete_alias gpl
 alias gps='git push'
+complete -F _complete_alias gps
 alias gph='git push'
+complete -F _complete_alias gph
 alias gpsh='git push'
+complete -F _complete_alias gpsh
 alias gpp='git pull && git push'
 alias gtree='git tree'
+complete -F _complete_alias gtree
 alias gbase='git rebase'
+complete -F _complete_alias gbase
+alias gd='git diff'
+complete -F _complete_alias gd
 
 function gcm() (
 	git commit -m "$(echo "$@")"
@@ -143,8 +168,11 @@ function gpu() (
 
 # Color grep
 alias grep='grep --color=auto'
+complete -F _complete_alias grep
 alias egrep='egrep --color=auto'
+complete -F _complete_alias egrep
 alias fgrep='fgrep --color=auto'
+complete -F _complete_alias fgrep
 
 # Helper to fix fake xauth generation warning
 alias fix-xauth='xauth generate $DISPLAY'
