@@ -118,6 +118,10 @@ alias gbase='git rebase'
 complete -F _complete_alias gbase
 alias gd='git diff'
 complete -F _complete_alias gd
+alias gm='git merge'
+complete -F _complete_alias gm
+alias gr='git rebase'
+complete -F _complete_alias gr
 
 function gcm() (
 	git commit -m "$(echo "$@")"
@@ -144,6 +148,17 @@ function gpls() (
 	git stash pop
 )
 
+function gpu() (
+	name=$(git rev-parse --abbrev-ref HEAD)
+	if [[ "$name" == HEAD ]]; then
+		echo "error: not on a branch"
+		return 1
+	else
+		echo git push --set-upstream origin "$name"
+		git push --set-upstream origin "$name"
+	fi
+)
+
 function mkcd() {
 	mkdircd $@
 }
@@ -155,16 +170,9 @@ function mkdircd() {
 	echo cd $@
 }
 
-function gpu() (
-	name=$(git rev-parse --abbrev-ref HEAD)
-	if [[ "$name" == HEAD ]]; then
-		echo "error: not on a branch"
-		return 1
-	else
-		echo git push --set-upstream origin "$name"
-		git push --set-upstream origin "$name"
-	fi
-)
+if command -v xdg-open; then
+	alias open='xdg-open'
+fi
 
 # Color grep
 alias grep='grep --color=auto'
