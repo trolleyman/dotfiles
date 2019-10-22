@@ -170,7 +170,7 @@ function mkdircd() {
 	echo cd $@
 }
 
-if command -v xdg-open; then
+if command -v xdg-open 2>&1 >/dev/null; then
 	alias open='xdg-open'
 fi
 
