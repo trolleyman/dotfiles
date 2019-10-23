@@ -128,6 +128,8 @@ alias gm='git merge'
 complete -F _complete_alias gm
 alias gr='git rebase'
 complete -F _complete_alias gr
+alias gf='git fetch'
+complete -F _complete_alias gf
 
 function gcm() (
 	git commit -m "$(echo "$@")"
