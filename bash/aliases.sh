@@ -67,6 +67,12 @@ function each() {
 alias reload='exec bash -l'
 
 alias cls=clear
+complete -F _complete_alias cls
+
+alias pd='pushd'
+complete -F _complete_alias pd
+alias ppd='popd'
+complete -F _complete_alias ppd
 
 alias ll='ls -lXhF --color --group-directories-first'
 complete -F _complete_alias ll
