@@ -32,6 +32,8 @@ fi
 . ~/.dotfiles/bash/prompt.sh
 
 if $_INTERACTIVE_SHELL && $_LOGIN_SHELL; then
+	unset command_not_found_handle
+
 	# Info that the bashrc ran
 	echo ~/.bashrc run.
 fi
