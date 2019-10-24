@@ -71,6 +71,8 @@ complete -F _complete_alias cls
 
 alias pd='pushd'
 complete -F _complete_alias pd
+alias pp='popd'
+complete -F _complete_alias pp
 alias ppd='popd'
 complete -F _complete_alias ppd
 
