@@ -113,6 +113,8 @@ alias gco='git checkout'
 complete -F _complete_alias gco
 alias gpl='git pull'
 complete -F _complete_alias gpl
+alias gp='git push'
+complete -F _complete_alias gp
 alias gps='git push'
 complete -F _complete_alias gps
 alias gph='git push'
