@@ -132,6 +132,8 @@ alias gm='git merge'
 complete -F _complete_alias gm
 alias gr='git rebase'
 complete -F _complete_alias gr
+alias grt='git reset'
+complete -F _complete_alias grt
 alias gf='git fetch'
 complete -F _complete_alias gf
 
