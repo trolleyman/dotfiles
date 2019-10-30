@@ -16,7 +16,7 @@ while read -r fname; do
         echo "error: git-nocommit: $(make_path_relative "$fname")"
         exitcode=1
     fi
-    if grep -qE 'git-?no-?commit-?file' "${fname}"; then
+    if [[ -r "${fname}" ]] && grep -qE 'git-?no-?commit-?file' "${fname}"; then
         echo "error: git-nocommit-file: $(make_path_relative "$fname")"
         exitcode=1
     fi
