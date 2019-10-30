@@ -12,11 +12,11 @@ make_path_relative() {
 # Check for git-nocommit
 exitcode=0
 while read -r fname; do
-    if git diff --staged -U2 -- "${fname}" | grep -qE "git-nocommit|git-no-commit"; then
+    if git diff --staged -U2 -- "${fname}" | grep -qE "git-?no-?commit"; then
         echo "error: git-nocommit: $(make_path_relative "$fname")"
         exitcode=1
     fi
-    if grep -qE 'git-no-?commit-?file' "${fname}"; then
+    if grep -qE 'git-?no-?commit-?file' "${fname}"; then
         echo "error: git-nocommit-file: $(make_path_relative "$fname")"
         exitcode=1
     fi
