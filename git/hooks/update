@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ -x ./.git/hooks/update ]]; then
+    ./.git/hooks/update $@
+    exit $?
+fi

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ -x ./.git/hooks/pre-push ]]; then
+    ./.git/hooks/pre-push $@
+    exit $?
+fi

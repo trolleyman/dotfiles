@@ -38,6 +38,7 @@ function config_git {
 	git config --global push.default simple                         # Adopt new pushing format
 
 	git config --global core.excludesFile '~/.dotfiles/git/global_gitignore'
+	git config --global core.hooksPath '~/.dotfiles/git/hooks'
 }
 $_INTERACTIVE_SHELL && $_LOGIN_SHELL && config_git 2>&1 >/dev/null
 

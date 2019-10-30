@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ -x ./.git/hooks/pre-applypatch ]]; then
+    ./.git/hooks/pre-applypatch $@
+    exit $?
+fi
