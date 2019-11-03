@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ -x ./.git/hooks/pre-rebase ]]; then
+    ./.git/hooks/pre-rebase $@
+    exit $?
+fi

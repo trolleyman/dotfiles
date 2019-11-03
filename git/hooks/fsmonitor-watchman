@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ -x ./.git/hooks/fsmonitor-watchman ]]; then
+    ./.git/hooks/fsmonitor-watchman $@
+    exit $?
+fi

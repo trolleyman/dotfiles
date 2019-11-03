@@ -34,3 +34,6 @@
 [submodule "vim/bundle/vim-fakeclip"]
 	path = vim/bundle/vim-fakeclip
 	url = https://github.com/trolleyman/vim-fakeclip
+[submodule "bash/lib/complete-alias"]
+	path = bash/lib/complete-alias
+	url = https://github.com/trolleyman/complete-alias.git

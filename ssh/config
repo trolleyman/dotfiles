@@ -1,5 +1,10 @@
 
-# = Work hosts =
+# = Ocado hosts =
+Host                 inductiondev
+HostName             ithfsd01
+User                 ocadolog
+
+# = UoB CS hosts =
 Host                 bluebear bb
 HostName             bluebear.bham.ac.uk
 User                 tolleyc

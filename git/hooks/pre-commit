@@ -1,0 +1,33 @@
+#!/bin/bash
+
+make_path_relative() {
+    path=$1
+    if [[ "-${GIT_PREFIX}" == "-" ]]; then
+        echo "$path"
+    else
+        echo "$(realpath --relative-to="./$GIT_PREFIX" "$path")"
+    fi
+}
+
+# Check for git-nocommit
+exitcode=0
+while read -r fname; do
+    if git diff --staged -U2 -- "${fname}" | grep -qE "git-?no-?commit"; then
+        echo "error: git-nocommit: $(make_path_relative "$fname")"
+        exitcode=1
+    fi
+    if [[ -r "${fname}" ]] && grep -qE 'git-?no-?commit-?file' "${fname}"; then
+        echo "error: git-nocommit-file: $(make_path_relative "$fname")"
+        exitcode=1
+    fi
+done <<< "`git diff --name-only --staged`"
+
+# Run local git hook
+localexitcode=0
+if [[ -x ./.git/hooks/pre-commit ]]; then
+    ./.git/hooks/pre-commit
+    localexitcode=$?
+fi
+if [[ $exitcode != 0 ]] || [[ $localexitcode != 0 ]]; then
+    exit 1
+fi

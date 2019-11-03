@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ -x ./.git/hooks/applypatch-msg ]]; then
+    ./.git/hooks/applypatch-msg $@
+    exit $?
+fi

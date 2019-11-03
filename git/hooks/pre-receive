@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ -x ./.git/hooks/pre-receive ]]; then
+    ./.git/hooks/pre-receive $@
+    exit $?
+fi
