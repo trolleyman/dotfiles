@@ -8,5 +8,5 @@ git submodule init
 git submodule sync
 git submodule update
 
-~/.dotfiles/bin/setup-dotfiles
+~/.dotfiles/bin/dotfiles-setup
 
