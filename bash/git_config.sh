@@ -30,9 +30,14 @@ function config_git {
 	# TODO: Bash script to print out total line count for users, in src/ directory
 	# git ls-tree -r HEAD --name-only | grep '^src/*' | xargs -I {} git blame --line-porcelain {} | sed -n 's/^author-mail //p' | sort | uniq -c | sort -rn
 
+	NUM_CPUS=$(nproc --all 2>/dev/null)
+	NUM_CPUS=${NUM_CPUS:-1}
+
 	# Git config
 	git config --global color.ui auto                               # Enable colors
 	git config --global submodule.recurse true                      # Recurse through submodules when pulling by default
+	git config --global submodule.fetchJobs $NUM_CPUS               # Parallelize submodule fetching
+	gir config --global fetch.parallel $NUM_CPUS                    # Parallelize regular fetching
 	git config --global credential.helper 'cache --timeout=7200'    # Cache passwords for 2 hours
 	git config --global core.preloadIndex true                      # Preload index -- helps on NFS
 	git config --global push.default simple                         # Adopt new pushing format
