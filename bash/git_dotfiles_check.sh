@@ -11,7 +11,7 @@ function check_dotfiles() (
 	if [[ "$LOCAL" == "$REMOTE" ]]; then
 		: # Up-to-date
 	elif [[ "$LOCAL" == "$BASE" ]]; then
-		printf "\e[93mWarning: Out of date dotfiles: Run update-dotfiles\e[0m\n"
+		printf "\e[93mWarning: Out of date dotfiles: Run dotfiles-update\e[0m\n"
 	elif [[ "$REMOTE" == "$BASE" ]]; then
 		printf "\e[93mWarning: Need to git push ~/.dotfiles\e[0m\n"
 	else
