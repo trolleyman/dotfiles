@@ -8,7 +8,7 @@ set -e
 if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
     # On WSL
     # Convert to win paths
-    cfile=$(wslpath -w "$file") # TODO: Fix wslpath for some paths
+    cfile=$(wslpath -w "$file") # TODO: Fix wslpath for some paths: https://github.com/microsoft/WSL/issues/4295
     if [[ -d "$file" ]]; then
         # Directory -- use explorer.exe
         echo + explorer.exe "$cfile"
