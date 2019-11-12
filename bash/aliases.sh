@@ -186,9 +186,8 @@ function mkdircd() {
 	echo cd $@
 }
 
-if command -v xdg-open 2>&1 >/dev/null; then
-	alias open='xdg-open'
-fi
+# Open
+alias open='~/.dotfiles/bin/open'
 
 # Color grep
 alias grep='grep --color=auto'
