@@ -76,11 +76,12 @@ do_link ~/.dotfiles/gdbinit.d ~/.gdbinit.d
 do_link ~/.dotfiles/zsh/zshrc ~/.zshrc
 
 # Fish
-mkdir -p ~/.config/fish/
+(set +x; mkdir -p ~/.config/fish/)
 do_link ~/.dotfiles/fish/config.fish ~/.config/fish/config.fish
 
 # Fix all permissions
 group=$(id -gn)
-(set -x; set +e; chown -R $USER:$group ~/.dotfiles)
-(set -x; set +e; chmod -R og-rwx ~/.dotfiles)
+set +e
+(set -x; chown -R $USER:$group ~/.dotfiles)
+(set -x; chmod -R og-rwx ~/.dotfiles)
 
