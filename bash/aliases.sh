@@ -2,7 +2,20 @@
 # _complete_alias function
 . ~/.dotfiles/bash/lib/complete-alias/bash_completion.sh
 
-function treedu() {
+args() {
+	i=1
+	while [[ $# -ge 1 ]]; do
+		echo "\$$i=$1"
+		i=$(( $i + 1 ))
+		shift
+	done
+}
+
+echo_cmd() {
+	( set -x; "$@"; )
+}
+
+treedu() {
 	local depth=''
 
 	while getopts "hL:" opt ; do
