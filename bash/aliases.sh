@@ -143,6 +143,8 @@ alias gbase='git rebase'
 complete -F _complete_alias gbase
 alias gd='git diff'
 complete -F _complete_alias gd
+alias gdiff='git diff'
+complete -F _complete_alias gdiff
 alias gm='git merge'
 complete -F _complete_alias gm
 alias gr='git rebase'
