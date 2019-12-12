@@ -17,19 +17,19 @@ fi
 
 shopt -q login_shell && _LOGIN_SHELL=true || _LOGIN_SHELL=false
 
-# If we are a slurm job, don't load anything.
-if [[ ! -z "${SLURM_JOB_ID}" ]]; then
-	return 0
-fi
-
 . ~/.dotfiles/bash/env.sh
 
 . ~/.dotfiles/bash/aliases.sh
+. ~/.dotfiles/bash/os.sh
 . ~/.dotfiles/bash/git_config.sh 2>&1 >/dev/null
 . ~/.dotfiles/bash/git_dotfiles_check.sh
-. ~/.dotfiles/bash/completion.sh
 
+. ~/.dotfiles/bash/completion.sh
 . ~/.dotfiles/bash/prompt.sh
+
+if [[ -r ~/.local/env.sh ]]; then
+	. ~/.local/env.sh
+fi
 
 if $_INTERACTIVE_SHELL && $_LOGIN_SHELL; then
 	# Info that the bashrc ran
