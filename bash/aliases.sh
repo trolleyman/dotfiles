@@ -169,6 +169,10 @@ function gcam() (
 	git commit --amend -m "$(echo "$@")"
 )
 
+function gcmnv() (
+	git commit --no-verify -m "$(echo "$@")"
+)
+
 function gcos() (
 	set -x
 	git stash save
