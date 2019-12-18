@@ -155,8 +155,12 @@ alias grt='git reset'
 complete -F _complete_alias grt
 alias gf='git fetch'
 complete -F _complete_alias gf
+alias gfp='git fetch -p'
+complete -F _complete_alias gfp
 alias gbr='git branch'
 complete -F _complete_alias gbr
+alias grm='git rm'
+complete -F _complete_alias grm
 
 function gcm() (
 	git commit -m "$(echo "$@")"
