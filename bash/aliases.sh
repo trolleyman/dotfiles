@@ -118,6 +118,8 @@ alias gaa='git add --all'
 complete -F _complete_alias gaa
 alias gss='git stash save'
 complete -F _complete_alias gss
+alias gsd='git stash drop'
+complete -F _complete_alias gsd
 alias gsp='git stash pop'
 complete -F _complete_alias gsp
 alias gsa='git stash apply'
