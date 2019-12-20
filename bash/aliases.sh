@@ -112,6 +112,8 @@ alias gst='git status'
 complete -F _complete_alias gst
 alias gap='git add -p'
 complete -F _complete_alias gap
+alias gpa='git add -p'
+complete -F _complete_alias gpa
 alias ga='git add'
 complete -F _complete_alias ga
 alias gaa='git add --all'
