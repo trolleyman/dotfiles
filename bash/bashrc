@@ -17,6 +17,8 @@ fi
 
 shopt -q login_shell && _LOGIN_SHELL=true || _LOGIN_SHELL=false
 
+. ~/.dotfiles/bash/lib/goto/goto.sh
+
 . ~/.dotfiles/bash/env.sh
 
 . ~/.dotfiles/bash/aliases.sh

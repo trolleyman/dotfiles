@@ -37,3 +37,6 @@
 [submodule "bash/lib/complete-alias"]
 	path = bash/lib/complete-alias
 	url = https://github.com/trolleyman/complete-alias.git
+[submodule "bash/lib/goto"]
+	path = bash/lib/goto
+	url = https://github.com/iridakos/goto
