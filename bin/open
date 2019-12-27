@@ -1,7 +1,9 @@
 #!/bin/bash
 
+scriptname=open
+
 if [[ $# -lt 1 ]]; then
-    echo "Usage: $0 <target>..." >/dev/stderr
+    echo "Usage: $scriptname <target>..." >&2
     exit 1
 fi
 
@@ -21,7 +23,7 @@ for file in "$@"; do
             win_pwd=$(wslpath -w "$(pwd)")
             if [[ "$win_pwd" == '\\wsl$\'* ]]; then
                 # In a wsl path, cd out first before opening
-                echo "$0: wsl path not yet implemented" >/dev/stderr
+                echo "$scriptname: wsl path not yet implemented" >&2
                 exit_code=1
             else
                 # Use cmd.exe to open file
@@ -30,7 +32,7 @@ for file in "$@"; do
                 if [[ $exit_code == 0 ]]; then exit_code=$code; fi
             fi
         else
-            echo "$0: $file: No such file or directory" >/dev/stderr
+            echo "$scriptname: $file: No such file or directory" >&2
             exit_code=1
         fi
     elif command -v xdg-open 2>&1 >/dev/null; then
@@ -40,7 +42,7 @@ for file in "$@"; do
         code=$?
         if [[ $exit_code == 0 ]]; then exit_code=$code; fi
     else
-        echo "$0: non-wsl and xdg-open not detected" >/dev/stderr
+        echo "$scriptname: non-wsl and xdg-open not detected" >&2
         exit_code=1
     fi
 done

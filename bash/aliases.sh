@@ -20,6 +20,15 @@ alias reload='exec bash -l'
 alias cls=clear
 complete -F _complete_alias cls
 
+if command -v trash 2>&1 >/dev/null; then
+	alias rm='trash'
+	complete -F _complete_alias rm
+else
+	if $_INTERACTIVE_SHELL && $_LOGIN_SHELL; then
+		echo "Warning: trash command does not exist: run apt install trash-cli" >&2
+	fi
+fi
+
 alias pd='pushd'
 complete -F _complete_alias pd
 alias pp='popd'
