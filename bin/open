@@ -1,7 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-echo open: "$@"
-file="$@"
+if [[ $# -ne 1 ]]; then
+    echo "Usage: open <file>" >/dev/stderr
+fi
+file="$1"
 
 set -e
 
@@ -11,20 +13,18 @@ if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
     cfile=$(wslpath -w "$file") # TODO: Fix wslpath for some paths: https://github.com/microsoft/WSL/issues/4295
     if [[ -d "$file" ]]; then
         # Directory -- use explorer.exe
-        echo + explorer.exe "$cfile"
-        explorer.exe "$cfile"
+        ( set +x; explorer.exe "$cfile"; )
     elif [[ -f "$file" ]]; then
         # File -- use cmd.exe to open the file
-        echo + cmd.exe "$cfile"
-        cmd.exe /C "$cfile"
+        ( set +x; cmd /C "$cfile"; )
     else
-        echo "error: file does not exist"
+        echo "error: file does not exist" >/dev/stderr
     fi
 elif command -v xdg-open 2>&1 >/dev/null; then
     # Use xdg-open
     echo + xdg-open "$file"
     xdg-open "$file"
 else
-    echo "not yet implemented"
+    echo "error: not yet implemented" >/dev/stderr
+    exit 1
 fi
-

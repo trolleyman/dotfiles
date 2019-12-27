@@ -34,7 +34,7 @@ if $_INTERACTIVE_SHELL; then
 	export HISTCONTROL=ignorespace
 fi
 
-# == Env ==
+# == Environment variables ==
 # GPG
 $_INTERACTIVE_SHELL && export GPG_TTY=$(tty)
 
@@ -54,45 +54,26 @@ if [[ -r "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
 	. "$HOME/anaconda3/etc/profile.d/conda.sh"
 fi
 
-# snap binaries
-export PATH=/snap/bin${PATH:+:${PATH}}
-
-# CUDA
-if [[ -d /usr/local/cuda ]]; then
-	export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
-	export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-fi
-
-# Cargo/rust, if they've been installed manually (i.e. on the CS lab computers)
-if [[ -d ~/rust ]]; then
-	export PATH=~/rust/rustc/bin:~/rust/cargo/bin${PATH:+:${PATH}}
-	#export LD_LIBRARY_PATH=~/rust/rustc/lib:~/rust/rustc/lib/rustlib/x86_64-unknown-linux-gnu/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-	export RUSTFLAGS="-L $HOME/rust/rust-std-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/lib"
-fi
-
-# Cargo binaries
-export PATH=$HOME/.cargo/bin${PATH:+:${PATH}}
-
-# .dotfiles binaries
-export PATH=$HOME/.dotfiles/bin${PATH:+:${PATH}}
-
-# Local binaries
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH
-
 # X11 DISPLAY variable
 if [[ -z "$DISPLAY" ]]; then
 	export DISPLAY=localhost:0
 fi
 
-# Docker, but only for Desktop PC
-if [[ "$(hostname)" == "Callums-PC" ]]; then
-	if $_LOGIN_SHELL; then
-		export DOCKER_HOST=localhost:2375
-	fi
+# === PATH ===
+# snap binaries
+export PATH=/snap/bin:$PATH
+
+# CUDA
+if [[ -d /usr/local/cuda ]]; then
+	export PATH=/usr/local/cuda/bin:$PATH
+	export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 fi
 
-# Set proper umask, but only when on socs computers
-if $_LOGIN_SHELL && [[ "$HOST" == 'tinky-winky' || "$HOST" == *.cs.bham.ac.uk ]]; then
-	umask 077
-fi
+# Cargo binaries
+export PATH=$HOME/.cargo/bin:$PATH
 
+# .dotfiles binaries
+export PATH=$HOME/.dotfiles/bin:$PATH
+
+# Other local binaries
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH

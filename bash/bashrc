@@ -21,6 +21,7 @@ shopt -q login_shell && _LOGIN_SHELL=true || _LOGIN_SHELL=false
 
 . ~/.dotfiles/bash/env.sh
 
+. ~/.dotfiles/bash/commands.sh
 . ~/.dotfiles/bash/aliases.sh
 . ~/.dotfiles/bash/os.sh
 . ~/.dotfiles/bash/git_config.sh 2>&1 >/dev/null
