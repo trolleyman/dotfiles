@@ -1,31 +1,47 @@
 #!/bin/bash
 
-if [[ $# -ne 1 ]]; then
-    echo "Usage: $0 <file>" >/dev/stderr
+if [[ $# -lt 1 ]]; then
+    echo "Usage: $0 <target>..." >/dev/stderr
     exit 1
 fi
-file="$1"
 
-set -e
-
-if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
-    # On WSL
-    # Convert to win paths
-    cfile=$(wslpath -w "$file") # TODO: Fix wslpath for some paths: https://github.com/microsoft/WSL/issues/4295
-    if [[ -d "$file" ]]; then
-        # Directory -- use explorer.exe
-        ( set +x; explorer.exe "$cfile"; )
-    elif [[ -f "$file" ]]; then
-        # File -- use cmd.exe to open the file
-        ( set +x; cmd /C "$cfile"; )
+exit_code=0
+for file in "$@"; do
+    if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+        # On WSL
+        # Convert to win paths
+        win_file=$(wslpath -w "$file") # TODO: Fix wslpath for some paths: https://github.com/microsoft/WSL/issues/4295
+        if [[ -d "$file" ]]; then
+            # Directory -- use explorer.exe
+            ( set +x; explorer.exe "$win_file"; )
+            code=$?
+            if [[ $exit_code == 0 ]]; then exit_code=$code; fi
+        elif [[ -f "$file" ]]; then
+            # File -- use cmd.exe to open the file
+            win_pwd=$(wslpath -w "$(pwd)")
+            if [[ "$win_pwd" == '\\wsl$\'* ]]; then
+                # In a wsl path, cd out first before opening
+                echo "$0: wsl path not yet implemented" >/dev/stderr
+                exit_code=1
+            else
+                # Use cmd.exe to open file
+                ( cd ; set +x; cmd.exe /C "$win_file"; )
+                code=$?
+                if [[ $exit_code == 0 ]]; then exit_code=$code; fi
+            fi
+        else
+            echo "$0: $file: No such file or directory" >/dev/stderr
+            exit_code=1
+        fi
+    elif command -v xdg-open 2>&1 >/dev/null; then
+        # Use xdg-open
+        echo + xdg-open "$file"
+        xdg-open "$file"
+        code=$?
+        if [[ $exit_code == 0 ]]; then exit_code=$code; fi
     else
-        echo "$0: $file: No such file or directory" >/dev/stderr
+        echo "$0: non-wsl and xdg-open not detected" >/dev/stderr
+        exit_code=1
     fi
-elif command -v xdg-open 2>&1 >/dev/null; then
-    # Use xdg-open
-    echo + xdg-open "$file"
-    xdg-open "$file"
-else
-    echo "$0: not yet implemented" >/dev/stderr
-    exit 1
-fi
+done
+exit $exit_code
