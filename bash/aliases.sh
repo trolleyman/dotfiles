@@ -144,10 +144,6 @@ function gpu() (
 	fi
 )
 
-# Open
-alias open='~/.dotfiles/bin/open'
-complete -F _complete_alias open
-
 # Color grep
 alias grep='grep --color=auto'
 complete -F _complete_alias grep

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [[ $# -ne 1 ]]; then
-    echo "Usage: open <file>" >/dev/stderr
+    echo "Usage: $0 <file>" >/dev/stderr
+    exit 1
 fi
 file="$1"
 
@@ -18,13 +19,13 @@ if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
         # File -- use cmd.exe to open the file
         ( set +x; cmd /C "$cfile"; )
     else
-        echo "error: file does not exist" >/dev/stderr
+        echo "$0: $file: No such file or directory" >/dev/stderr
     fi
 elif command -v xdg-open 2>&1 >/dev/null; then
     # Use xdg-open
     echo + xdg-open "$file"
     xdg-open "$file"
 else
-    echo "error: not yet implemented" >/dev/stderr
+    echo "$0: not yet implemented" >/dev/stderr
     exit 1
 fi
