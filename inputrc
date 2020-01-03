@@ -20,5 +20,6 @@ set completion-ignore-case on
 set completion-map-case on
 
 # When displaying <TAB> completion, don't display prefix that has been
-# already typed, if longer than 3 characters
+# already typed, if longer than N characters
 set completion-prefix-display-length 16
+
