@@ -1,12 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
 set -ex
 
-cd ~/.dotfiles
+pushd ~/.dotfiles
 git pull
 git submodule init
 git submodule sync
 git submodule update
+popd
 
 ~/.dotfiles/bin/dotfiles-setup
 
