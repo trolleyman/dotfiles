@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 set -ex
 
-cd ~/.dotfiles
+pushd ~/.dotfiles
+trap exit popd
 git pull
 git submodule init
 git submodule sync

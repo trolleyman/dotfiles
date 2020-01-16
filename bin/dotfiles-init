@@ -1,8 +1,9 @@
 #!/bin/bash
 
 set -x
-cd ~/.dotfiles
+pushd ~/.dotfiles
 git submodule init
 git submodule update --recursive
+popd
 exec bash -l
 
