@@ -11,6 +11,9 @@ fi
 . ~/.dotfiles/bash/lib/git-completion.bash
 
 for f in ~/.dotfiles/bash/completion/*; do
-	. $f
+	name=$(basename $f | sed 's/.bash-completion$//g')
+	if command -v "$name" 2>&1 >/dev/null; then
+		. $f
+	fi
 done
 
