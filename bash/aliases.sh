@@ -25,7 +25,10 @@ if command -v trash 2>&1 >/dev/null; then
 	complete -F _complete_alias rm
 else
 	if $_INTERACTIVE_SHELL && $_LOGIN_SHELL; then
-		echo "Warning: trash command does not exist: run apt install trash-cli" >&2
+		if [[ "$USER" != root ]]; then
+			maybe_sudo=" sudo"
+		fi
+		printf "\e[93mWarning:\e[0m trash command does not exist: run$maybe_sudo apt install trash-cli\n" >&2
 	fi
 fi
 
@@ -169,3 +172,4 @@ alias fix='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"'
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
+

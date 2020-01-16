@@ -77,3 +77,4 @@ export PATH=$HOME/.dotfiles/bin:$PATH
 
 # Other local binaries
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
+
