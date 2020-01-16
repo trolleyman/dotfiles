@@ -3,11 +3,11 @@
 set -ex
 
 pushd ~/.dotfiles
-trap exit popd
 git pull
 git submodule init
 git submodule sync
 git submodule update
+popd
 
 ~/.dotfiles/bin/dotfiles-setup
 
