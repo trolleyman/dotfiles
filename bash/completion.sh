@@ -11,9 +11,11 @@ fi
 . ~/.dotfiles/bash/lib/git-completion.bash
 
 for f in ~/.dotfiles/bash/completion/*; do
-	name=$(basename $f | sed 's/.bash-completion$//g')
-	if command -v "$name" 2>&1 >/dev/null; then
+	name="$(basename "$f" | sed 's/.bash-completion$//g')"
+	if  [[ "$(alias | grep "$name" | wc -l)" != 0 ]] || command -v "$name" 2>&1 >/dev/null; then
 		. $f
+	else
+		printf "\e[93mWarning:\e[0m Skipped bash completion for $name\n"
 	fi
 done
 
