@@ -156,6 +156,14 @@ function gpu() (
 	fi
 )
 
+# Docker
+alias d='docker'
+complete -F _complete_alias d
+alias dc='docker container'
+complete -F _complete_alias dc
+alias di='docker image'
+complete -F _complete_alias di
+
 # Color grep
 alias grep='grep --color=auto'
 complete -F _complete_alias grep
