@@ -10,8 +10,8 @@ fi
 set -x
 
 # Set correct crlf settings
-git config core.autocrlf input
-git config core.eol lf
+git config core.autocrlf false
+git config core.eol crlf
 
 # Reset current files
 git ls-files -z | xargs -0 rm
