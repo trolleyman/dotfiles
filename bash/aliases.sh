@@ -76,6 +76,8 @@ alias gsp='git stash pop'
 complete -F _complete_alias gsp
 alias gsa='git stash apply'
 complete -F _complete_alias gsa
+alias gsl='git stash list'
+complete -F _complete_alias gsl
 alias gco='git checkout'
 complete -F _complete_alias gco
 alias gpl='git pull'
