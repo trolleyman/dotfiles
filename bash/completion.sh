@@ -15,7 +15,7 @@ for f in ~/.dotfiles/bash/completion/*; do
 	if  [[ "$(alias | grep "$name" | wc -l)" != 0 ]] || command -v "$name" 2>&1 >/dev/null; then
 		. $f
 	else
-		printf "\e[93mWarning:\e[0m Skipped bash completion for $name\n"
+		printf "\e[1m\e[33mWarning:\e[0m Skipped bash completion for $name\n"
 	fi
 done
 

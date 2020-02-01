@@ -11,11 +11,11 @@ function check_dotfiles() (
 	if [[ "$LOCAL" == "$REMOTE" ]]; then
 		: # Up-to-date
 	elif [[ "$LOCAL" == "$BASE" ]]; then
-		printf "\e[93mWarning:\e[0m Out of date dotfiles: Run dotfiles-update\n"
+		printf "\e[1m\e[33mWarning:\e[0m Out of date dotfiles: Run dotfiles-update\n"
 	elif [[ "$REMOTE" == "$BASE" ]]; then
-		printf "\e[93mWarning:\e[0m Need to git push ~/.dotfiles\n"
+		printf "\e[1m\e[33mWarning:\e[0m Need to git push ~/.dotfiles\n"
 	else
-		printf "\e[93mWarning:\e[0m ~/.dotfiles has diverged from upstream\n"
+		printf "\e[1m\e[33mWarning:\e[0m ~/.dotfiles has diverged from upstream\n"
 	fi
 	
 	# Do this in the background so there's no waiting -- we'll

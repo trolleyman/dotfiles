@@ -28,7 +28,7 @@ else
 		if [[ "$USER" != root ]]; then
 			maybe_sudo=" sudo"
 		fi
-		printf "\e[93mWarning:\e[0m trash command does not exist: run$maybe_sudo apt install trash-cli\n" >&2
+		printf "\e[1m\e[33mWarning:\e[0m trash command does not exist: run$maybe_sudo apt install trash-cli\n" >&2
 	fi
 fi
 
