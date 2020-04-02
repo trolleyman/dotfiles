@@ -6,6 +6,9 @@ $include /etc/inputrc
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 
+# Make ctrl-backspace kill the previous word
+"\C-h": backward-kill-word
+
 # Turn off bell
 set bell-style none
 
