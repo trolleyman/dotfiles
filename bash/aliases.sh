@@ -20,18 +20,6 @@ alias reload='exec bash -l'
 alias cls=clear
 complete -F _complete_alias cls
 
-if command -v trash 2>&1 >/dev/null; then
-	alias rm='trash'
-	complete -F _complete_alias rm
-else
-	if $_INTERACTIVE_SHELL && $_LOGIN_SHELL; then
-		if [[ "$USER" != root ]]; then
-			maybe_sudo=" sudo"
-		fi
-		printf "\e[1m\e[33mWarning:\e[0m trash command does not exist: run$maybe_sudo apt install trash-cli\n" >&2
-	fi
-fi
-
 alias pd='pushd'
 complete -F _complete_alias pd
 alias pp='popd'
