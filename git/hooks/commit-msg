@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ -x ./.git/hooks/commit-msg ]]; then
-    ./.git/hooks/commit-msg $@
+if [[ -x .git/hooks/commit-msg ]]; then
+    .git/hooks/commit-msg "$@"
     exit $?
 fi

@@ -25,8 +25,8 @@ done <<< "`git diff --name-only --staged`"
 
 # Run local git hook
 localexitcode=0
-if [[ -x ./.git/hooks/pre-commit ]]; then
-    ./.git/hooks/pre-commit
+if [[ -x .git/hooks/pre-commit ]]; then
+    .git/hooks/pre-commit "$@"
     localexitcode=$?
 fi
 if [[ $exitcode != 0 ]] || [[ $localexitcode != 0 ]]; then
