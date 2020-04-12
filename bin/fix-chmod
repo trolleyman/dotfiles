@@ -2,5 +2,5 @@
 
 set -x
 
-chmod -R og-rwx .
+chmod -R og-rwx ~
 
