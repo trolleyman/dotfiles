@@ -63,7 +63,7 @@ do_link ~/.dotfiles/vim ~/.vim
 # Remove old vim bundles
 (set -x; rm -rf ~/.dotfiles/vim/bundle/)
 # Update
-(set -x; vim +PlugUpgrade +PlugUpdate +qa!)
+#(set -x; vim +PlugUpgrade +PlugUpdate +qa!)
 
 # tmux
 do_link ~/.dotfiles/tmux.conf ~/.tmux.conf
