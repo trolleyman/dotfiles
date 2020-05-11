@@ -4,17 +4,12 @@ Host                 inductiondev
 HostName             ithfsd01
 User                 ocadolog
 
-# = UoB CS hosts =
-Host                 bluebear bb
-HostName             bluebear.bham.ac.uk
-User                 tolleyc
-
-Host                 bb2login04
-HostName             bb2login04
-
-Host                 django
-HostName             172.31.8.69
-User                 centos
+Host                 work
+#HostName             hotcpc-talbot.ocado.com
+HostName             10.62.11.38
+User                 callum.tolley
+ForwardX11           yes
+ForwardX11Trusted    yes
 
 # = GitHub =
 Host                 github.com
@@ -29,23 +24,12 @@ ForwardX11Trusted    no
 Host                 trolleyman.org callumgtolley.uk
 HostName             %h
 User                 root
+ForwardX11           yes
+ForwardX11Trusted    yes
 
 Host                 mc.trolleyman.org mc.callumgtolley.uk
 HostName             %h
 User                 cgtrolley
-
-# = CS hosts =
-Host                 cs tw.cs.bham.ac.uk
-HostName             tinky-winky.cs.bham.ac.uk
-User                 cxt510
-
-# = Internal CS hosts =
-Host                 cca-ug04-* cca-*.cs.bham.ac.uk
-StrictHostKeyChecking no
-
-# = Trusted host defaults =
-Host                 trolleyman.org callumgtolley.uk bluebear bb bluebear.bham.ac.uk bb2login04
-ForwardAgent         yes
 ForwardX11           yes
 ForwardX11Trusted    yes
 
