@@ -1,0 +1,15 @@
+#!/bin/bash
+
+remove_from_path() {
+	for path in "$@";do
+		PATH="$(echo "$PATH" |sed -e "s#\(^\|:\)$(echo "$path" |sed -e 's/[^^]/[&]/g' -e 's/\^/\\^/g')\(:\|/\{0,1\}$\)#\1\2#" -e 's#:\+#:#g' -e 's#^:\|:$##g')"
+	done
+	echo "$PATH"
+}
+
+if [[ "$(pwd)" == /mnt/* ]]; then
+	git.exe "$@"
+else
+	export PATH="$(remove_from_path ~/.dotfiles/bin/os/wsl)"
+	git "$@"
+fi

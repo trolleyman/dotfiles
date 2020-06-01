@@ -33,13 +33,14 @@ extract () {
 	fi
 }
 
-function mkdircd() {
+mkdircd() {
 	mkdir $@
 	echo mkdir $@
 	cd $@
 	echo cd $@
 }
 
-function mkcd() {
+mkcd() {
 	mkdircd $@
 }
+

@@ -23,7 +23,6 @@ cmd() (
 )
 
 # TODO: Override 'cd' to handle Windows paths
-
 cdw() {
     if [[ $# == 0 ]]; then
         cd ~
