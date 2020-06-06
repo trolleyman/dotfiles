@@ -52,6 +52,8 @@ Set-Alias ppd popd
 
 Set-Alias ll 'dir'
 
+Set-Alias which get-command
+
 # Git aliases
 Set-Alias g git
 Set-Alias gti git
