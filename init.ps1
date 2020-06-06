@@ -22,6 +22,6 @@ if ( -Not (Test-Path $dotfilesPath -PathType Container) ) {
 }
 
 # Run setup script
-powershell -file $dotfilesPath/powershell/Dotfiles-Setup.ps1
+powershell -file $dotfilesPath/powershell/Setup-Dotfiles.ps1
 
 Write-Host "`nTo update the shell, re-run: powershell`n`n"

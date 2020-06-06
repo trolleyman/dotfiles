@@ -33,4 +33,4 @@ function Make-Link {
 
 Make-Link -Link "$Profile" -Target "$PSScriptRoot\Profile.ps1" -Force
 
-Write-Host "`nDotfiles-Setup complete.`n"
+Write-Host "`nSetup-Dotfiles complete.`n"
