@@ -46,6 +46,8 @@ Start-Job -ScriptBlock {
 	git config --global core.hooksPath "$HOME\.dotfiles\git\hooks"
 } | Out-Null
 
+# TODO: Check out of date dotfiles repo
+
 # Helpers
 Set-Alias pd pushd
 Set-Alias pp popd
