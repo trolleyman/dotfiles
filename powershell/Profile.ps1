@@ -220,5 +220,8 @@ function path() {
 
 . "$HOME\.dotfiles\powershell\Set-Prompt.ps1"
 
-Clear-Host
-Write-Host "$PSCommandPath run."
+if ($null -eq [Environment]::UserInteractive -or [Environment]::UserInteractive) {
+	# Interactive mode
+	Clear-Host
+	Write-Host "$PSCommandPath run."
+}
