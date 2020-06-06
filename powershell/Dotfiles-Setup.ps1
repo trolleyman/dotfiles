@@ -1,5 +1,6 @@
 
 # TODO: Setup links & profile, etc.
-Import-Module $PSScriptRoot\UserRights.psm1
+Unblock-File $PSScriptRoot\lib\UserRights.psm1
+Import-Module $PSScriptRoot\lib\UserRights.psm1
 
-
+echo "Setup complete"

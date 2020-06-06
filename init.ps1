@@ -15,4 +15,4 @@ $f=Get-Item -Force ~/.dotfiles
 $f.Attributes = $f.Attributes -bor "Hidden"
 
 # Run setup script
-powershell -file ~/.dotfiles/powershell/Setup.ps1
+powershell -file ~/.dotfiles/powershell/Dotfiles-Setup.ps1
