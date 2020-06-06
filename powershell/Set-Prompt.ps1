@@ -12,7 +12,7 @@ function prompt() {
 	# TODO: Get context color
 	$ContextColor = [char]27 + '[1;31m'
 
-	# TODO: Check conda/venv
+	# TODO: Check venv, conda seems to work fine
 	Write-Host -NoNewline "$ContextColor$(Get-Date -Format "HH:mm:ss")"
 	Write-Host -NoNewline -ForegroundColor Gray " $([Environment]::UserName)"
 	Write-Host -NoNewline "$ContextColor@"
