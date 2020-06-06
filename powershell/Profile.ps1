@@ -2,8 +2,6 @@
 # Set equivalent of `set -e`, note that this doesn't work for EXEs
 $ErrorActionPreference = "Stop"
 
-Set-ExecutionPolicy Unrestricted -scope CurrentUser
-
 Start-Job -ScriptBlock {
 	# Git aliases
 	git config --global alias.aa 'add -A'
