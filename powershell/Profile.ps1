@@ -41,6 +41,7 @@ function Set-GitConfig() {
 	git config --global core.preloadIndex true                      # Preload index -- helps on NFS
 	git config --global push.default simple                         # Adopt new pushing format
 	git config --global core.safecrlf false                         # Silence CRLF warnings
+	git config --global fetch.prune true                            # Prune branches that have been deleted on origin
 
 	git config --global core.excludesFile "$HOME\.dotfiles\git\global_gitignore"
 	git config --global core.hooksPath "$HOME\.dotfiles\git\hooks"
