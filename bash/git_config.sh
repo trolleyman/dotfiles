@@ -36,6 +36,7 @@ function config_git {
 	# Git config
 	git config --global color.ui auto                               # Enable colors
 	git config --global submodule.recurse true                      # Recurse through submodules when pulling by default
+	git config --global push.recurseSubmodules on-demand            # Push submodules that have had their revisions changed
 	git config --global submodule.fetchJobs $NUM_CPUS               # Parallelize submodule fetching
 	git config --global fetch.parallel $NUM_CPUS                    # Parallelize regular fetching
 	git config --global credential.helper 'cache --timeout=7200'    # Cache passwords for 2 hours

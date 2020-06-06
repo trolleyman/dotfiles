@@ -36,6 +36,7 @@ Start-Job -ScriptBlock {
 	$NumCpus = (Get-CimInstance Win32_ComputerSystem).NumberOfLogicalProcessors
 	git config --global color.ui auto                               # Enable colors
 	git config --global submodule.recurse true                      # Recurse through submodules when pulling by default
+	git config --global push.recurseSubmodules on-demand            # Push submodules that have had their revisions changed
 	git config --global submodule.fetchJobs $NumCpus                # Parallelize submodule fetching
 	git config --global fetch.parallel $NumCpus                     # Parallelize regular fetching
 	git config --global core.preloadIndex true                      # Preload index -- helps on NFS
