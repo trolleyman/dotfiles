@@ -11,6 +11,7 @@ function Set-GitConfig() {
 	git config --global alias.br branch
 	git config --global alias.ct commit
 
+	git config --global alias.p push
 	git config --global alias.pp '!f(){ git pull && git push; }; f'
 
 	git config --global alias.unstage 'reset HEAD --'
@@ -96,9 +97,10 @@ function gco() {
 function gpl() {
 	git pull
 }
-function gp() {
-	git push
-}
+# Clashes with Get-ItemProperty
+#function gp() {
+#	git push
+#}
 function gpf() {
 	git push -f
 }
