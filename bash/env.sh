@@ -1,14 +1,14 @@
 
 # == Dir colors ==
 if [ -r ~/.dir_colors ]; then
-	$_INTERACTIVE_SHELL && eval `dircolors ~/.dir_colors`
+	[[ $_INTERACTIVE_SHELL == "true" ]] && eval `dircolors ~/.dir_colors`
 fi
 
 # == Shell options ==
 # prevent other users from writing, reading or executing my files by default
 umask go-rwx
 
-if $_INTERACTIVE_SHELL; then
+if [[ $_INTERACTIVE_SHELL == "true" ]]; then
 	# For rm **/*.pyc, etc.
 	shopt -s globstar
 	# If a directory is executed, then cd to that directory
@@ -36,7 +36,7 @@ fi
 
 # == Environment variables ==
 # GPG
-$_INTERACTIVE_SHELL && export GPG_TTY=$(tty)
+[[ $_INTERACTIVE_SHELL == "true" ]] && export GPG_TTY=$(tty)
 
 # Prevent other users from controlling the terminal
 if [[ $(tty -s ) ]]; then
