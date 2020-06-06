@@ -33,4 +33,6 @@ function Make-Link {
 
 Make-Link -Link "$Profile" -Target "$PSScriptRoot\Profile.ps1" -Force
 
+# TODO: Link up SSH config, and other things
+
 Write-Host "`nSetup-Dotfiles complete.`n"
