@@ -32,7 +32,7 @@ if [[ -r ~/.local/env.sh ]]; then
 	. ~/.local/env.sh
 fi
 
-if $_INTERACTIVE_SHELL && $_LOGIN_SHELL; then
+if [[ $_INTERACTIVE_SHELL == "true" ]] && [[ $_LOGIN_SHELL == "true" ]]; then
 	# Info that the bashrc ran
 	echo ~/.bashrc run.
 fi
