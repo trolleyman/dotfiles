@@ -23,4 +23,4 @@ fi
 ~/.dotfiles/bin/dotfiles-update -f
 set +x
 
-printf '\nTo update the shell, run: exec bash -l\n\n'
+printf '\nTo update the shell, run: exec bash -l\n'
