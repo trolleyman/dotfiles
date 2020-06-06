@@ -1,18 +1,14 @@
 
-# Enable echoing of commands
-Set-PSDebug -trace 2;
-
 # Set the execution policy so that anything can be executed for the current user
 Set-ExecutionPolicy Unrestricted -scope CurrentUser
 
 # TODO: Handle installing Git (probably through winget)
 
 # Clone dotfiles repo to home directory
-git clone --recursive https://github.com/trolleyman/dotfiles ~/.dotfiles
-
-# Set as hidden
-$f=Get-Item -Force ~/.dotfiles
-$f.Attributes = $f.Attributes -bor "Hidden"
+$dotfilesPath="$HOME\.dotfiles"
+if ( -Not (Test-Path $dotfilesPath -PathType Container) ) {
+    git clone --recursive https://github.com/trolleyman/dotfiles $dotfilesPath
+}
 
 # Run setup script
-powershell -file ~/.dotfiles/powershell/Dotfiles-Setup.ps1
+powershell -file $dotfilesPath/powershell/Dotfiles-Setup.ps1
