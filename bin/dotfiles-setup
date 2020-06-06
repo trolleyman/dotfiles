@@ -85,4 +85,4 @@ set +e
 (set -x; chown -R $USER:$group ~/.dotfiles)
 (set -x; chmod -R og-rwx ~/.dotfiles)
 
-printf '\nSetup completed\n'
+printf '\ndotfiles-setup completed\n'
