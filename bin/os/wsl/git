@@ -8,6 +8,7 @@ remove_from_path() {
 }
 
 if [[ "$(pwd)" == /mnt/* ]]; then
+	# TODO: Only do this on WSL2
 	git.exe "$@"
 else
 	export PATH="$(remove_from_path ~/.dotfiles/bin/os/wsl)"

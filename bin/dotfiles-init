@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -ex
-pushd ~/.dotfiles
-git submodule init
-git submodule update --recursive
-popd
-exec bash -l
-

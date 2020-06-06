@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -ex
 
@@ -10,4 +10,3 @@ git submodule update
 popd
 
 ~/.dotfiles/bin/dotfiles-setup
-
