@@ -18,3 +18,6 @@ else
 fi
 
 ~/.dotfiles/bin/dotfiles-setup -f
+set +x
+
+printf "\nSetup completed\n\nTo update the shell, run: exec bash -l\n\n"
