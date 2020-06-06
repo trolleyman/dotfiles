@@ -1,6 +1,7 @@
 
 Set-ExecutionPolicy Unrestricted -scope CurrentUser
 
+function Set-GitConfig() {
 # Git aliases
 git config --global alias.aa 'add -A'
 git config --global alias.a 'add'
@@ -39,3 +40,6 @@ git config --global core.safecrlf false                         # Silence CRLF w
 
 git config --global core.excludesFile "$HOME\.dotfiles\git\global_gitignore"
 git config --global core.hooksPath "$HOME\.dotfiles\git\hooks"
+}
+
+Start-Job -ScriptBlock { Set-GitConfig } | Out-Null
