@@ -41,7 +41,7 @@ complete -F _complete_alias itg
 alias igt=git
 complete -F _complete_alias igt
 
-# Git alias
+# Git aliases
 alias g=git
 complete -F _complete_alias g
 alias gct='git commit'
