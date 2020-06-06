@@ -36,7 +36,3 @@ if [[ $_INTERACTIVE_SHELL == "true" ]] && [[ $_LOGIN_SHELL == "true" ]]; then
 	# Info that the bashrc ran
 	echo ~/.bashrc run.
 fi
-
-unset _INTERACTIVE_SHELL
-unset _LOGIN_SHELL
-
