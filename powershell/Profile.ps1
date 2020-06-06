@@ -159,19 +159,19 @@ function grm() {
 	git rm
 }
 
-function gcm() {
+function gctm() {
 	git commit -m "$args"
 }
 
-function gcma() {
+function gctma() {
 	git commit --amend -m "$args"
 }
 
-function gcam() {
+function gctam() {
 	git commit --amend -m "$args"
 }
 
-function gcmnv() {
+function gctmnv() {
 	git commit --no-verify -m "$args"
 }
 
