@@ -45,94 +45,163 @@ function Set-GitConfig() {
 Start-Job -ScriptBlock { Set-GitConfig } | Out-Null
 
 # Helpers
-#alias pd='pushd'
-#alias pp='popd'
-#alias ppd='popd'
+Set-Alias pd pushd
+Set-Alias pp popd
+Set-Alias ppd popd
 
-#alias ll='ls -lXhF --color --group-directories-first'
-
-# Mistyping helpers
-#alias ..='cd ..'
-#alias cd..='cd ..'
-
-#alias gti=git
-#alias itg=git
-#alias igt=git
+Set-Alias ll 'dir'
 
 # Git aliases
-#alias g=git
-#alias gct='git commit'
-#alias gst='git status'
-#alias gap='git add -p'
-#alias gpa='git add -p'
-#alias ga='git add'
-#alias gaa='git add --all'
-#alias gss='git stash save'
-#alias gsd='git stash drop'
-#alias gsp='git stash pop'
-#alias gsa='git stash apply'
-#alias gsl='git stash list'
-#alias gco='git checkout'
-#alias gpl='git pull'
-#alias gp='git push'
-#alias gpf='git push -f'
-#alias gps='git push'
-#alias gph='git push'
-#alias gpsh='git push'
-#alias gpp='git pull && git push'
-#alias gtree='git tree'
-#alias gbase='git rebase'
-#alias gd='git diff'
-#alias gdiff='git diff'
-#alias gm='git merge'
-#alias gr='git rebase'
-#alias gri='git rebase -i'
-#alias grt='git reset'
-#alias gf='git fetch'
-#alias gfp='git fetch -p'
-#alias gbr='git branch'
-#alias grm='git rm'
+Set-Alias g git
+Set-Alias gti git
+Set-Alias itg git
+Set-Alias igt git
 
-# function gcm() (
-# 	git commit -m "$(echo "$@")"
-# )
+function gct() {
+	git commit
+}
+function gst() {
+	git status
+}
+function gap() {
+	git add -p
+}
+function gpa() {
+	git add -p
+}
+function ga() {
+	git add
+}
+function gaa() {
+	git add --all
+}
+function gss() {
+	git stash save
+}
+function gsd() {
+	git stash drop
+}
+function gsp() {
+	git stash pop
+}
+function gsa() {
+	git stash apply
+}
+function gsl() {
+	git stash list
+}
+function gco() {
+	git checkout
+}
+function gpl() {
+	git pull
+}
+function gp() {
+	git push
+}
+function gpf() {
+	git push -f
+}
+function gps() {
+	git push
+}
+function gph() {
+	git push
+}
+function gpsh() {
+	git push
+}
+function gpp() {
+	git pull
+	git push
+}
+function gtree() {
+	git tree
+}
+function gbase() {
+	git rebase
+}
+function gd() {
+	git diff
+}
+function gdiff() {
+	git diff
+}
+function gm() {
+	git merge
+}
+function gr() {
+	git rebase
+}
+function gri() {
+	git rebase -i
+}
+function grt() {
+	git reset
+}
+function gf() {
+	git fetch
+}
+function gfp() {
+	git fetch -p
+}
+function gbr() {
+	git branch
+}
+function grm() {
+	git rm
+}
 
-# function gcma() (
-# 	git commit --amend -m "$(echo "$@")"
-# )
+function gcm() {
+	git commit -m "$args"
+}
 
-# function gcam() (
-# 	git commit --amend -m "$(echo "$@")"
-# )
+function gcma() {
+	git commit --amend -m "$args"
+}
 
-# function gcmnv() (
-# 	git commit --no-verify -m "$(echo "$@")"
-# )
+function gcam() {
+	git commit --amend -m "$args"
+}
 
-# function gcos() (
-# 	set -x
-# 	git stash save
-# 	git checkout $@
-# 	git stash pop
-# )
+function gcmnv() {
+	git commit --no-verify -m "$args"
+}
 
-# function gpls() (
-# 	set -x
-# 	git stash save
-# 	git pull $@
-# 	git stash pop
-# )
+function gcos() {
+	Write-Host + git stash save
+	git stash save
 
-# function gpu() (
-# 	name=$(git rev-parse --abbrev-ref HEAD)
-# 	if [[ "$name" == HEAD ]]; then
-# 		echo "error: not on a branch"
-# 		return 1
-# 	else
-# 		echo git push --set-upstream origin "$name"
-# 		git push --set-upstream origin "$name"
-# 	fi
-# )
+	Write-Host + git checkout @args
+	git checkout @args
+
+	Write-Host + git stash pop
+	git stash pop
+}
+
+function gpls() {
+	Write-Host + git stash save
+	git stash save
+
+	Write-Host + git pull @args
+	git pull @args
+
+	Write-Host + git stash pop
+	git stash pop
+}
+
+function gpu() {
+	$name = git rev-parse --abbrev-ref HEAD
+	if ($name -eq "HEAD") {
+		Write-Host -ForegroundColor Red "error: not on a branch"
+		return 1
+	} else {
+		Write-Host git push --set-upstream origin "$name"
+		git push --set-upstream origin "$name"
+	}
+}
 
 # Pretty print the path
-#alias path='echo $PATH | tr -s ":" "\n"'
+function path() {
+	$env:path.Split(';')
+}
