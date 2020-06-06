@@ -207,3 +207,6 @@ function gpu() {
 function path() {
 	$env:path.Split(';')
 }
+
+Clear-Host
+Write-Host "$PSCommandPath run."
