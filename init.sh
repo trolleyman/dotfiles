@@ -8,7 +8,8 @@ if [ ! -d ~/.dotfiles ]; then
     git clone --recursive https://github.com/trolleyman/dotfiles ~/.dotfiles
 else
     set -x
-    pushd ~/.dotfiles
+    oldpath=$(pwd)
+    cd ~/.dotfiles
     git fetch
     git reset --hard
     git checkout master
@@ -16,7 +17,7 @@ else
     git submodule init
     git submodule sync
     git submodule update
-    popd
+    cd "$oldpath"
 fi
 
 ~/.dotfiles/bin/dotfiles-setup -f
