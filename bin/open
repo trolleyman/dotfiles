@@ -9,7 +9,7 @@ fi
 
 exit_code=0
 for file in "$@"; do
-    if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+    if grep -iqE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
         # On WSL
         # Convert to win paths
         win_file=$(wslpath -w "$file") # TODO: Fix wslpath for some paths: https://github.com/microsoft/WSL/issues/4295
