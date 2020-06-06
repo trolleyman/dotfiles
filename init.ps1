@@ -15,9 +15,6 @@ if ( -Not (Test-Path $dotfilesPath -PathType Container) ) {
     git reset --hard
     git checkout master
     git reset --hard origin/master
-    git submodule init
-    git submodule sync
-    git submodule update
     popd
 }
 
