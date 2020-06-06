@@ -4,7 +4,7 @@ $ErrorActionPreference = "Stop"
 
 Set-ExecutionPolicy Unrestricted -scope CurrentUser
 
-function Set-GitConfig() {
+Start-Job -ScriptBlock {
 	# Git aliases
 	git config --global alias.aa 'add -A'
 	git config --global alias.a 'add'
@@ -45,9 +45,7 @@ function Set-GitConfig() {
 
 	git config --global core.excludesFile "$HOME\.dotfiles\git\global_gitignore"
 	git config --global core.hooksPath "$HOME\.dotfiles\git\hooks"
-}
-
-Start-Job -ScriptBlock { Set-GitConfig } | Out-Null
+} | Out-Null
 
 # Helpers
 Set-Alias pd pushd
