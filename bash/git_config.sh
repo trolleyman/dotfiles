@@ -47,4 +47,3 @@ function config_git {
 	git config --global core.hooksPath '~/.dotfiles/git/hooks'
 }
 $_INTERACTIVE_SHELL && $_LOGIN_SHELL && config_git 2>&1 >/dev/null
-
