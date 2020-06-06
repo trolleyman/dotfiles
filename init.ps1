@@ -15,8 +15,13 @@ if ( -Not (Test-Path $dotfilesPath -PathType Container) ) {
     git reset --hard
     git checkout master
     git reset --hard origin/master
+    git submodule init
+    git submodule sync
+    git submodule update
     popd
 }
 
 # Run setup script
 powershell -file $dotfilesPath/powershell/Dotfiles-Setup.ps1
+
+printf "\nTo update the shell, re-run: powershell\n\n"

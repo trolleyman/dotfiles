@@ -14,10 +14,13 @@ else
     git reset --hard
     git checkout master
     git reset --hard origin/master
+    git submodule init
+    git submodule sync
+    git submodule update
     cd "$oldpath"
 fi
 
-~/.dotfiles/bin/dotfiles-setup -f
+~/.dotfiles/bin/dotfiles-update -f
 set +x
 
-printf "\nSetup completed\n\nTo update the shell, run: exec bash -l\n\n"
+printf '\nTo update the shell, run: exec bash -l\n\n'
