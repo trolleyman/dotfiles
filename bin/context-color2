@@ -1,0 +1,200 @@
+#!/bin/bash
+#
+# context-color
+# Copyright (C) 2018 Guillaume Gelin
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+readonly PROGNAME=$(basename $0)
+readonly DEFAULT_CONTEXT="whoami; hostname"
+
+__context_color_rand_mod() {
+    # Usage: __context_color_random_number <random number> <min> <max>
+    local rn=$1
+    local min=$2
+    local max=$3
+
+    local num=$(( $min + ( $rn % ( $max - $min ) ) ))
+    printf "%d" $num
+}
+
+__context_color_mod_positive() {
+    # Usage: __context_color_mod_positive <x> <y>
+    #        result = x mod y
+    #        e.g. 3 mod 5 = 
+    printf "%d" $(( ( ($1 % $2) + $2) % $2 ))
+}
+
+__context_color_helper_color_algorithm() {
+    # Usage: __context_color_helper_color_algorithm <temp color> <t1> <t2>
+    local col=$1
+    local t1=$2
+    local t2=$3
+
+    if [[ $(( 6 * $col )) -lt 10000 ]]; then
+        col=$(( $t2 + ( ($t1 - $t2) * 6 * $col )/10000 ))
+    elif [[ $(( 2 * $col )) -lt 10000 ]]; then
+        col=$t1
+    elif [[ $(( 3 * $col )) -lt 2 ]]; then
+        col=$(( $t2 + ( ($t1 - $t2) * 6 * (6666 - $col) )/10000 ))
+    else
+        col=$t2
+    fi
+    printf "%d" $col
+}
+
+__context_color_random_color() {
+    local SEED=$1
+    RANDOM=$SEED
+    local r1=$RANDOM
+    local r2=$RANDOM
+    local r3=$RANDOM
+
+    # Algorithm taken from http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/
+    # All numbers here need to be floats, so they're all multiplied by 10,000
+    local h=$(__context_color_rand_mod $r1 0 10000)
+    local s=$(__context_color_rand_mod $r2 $(( 42*10000/255 )) $(( 255*10000/255 )) )
+    local l=$(__context_color_rand_mod $r3 $(( 80*10000/255 )) $(( 150*10000/255 )) )
+
+    local t1=0
+    if [[ $l -lt 5000 ]]; then
+        # t1 = luminance * (1 + saturation)
+        t1=$(( ($l * (10000+$s))/10000 ))
+    else
+        # t1 = luminance + saturation - (luminance * saturation)
+        t1=$(( $l + $s - ($l * $s)/10000 ))
+    fi
+
+    # t2 = 2 * luminance - t1
+    local t2=$(( (2 * $l) - $t1 ))
+
+    # temp red = hue + (1/3)
+    local tr=$(( $h + 3333 ))
+    tr=$(__context_color_mod_positive $tr 10000)
+    # temp green = hue
+    local tg=$(( $h ))
+    tg=$(__context_color_mod_positive $tg 10000)
+    # temp blue = hue - (1/3)
+    local tb=$(( $h - 3333 ))
+    tb=$(__context_color_mod_positive $tb 10000)
+
+    tr=$(__context_color_helper_color_algorithm $tr $t1 $t2)
+    tg=$(__context_color_helper_color_algorithm $tg $t1 $t2)
+    tb=$(__context_color_helper_color_algorithm $tb $t1 $t2)
+
+    local rr=$(( ($tr * 255) / 10000 ))
+    local rg=$(( ($tg * 255) / 10000 ))
+    local rb=$(( ($tb * 255) / 10000 ))
+
+    printf "%d %d %d" $rr $rg $rb
+}
+
+__context_color_usage() {
+    cat <<- EOF
+usage: $PROGNAME [OPTIONS]
+
+Print a color sequence based on different context informations.
+
+OPTIONS:
+    --help, -h          Print this help.
+    --background, -b    Use a background sequence rather than foreground.
+    --prompt, -p        Declare the sequence as non-printable for prompts.
+
+    --context <command>, -c <command>
+                        Define the context command on which result the color
+                        will be generated.
+                        The default context is "$DEFAULT_CONTEXT".
+EOF
+}
+
+__context_color_hash() {
+    case "$(whoami):$(hostname)" in
+        callum:Callums-PC)
+            echo 9
+            ;;
+        *)
+            eval "$CONTEXT" | sum | cut -d' ' -f1
+            ;;
+    esac
+}
+
+__context_color_sequence() {
+    local clr=($(__context_color_random_color $(__context_color_hash)))
+    local cr=${clr[0]}
+    local cg=${clr[1]}
+    local cb=${clr[2]}
+
+    local sequence=$(printf "\e[38;2;%d;%d;%dm" $cr $cg $cb)
+
+    if [ "$PROMPT" ]
+    then
+        sequence="\[${sequence}\]"
+    fi
+    echo "$sequence"
+}
+
+context_color() {
+    if [ ! "$CONTEXT" ]
+    then
+        CONTEXT="$DEFAULT_CONTEXT"
+    fi
+
+    for arg
+    do
+        local delim=""
+        case "$arg" in
+            --help)
+                args="${args}-h "
+                ;;
+            --background)
+                args="${args}-b "
+                ;;
+            --prompt)
+                args="${args}-p "
+                ;;
+            --context)
+                args="${args}-c "
+                ;;
+            *)
+                args="$args $arg"
+                ;;
+        esac
+    done
+
+    eval set -- $args
+
+    while getopts "hbpc:" OPTION
+    do
+         case $OPTION in
+         h)
+             __context_color_usage
+             exit 0
+             ;;
+         b)
+             readonly BACKGROUND=1
+             ;;
+         p)
+             readonly PROMPT=1
+             ;;
+         c)
+             CONTEXT="$OPTARG"
+             ;;
+         esac
+    done
+
+    echo -n "$(__context_color_sequence)"
+    return 0
+}
+
+context_color "$@"
