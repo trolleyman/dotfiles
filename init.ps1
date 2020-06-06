@@ -3,6 +3,7 @@
 Set-ExecutionPolicy Unrestricted -scope CurrentUser
 
 # TODO: Handle installing Git (probably through winget)
+# Also, enable symbolic links on Windows
 
 # Clone dotfiles repo to home directory
 $dotfilesPath="$HOME\.dotfiles"
