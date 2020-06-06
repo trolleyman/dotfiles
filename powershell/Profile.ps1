@@ -159,6 +159,11 @@ function grm() {
 	git rm
 }
 
+# Clashes with Get-Command
+#function gcm() {
+#	git push
+#}
+
 function gctm() {
 	git commit -m "$args"
 }
