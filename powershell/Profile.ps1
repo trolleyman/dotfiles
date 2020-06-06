@@ -210,5 +210,7 @@ function path() {
 	$env:path.Split(';')
 }
 
+$PSScriptRoot\Set-Prompt.ps1
+
 Clear-Host
 Write-Host "$PSCommandPath run."
