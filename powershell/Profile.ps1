@@ -1,4 +1,7 @@
 
+# Set equivalent of `set -e`, note that this doesn't work for EXEs
+$ErrorActionPreference = "Stop"
+
 Set-ExecutionPolicy Unrestricted -scope CurrentUser
 
 function Set-GitConfig() {
@@ -210,7 +213,7 @@ function path() {
 	$env:path.Split(';')
 }
 
-$PSScriptRoot\Set-Prompt.ps1
+& "$PSScriptRoot\Set-Prompt.ps1"
 
 Clear-Host
 Write-Host "$PSCommandPath run."

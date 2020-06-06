@@ -4,7 +4,7 @@ if (([Version](Get-CimInstance Win32_OperatingSystem).version).Major -lt 10) {
 	exit 1
 }
 
-# Set equivalent of `set -e`, only note that this doesn't work for EXEs
+# Set equivalent of `set -e`, note that this doesn't work for EXEs
 $ErrorActionPreference = "Stop"
 
 # Ensure that developer mode is activated
