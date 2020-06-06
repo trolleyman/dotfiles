@@ -1,6 +1,6 @@
 
 # _complete_alias function
-. ~/.dotfiles/bash/lib/complete-alias/bash_completion.sh
+. ~/.dotfiles/bash/lib/complete-alias.sh
 
 man() {
 	env \
