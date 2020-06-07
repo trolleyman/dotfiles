@@ -5,8 +5,8 @@ if [ -r ~/.dir_colors ]; then
 fi
 
 # == Shell options ==
-# prevent other users from writing, reading or executing my files by default
-umask go-rwx
+# prevent other users from writing files by default
+umask go-w
 
 if [[ $_INTERACTIVE_SHELL == "true" ]]; then
 	# For rm **/*.pyc, etc.
