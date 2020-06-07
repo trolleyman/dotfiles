@@ -10,8 +10,8 @@
 	goto <alias> - Changes to the directory registered for the given alias
 	goto -r|-register <alias> <directory> - Registers an alias
 	goto -u|-unregister <alias> - Unregisters an alias
-	goto -pu|-push <alias> - Pushes the current directory onto the stack, then performs goto TODO
-	goto -po|-pop - Pops the top directory from the stack, then changes to that directory TODO
+	goto -pu|-push <alias> - Pushes the current directory onto the stack, then performs goto
+	goto -po|-pop - Pops the top directory from the stack, then changes to that directory
 	goto -l|-list - Lists aliases
 	goto -e|-expand <alias> - Expands an alias
 	goto -c|-cleanup - Cleans up non existent directory aliases
