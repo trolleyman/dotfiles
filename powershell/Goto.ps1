@@ -12,7 +12,7 @@
 	goto -e|-expand <alias>               - Expands an alias
 	goto -c|-cleanup                      - Cleans up non existent directory aliases
 .Notes
-	Author: Callum Tolley
+	Author: Callum Tolley (Inspired by https://github.com/iridakos/goto)
 	Date:   7th June 2020
 #>
 function goto() {
