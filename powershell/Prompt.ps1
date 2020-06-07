@@ -46,10 +46,10 @@ function prompt() {
 
 	Write-Host -NoNewline -ForegroundColor DarkYellow "$('+' * (Get-Location -Stack).ToArray().Length)"
 
-	if ((New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-		Write-Host -NoNewline -ForegroundColor Green '#'
-	} else {
-		Write-Host -NoNewline -ForegroundColor Green '$'
-	}
-	return ' '
+	# if ((New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+	# 	Write-Host -NoNewline -ForegroundColor Green '#'
+	# } else {
+	# 	Write-Host -NoNewline -ForegroundColor Green '$'
+	# }
+	return '> '
 }
