@@ -53,7 +53,7 @@ function goto() {
 		# Parse $Content
 		$Database = @{}
 		foreach ($Line in $Content) {
-			if (-Not $Line) {
+			if (-not $Line) {
 				continue
 			}
 
@@ -80,52 +80,40 @@ function goto() {
 		throw "Multiple options specified (only one allowed)"
 	}
 
-	# Check alias is valid
-	if ($Alias) {
-		foreach ($c in [char[]]$Alias) {
-			if ([char]::IsWhiteSpace($c)) {
-				throw "Alias contains whitespace: '$Alias'"
-			}
-		}
-	}
-
-	# Transform directory to absolue path
-	if ($Directory) {
-		Push-Location $Directory
-		$Directory = Get-Location
-		Pop-Location
-	}
-
-	Write-Host "Register=$Register"
-	Write-Host "Unregister=$Unregister"
-	Write-Host "Push=$Push"
-	Write-Host "Pop=$Pop"
-	Write-Host "List=$List"
-	Write-Host "Expand=$Expand"
-	Write-Host "Cleanup=$Cleanup"
-	Write-Host "Alias=$Alias"
-	Write-Host "Directory=$Directory"
-
 	function CheckAlias($exists) {
 		if ($exists) {
-			if (-Not $Alias) {
-				throw "Alias not specified"
+			if (-not $Alias) {
+				throw "Expected dlias, but was not specified"
+			} else {
+				foreach ($c in [char[]]$Alias) {
+					if ([char]::IsWhiteSpace($c)) {
+						throw "Alias contains whitespace: '$Alias'"
+					}
+				}
 			}
 		} else {
 			if ($Alias) {
-				throw "Unexpected Alias specified"
+				throw "Unexpected alias encountered"
 			}
 		}
 	}
 
 	function CheckDirectory($exists) {
 		if ($exists) {
-			if (-Not $Directory) {
-				throw "Directory not specified"
+			if (-not $Directory) {
+				throw "Expected directory, but was not specified"
+			} else {
+				# Transform directory to absolue path
+				try {
+					Push-Location $Directory
+					$Directory = Get-Location
+				} finally {
+					Pop-Location
+				}
 			}
 		} else {
 			if ($Directory) {
-				throw "Unexpected Directory specified"
+				throw "Unexpected directory encountered"
 			}
 		}
 	}
@@ -172,7 +160,7 @@ function goto() {
 		$RemoveKeys = @()
 		foreach ($Alias in $Database.Keys) {
 			$Directory = $Database[$Alias]
-			if (-Not (Test-Path $Directory -PathType "Container")) {
+			if (-not (Test-Path $Directory -PathType "Container")) {
 				Write-Host "Removing alias '$Alias' as path does not exist: $Directory"
 				$RemoveKeys += $Alias
 			}
@@ -183,7 +171,15 @@ function goto() {
 		SaveDatabase $Database
 		Write-Host "Cleaned up database (removed $($RemoveKeys.Length) entries)"
 	} else {
-		throw "Not yet implemented"
+		CheckAlias $true
+		CheckDirectory $false
+
+		$Database = LoadDatabase
+		if (-not ($Database[$Alias])) {
+			throw "Alias '$Alias' does not exist"
+		} else {
+			Set-Location $Database[$Alias]
+		}
 	}
 }
 
