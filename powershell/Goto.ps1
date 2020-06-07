@@ -10,11 +10,11 @@
 	goto <alias> - Changes to the directory registered for the given alias
 	goto -r|-register <alias> <directory> - Registers an alias
 	goto -u|-unregister <alias> - Unregisters an alias
-	goto -p|-push <alias> - Pushes the current directory onto the stack, then performs goto TODO
-	goto -o|-pop - Pops the top directory from the stack, then changes to that directory TODO
+	goto -pu|-push <alias> - Pushes the current directory onto the stack, then performs goto TODO
+	goto -po|-pop - Pops the top directory from the stack, then changes to that directory TODO
 	goto -l|-list - Lists aliases
 	goto -e|-expand <alias> - Expands an alias
-	goto -c|-cleanup - Cleans up non existent directory aliases TODO
+	goto -c|-cleanup - Cleans up non existent directory aliases
 .Notes
 	Author: Callum Tolley
 	Date:   7th June 2020
@@ -106,26 +106,42 @@ function goto() {
 	Write-Host "Alias=$Alias"
 	Write-Host "Directory=$Directory"
 
+	function CheckAlias($exists) {
+		if ($exists) {
+			if (-Not $Alias) {
+				throw "Alias not specified"
+			}
+		} else {
+			if ($Alias) {
+				throw "Unexpected Alias specified"
+			}
+		}
+	}
+
+	function CheckDirectory($exists) {
+		if ($exists) {
+			if (-Not $Directory) {
+				throw "Directory not specified"
+			}
+		} else {
+			if ($Directory) {
+				throw "Unexpected Directory specified"
+			}
+		}
+	}
+
 	# Process
 	if ($Register) {
-		if (-Not $Alias) {
-			throw "Alias not specified"
-		}
-		if (-Not $Directory) {
-			throw "Directory not specified"
-		}
+		CheckAlias $true
+		CheckDirectory $true
 
 		$Database = LoadDatabase
 		$Database[$Alias] = $Directory
 		SaveDatabase $Database
 		Write-Host "Alias '$Alias' registered for path $Directory"
 	} elseif ($Unregister) {
-		if (-Not $Alias) {
-			throw "Alias not specified"
-		}
-		if ($Directory) {
-			throw "Unexpected Directory specified"
-		}
+		CheckAlias $true
+		CheckDirectory $false
 
 		$Database = LoadDatabase
 		$Database.Remove($Alias)
@@ -136,21 +152,12 @@ function goto() {
 	} elseif ($Pop) {
 		throw "Not yet implemented"
 	} elseif ($List) {
-		if (-Not $Alias) {
-			throw "Unexpected Alias specified"
-		}
-		if ($Directory) {
-			throw "Unexpected Directory specified"
-		}
-
+		CheckAlias $false
+		CheckDirectory $false
 		return LoadDatabase
 	} elseif ($Expand) {
-		if (-Not $Alias) {
-			throw "Alias not specified"
-		}
-		if ($Directory) {
-			throw "Unexpected Directory specified"
-		}
+		CheckAlias $true
+		CheckDirectory $false
 
 		$Database = LoadDatabase
 		if (-not ($Database[$Alias])) {
@@ -159,7 +166,22 @@ function goto() {
 			return $Database[$Alias]
 		}
 	} elseif ($Cleanup) {
-		throw "Not yet implemented"
+		CheckAlias $false
+		CheckDirectory $false
+		$Database = LoadDatabase
+		$RemoveKeys = @()
+		foreach ($Alias in $Database.Keys) {
+			$Directory = $Database[$Alias]
+			if (-Not (Test-Path $Directory -PathType "Container")) {
+				Write-Host "Removing alias '$Alias' as path does not exist: $Directory"
+				$RemoveKeys += $Alias
+			}
+		}
+		foreach ($Alias in $RemoveKeys) {
+			$Database.Remove($Alias)
+		}
+		SaveDatabase $Database
+		Write-Host "Cleaned up database (removed $($RemoveKeys.Length) entries)"
 	} else {
 		throw "Not yet implemented"
 	}
