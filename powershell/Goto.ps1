@@ -127,6 +127,7 @@ function goto() {
 		$Database[$Alias] = $Directory
 		SaveDatabase $Database
 		Write-Host "Alias '$Alias' registered for path $Directory"
+
 	} elseif ($Unregister) {
 		CheckAlias $true
 		CheckDirectory $false
@@ -135,14 +136,26 @@ function goto() {
 		$Database.Remove($Alias)
 		SaveDatabase $Database
 		Write-Host "Alias '$Alias' unregistered successfully"
+
 	} elseif ($Push) {
-		throw "Not yet implemented"
+		CheckAlias $true
+		CheckDirectory $false
+
+		$Database = LoadDatabase
+		if (-not ($Database[$Alias])) {
+			throw "Alias '$Alias' does not exist"
+		} else {
+			Push-Location $Database[$Alias]
+		}
+
 	} elseif ($Pop) {
-		throw "Not yet implemented"
+		Pop-Location
+
 	} elseif ($List) {
 		CheckAlias $false
 		CheckDirectory $false
 		return LoadDatabase
+
 	} elseif ($Expand) {
 		CheckAlias $true
 		CheckDirectory $false
@@ -153,6 +166,7 @@ function goto() {
 		} else {
 			return $Database[$Alias]
 		}
+
 	} elseif ($Cleanup) {
 		CheckAlias $false
 		CheckDirectory $false
@@ -170,6 +184,7 @@ function goto() {
 		}
 		SaveDatabase $Database
 		Write-Host "Cleaned up database (removed $($RemoveKeys.Length) entries)"
+
 	} else {
 		CheckAlias $true
 		CheckDirectory $false
