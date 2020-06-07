@@ -12,8 +12,8 @@
 	goto -u|-unregister <alias> - Unregisters an alias
 	goto -p|-push <alias> - Pushes the current directory onto the stack, then performs goto TODO
 	goto -o|-pop - Pops the top directory from the stack, then changes to that directory TODO
-	goto -l|-list - Lists aliases TODO
-	goto -e|-expand <alias> - Expands an alias TODO
+	goto -l|-list - Lists aliases
+	goto -e|-expand <alias> - Expands an alias
 	goto -c|-cleanup - Cleans up non existent directory aliases TODO
 .Notes
 	Author: Callum Tolley
@@ -81,16 +81,20 @@ function goto() {
 	}
 
 	# Check alias is valid
-	foreach ($c in [char[]]$Alias) {
-		if ([char]::IsWhiteSpace($c)) {
-			throw "Alias contains whitespace: '$Alias'"
+	if ($Alias) {
+		foreach ($c in [char[]]$Alias) {
+			if ([char]::IsWhiteSpace($c)) {
+				throw "Alias contains whitespace: '$Alias'"
+			}
 		}
 	}
 
 	# Transform directory to absolue path
-	Push-Location $Directory
-	$Directory = Get-Location
-	Pop-Location
+	if ($Directory) {
+		Push-Location $Directory
+		$Directory = Get-Location
+		Pop-Location
+	}
 
 	Write-Host "Register=$Register"
 	Write-Host "Unregister=$Unregister"
@@ -110,9 +114,11 @@ function goto() {
 		if (-Not $Directory) {
 			throw "Directory not specified"
 		}
+
 		$Database = LoadDatabase
 		$Database[$Alias] = $Directory
 		SaveDatabase $Database
+		Write-Host "Alias '$Alias' registered for path $Directory"
 	} elseif ($Unregister) {
 		if (-Not $Alias) {
 			throw "Alias not specified"
@@ -120,17 +126,38 @@ function goto() {
 		if ($Directory) {
 			throw "Unexpected Directory specified"
 		}
+
 		$Database = LoadDatabase
 		$Database.Remove($Alias)
 		SaveDatabase $Database
+		Write-Host "Alias '$Alias' unregistered successfully"
 	} elseif ($Push) {
 		throw "Not yet implemented"
 	} elseif ($Pop) {
 		throw "Not yet implemented"
 	} elseif ($List) {
+		if (-Not $Alias) {
+			throw "Unexpected Alias specified"
+		}
+		if ($Directory) {
+			throw "Unexpected Directory specified"
+		}
+
 		return LoadDatabase
 	} elseif ($Expand) {
-		throw "Not yet implemented"
+		if (-Not $Alias) {
+			throw "Alias not specified"
+		}
+		if ($Directory) {
+			throw "Unexpected Directory specified"
+		}
+
+		$Database = LoadDatabase
+		if (-not ($Database[$Alias])) {
+			throw "Alias '$Alias' does not exist"
+		} else {
+			return $Database[$Alias]
+		}
 	} elseif ($Cleanup) {
 		throw "Not yet implemented"
 	} else {
