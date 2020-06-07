@@ -20,7 +20,7 @@ else
     cd "$oldpath"
 fi
 
-~/.dotfiles/bin/dotfiles-update -f
+~/.dotfiles/bin/dotfiles-setup -f
 set +x
 
 printf '\nTo update the shell, run: exec bash -l\n'
