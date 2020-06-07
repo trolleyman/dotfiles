@@ -4,6 +4,7 @@ $ErrorActionPreference = "Stop"
 
 # TODO: Check out of date dotfiles repo
 
+. "$HOME\.dotfiles\powershell\Goto.ps1"
 
 . "$HOME\.dotfiles\powershell\Aliases.ps1"
 . "$HOME\.dotfiles\powershell\GitConfig.ps1"
