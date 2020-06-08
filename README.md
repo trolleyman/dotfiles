@@ -16,6 +16,8 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 ## TODO
 - Set `.ssh/` on PowerShell
 - Add Git in PowerShell prompt (like posh git)
+- Add `Update-Dotfiles.ps1` for Windows
+- Add automatic update warning (like with Linux)
 - Add a `[y/n]` option when overwriting files using `dotfiles-setup` or `Setup-Dotfiles.ps1`
 - Store VS Code `settings.json`
 - Store VS Code `keybindings.json`
