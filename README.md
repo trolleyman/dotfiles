@@ -12,3 +12,11 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/trolleyma
 ```powershell
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/trolleyman/dotfiles/master/init.ps1'))
 ```
+
+## TODO
+- Set `.ssh/` on PowerShell
+- Add Git in PowerShell prompt (like posh git)
+- Add a `[y/n]` option when overwriting files using `dotfiles-setup` or `Setup-Dotfiles.ps1`
+- Store VS Code `settings.json`
+- Store VS Code `keybindings.json`
+- Store Windows Terminal `settings.json`
