@@ -15,99 +15,99 @@ Set-Alias itg git
 Set-Alias igt git
 
 function gct() {
-	git commit
+	git commit @args
 }
 function gst() {
-	git status
+	git status @args
 }
 function gap() {
-	git add -p
+	git add -p @args
 }
 function gpa() {
-	git add -p
+	git add -p @args
 }
 function ga() {
-	git add
+	git add @args
 }
 function gaa() {
-	git add --all
+	git add --all @args
 }
 function gss() {
-	git stash save
+	git stash save @args
 }
 function gsd() {
-	git stash drop
+	git stash drop @args
 }
 function gsp() {
-	git stash pop
+	git stash pop @args
 }
 function gsa() {
-	git stash apply
+	git stash apply @args
 }
 function gsl() {
-	git stash list
+	git stash list @args
 }
 function gco() {
-	git checkout
+	git checkout @args
 }
 function gpl() {
-	git pull
+	git pull @args
 }
 # Clashes with Get-ItemProperty
 #function gp() {
-#	git push
+#	git push @args
 #}
 function gpf() {
-	git push -f
+	git push -f @args
 }
 function gps() {
-	git push
+	git push @args
 }
 function gph() {
-	git push
+	git push @args
 }
 function gpsh() {
-	git push
+	git push @args
 }
 function gpp() {
-	git pull
-	git push
+	git pull @args
+	git push @args
 }
 function gtree() {
-	git tree
+	git tree @args
 }
 function gbase() {
-	git rebase
+	git rebase @args
 }
 function gd() {
-	git diff
+	git diff @args
 }
 function gdiff() {
-	git diff
+	git diff @args
 }
 function gm() {
-	git merge
+	git merge @args
 }
 function gr() {
-	git rebase
+	git rebase @args
 }
 function gri() {
-	git rebase -i
+	git rebase -i @args
 }
 function grt() {
-	git reset
+	git reset @args
 }
 function gf() {
-	git fetch
+	git fetch @args
 }
 function gfp() {
-	git fetch -p
+	git fetch -p @args
 }
 function gbr() {
-	git branch
+	git branch @args
 }
 function grm() {
-	git rm
+	git rm @args
 }
 
 # Clashes with Get-Command
