@@ -23,7 +23,7 @@ ForwardX11Trusted    no
 # = Personal hosts =
 Host                 trolleyman.org callumgtolley.uk
 HostName             %h
-User                 root
+User                 ctoll
 ForwardX11           yes
 ForwardX11Trusted    yes
 
