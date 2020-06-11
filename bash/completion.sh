@@ -1,6 +1,6 @@
 
 # Don't source completions if non-interactive
-$_INTERACTIVE_SHELL || return 0
+[[ $_INTERACTIVE_SHELL == "true" ]] || return 0
 
 # Source global bash completions
 if [ -r /etc/bash_completion ] && ! shopt -oq posix; then

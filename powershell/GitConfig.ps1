@@ -1,6 +1,5 @@
-#!/bin/bash
 
-function config_git {
+Start-Job -ScriptBlock {
 	# Git aliases
 	git config --global alias.aa 'add -A'
 	git config --global alias.a 'add'
@@ -10,6 +9,7 @@ function config_git {
 	git config --global alias.br branch
 	git config --global alias.ct commit
 
+	git config --global alias.p push
 	git config --global alias.pp '!f(){ git pull && git push; }; f'
 
 	git config --global alias.unstage 'reset HEAD --'
@@ -25,27 +25,20 @@ function config_git {
 	git config --global alias.sm submodule
 
 	git config --global alias.pullall '!f(){ git pull "$@" && git submodule update --init --recursive; }; f'
-	git config --global alias.prune "!bash -c \"f(){ git fetch -p && (git branch -r | awk '{print \\\$1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print \\\$1}' | xargs -r git branch -d); }; f\""
-
-	# TODO: Bash script to print out total line count for users, in src/ directory
-	# git ls-tree -r HEAD --name-only | grep '^src/*' | xargs -I {} git blame --line-porcelain {} | sed -n 's/^author-mail //p' | sort | uniq -c | sort -rn
-
-	NUM_CPUS=$(nproc --all 2>/dev/null)
-	NUM_CPUS=${NUM_CPUS:-1}
+	#git config --global alias.prune "!bash -c `"f(){ git fetch -p && (git branch -r | awk '{print \\\`$1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print \\\`$1}' | xargs -r git branch -d); }; f`""
 
 	# Git config
+	$NumCpus = (Get-CimInstance Win32_ComputerSystem).NumberOfLogicalProcessors
 	git config --global color.ui auto                               # Enable colors
 	git config --global submodule.recurse true                      # Recurse through submodules when pulling by default
 	git config --global push.recurseSubmodules on-demand            # Push submodules that have had their revisions changed
-	git config --global submodule.fetchJobs $NUM_CPUS               # Parallelize submodule fetching
-	git config --global fetch.parallel $NUM_CPUS                    # Parallelize regular fetching
-	git config --global credential.helper 'cache --timeout=7200'    # Cache passwords for 2 hours
+	git config --global submodule.fetchJobs $NumCpus                # Parallelize submodule fetching
+	git config --global fetch.parallel $NumCpus                     # Parallelize regular fetching
 	git config --global core.preloadIndex true                      # Preload index -- helps on NFS
 	git config --global push.default simple                         # Adopt new pushing format
 	git config --global core.safecrlf false                         # Silence CRLF warnings
 	git config --global fetch.prune true                            # Prune branches that have been deleted on origin
 
-	git config --global core.excludesFile '~/.dotfiles/git/global_gitignore'
-	git config --global core.hooksPath '~/.dotfiles/git/hooks'
-}
-[[ $_INTERACTIVE_SHELL == "true" ]] && [[ $_LOGIN_SHELL == "true" ]] && config_git 2>&1 >/dev/null
+	git config --global core.excludesFile "$HOME\.dotfiles\git\global_gitignore"
+	git config --global core.hooksPath "$HOME\.dotfiles\git\hooks"
+} | Out-Null

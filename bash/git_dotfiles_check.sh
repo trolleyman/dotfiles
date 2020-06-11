@@ -25,7 +25,7 @@ function check_dotfiles() (
 	popd 2>&1 1>/dev/null
 )
 
-if $_INTERACTIVE_SHELL && $_LOGIN_SHELL; then
+if [[ $_INTERACTIVE_SHELL == "true" ]] && [[ $_LOGIN_SHELL == "true" ]]; then
 	# Detect whether or not ~/.dotfiles is out of date
 	pushd ~/.dotfiles 2>&1 >/dev/null
 	if [[ -z "$( git remote -v | grep fetch | grep https:// )" ]]; then

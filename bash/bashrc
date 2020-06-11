@@ -1,5 +1,3 @@
-(set -o igncr) 2>/dev/null && set -o igncr; # this comment is needed
-# ^ For CRLF-unfriendly systems
 
 export SHELL=/bin/bash
 
@@ -17,7 +15,7 @@ fi
 
 shopt -q login_shell && _LOGIN_SHELL=true || _LOGIN_SHELL=false
 
-. ~/.dotfiles/bash/lib/goto/goto.sh
+. ~/.dotfiles/bash/lib/goto.sh
 
 . ~/.dotfiles/bash/env.sh
 
@@ -34,11 +32,7 @@ if [[ -r ~/.local/env.sh ]]; then
 	. ~/.local/env.sh
 fi
 
-if $_INTERACTIVE_SHELL && $_LOGIN_SHELL; then
+if [[ $_INTERACTIVE_SHELL == "true" ]] && [[ $_LOGIN_SHELL == "true" ]]; then
 	# Info that the bashrc ran
 	echo ~/.bashrc run.
 fi
-
-unset _INTERACTIVE_SHELL
-unset _LOGIN_SHELL
-

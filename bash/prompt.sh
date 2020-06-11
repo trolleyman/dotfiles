@@ -1,5 +1,5 @@
 
-if $_INTERACTIVE_SHELL; then
+if [[ $_INTERACTIVE_SHELL == "true" ]]; then
 	# Select git info displayed, see ~/.dotfiles/bash/lib/git-prompt.sh for more
 	export GIT_PS1_SHOWDIRTYSTATE=1           # '*' = unstaged, '+' = staged
 	export GIT_PS1_SHOWSTASHSTATE=1           # '$' = stashed
@@ -82,7 +82,7 @@ fi
 
 # Executed before each command is run in bash
 __pre_cmd() {
-	$_INTERACTIVE_SHELL || return 0
+	[[ $_INTERACTIVE_SHELL == "true" ]] || return 0
 
 	# Set title to command that's currently running
 	local cmd="${BASH_COMMAND}"
@@ -105,12 +105,12 @@ __pre_cmd() {
 
 	_COMMAND_START_TIME=$(date +%s%N)
 }
-$_INTERACTIVE_SHELL && trap __pre_cmd DEBUG
+[[ $_INTERACTIVE_SHELL == "true" ]] && trap __pre_cmd DEBUG
 
 __set_bash_prompt() {
 	local exit="$?" # Save the exit status of the last command
 
-	$_INTERACTIVE_SHELL || return 0
+	[[ $_INTERACTIVE_SHELL == "true" ]] || return 0
 
 	local _COMMAND_END_TIME=$(date +%s%N)
 
@@ -184,7 +184,7 @@ __set_bash_prompt() {
 	if [[ ! -z "$VIRTUAL_ENV" ]]; then
 		venv="($(basename $VIRTUAL_ENV)) "
 	fi
-	local preGitPS1="$infoStrPS1 \[\033[G\]$__COL_BW$CONDA_PROMPT_MODIFIER$venv$__COL_CX\t $__COL_W\u$__COL_CX@$__COL_W\h $exitString $__COL_Y\w $__COL_BW"
+	local preGitPS1="$infoStrPS1 \[\033[G\]$__COL_W[${__COL_BK}bash$__COL_W] $__COL_BW$CONDA_PROMPT_MODIFIER$venv$__COL_CX\t $__COL_W\u$__COL_CX@$__COL_W\h $exitString $__COL_Y\w $__COL_BW"
 	local postGitPS1="\n$__COL_Y$dirstack$__COL_G\\\$$__COL_RESET "
 
 	# Set PS1 from $preGitPS1 + <git-status> + $postGitPS1
@@ -192,7 +192,7 @@ __set_bash_prompt() {
 }
 
 # Only set prompt if interactive
-if $_INTERACTIVE_SHELL; then
+if [[ $_INTERACTIVE_SHELL == "true" ]]; then
 	unset PS1
 
 	# This tells bash to reinterpret PS1 after every command, which we
