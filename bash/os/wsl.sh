@@ -1,13 +1,15 @@
 #!/bin/bash
 
+export WINHOME="$(cmd.exe /C "cd /D %USERPROFILE% && bash.exe -c pwd" 2>/dev/null)"
+
 if command -v jupyter 2>&1 > /dev/null; then
     jupyter() {
         case $1 in
             notebook)
-                command "jupyter" $@ --no-browser
+                command "jupyter" --no-browser "$@"
                 ;;
             *)
-                command "jupyter" $@
+                command "jupyter" "$@"
                 ;;
         esac
     }
@@ -31,8 +33,10 @@ cdw() {
         return 1
     else
         if [[ "$1" == '~' ]]; then
-            # TODO: Handle '~/Downloads', etc. properly
-            cd "/mnt/c/Users/$(whoami)"
+            cd "$WINHOME"
+            return
+        elif [[ "$1" == '~/'* ]]; then
+            cd "$WINHOME/${1##\~\/}"
             return
         fi
         path="$(wslpath "$1" 2>&1)"

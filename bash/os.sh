@@ -1,7 +1,12 @@
 #!/bin/bash
 
+is_wsl() {
+    grep -qiE "(Microsoft|WSL)" /proc/version &> /dev/null
+    return $?
+}
+
 # Source os/ scripts
-if grep -q -i Microsoft /proc/version; then
+if is_wsl; then
     # WSL
     export PATH=~/.dotfiles/bin/os/wsl:$PATH
     if [[ -r ~/.dotfiles/bash/os/wsl.sh ]]; then
