@@ -1,22 +1,18 @@
 
 <#
 .Synopsis
-	goto [<option>] <alias> [<directory>]
+	goto - quickly navigate around the file system using custom aliases
 .Description
-	Quickly navigate around the file system
-.Parameter Name
-
-.Example
-	goto <alias> - Changes to the directory registered for the given alias
+	goto <alias>                          - Changes to the directory registered for the given alias
 	goto -r|-register <alias> <directory> - Registers an alias
-	goto -u|-unregister <alias> - Unregisters an alias
-	goto -pu|-push <alias> - Pushes the current directory onto the stack, then performs goto
-	goto -po|-pop - Pops the top directory from the stack, then changes to that directory
-	goto -l|-list - Lists aliases
-	goto -e|-expand <alias> - Expands an alias
-	goto -c|-cleanup - Cleans up non existent directory aliases
+	goto -u|-unregister <alias>           - Unregisters an alias
+	goto -pu|-push <alias>                - Pushes the current directory onto the stack, then performs goto
+	goto -po|-pop                         - Pops the top directory from the stack, then changes to that directory
+	goto -l|-list                         - Lists aliases
+	goto -e|-expand <alias>               - Expands an alias
+	goto -c|-cleanup                      - Cleans up non existent directory aliases
 .Notes
-	Author: Callum Tolley
+	Author: Callum Tolley (Inspired by https://github.com/iridakos/goto)
 	Date:   7th June 2020
 #>
 function goto() {
