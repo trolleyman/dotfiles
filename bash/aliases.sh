@@ -87,6 +87,8 @@ alias gbase='git rebase'
 complete -F _complete_alias gbase
 alias gd='git diff'
 complete -F _complete_alias gd
+alias gds='git diff --staged'
+complete -F _complete_alias gds
 alias gdiff='git diff'
 complete -F _complete_alias gdiff
 alias gm='git merge'
@@ -97,6 +99,10 @@ alias gri='git rebase -i'
 complete -F _complete_alias gri
 alias grt='git reset'
 complete -F _complete_alias grt
+alias grth='git reset --hard'
+complete -F _complete_alias grth
+alias grh='git reset --hard'
+complete -F _complete_alias grh
 alias gf='git fetch'
 complete -F _complete_alias gf
 alias gfp='git fetch -p'

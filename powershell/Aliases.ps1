@@ -82,6 +82,9 @@ function gbase() {
 function gd() {
 	git diff @args
 }
+function gds() {
+	git diff --staged @args
+}
 function gdiff() {
 	git diff @args
 }
@@ -96,6 +99,12 @@ function gri() {
 }
 function grt() {
 	git reset @args
+}
+function grth() {
+	git reset --hard @args
+}
+function grh() {
+	git reset --hard @args
 }
 function gf() {
 	git fetch @args
