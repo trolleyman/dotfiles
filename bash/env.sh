@@ -49,6 +49,9 @@ export LESS=-Rq
 # Make vim the default editor
 export EDITOR=/usr/bin/vim
 
+# Stop Git from prompting for merge messages
+export GIT_MERGE_AUTOEDIT=no
+
 # Anaconda env
 if [[ -r "$HOME/anaconda3/etc/profile.d/conda.sh" ]]; then
 	. "$HOME/anaconda3/etc/profile.d/conda.sh"

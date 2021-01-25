@@ -42,3 +42,5 @@ Start-Job -ScriptBlock {
 	git config --global core.excludesFile "$HOME\.dotfiles\git\global_gitignore"
 	git config --global core.hooksPath "$HOME\.dotfiles\git\hooks"
 } | Out-Null
+
+$env:GIT_MERGE_AUTOEDIT="no"
