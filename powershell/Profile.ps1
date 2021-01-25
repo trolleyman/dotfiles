@@ -8,6 +8,7 @@ $ErrorActionPreference = "Stop"
 
 . "$HOME\.dotfiles\powershell\Aliases.ps1"
 . "$HOME\.dotfiles\powershell\GitConfig.ps1"
+. "$HOME\.dotfiles\powershell\Update-SessionEnvironment.ps1"
 
 # TODO: Git in prompt
 . "$HOME\.dotfiles\powershell\Prompt.ps1"
