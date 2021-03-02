@@ -33,6 +33,12 @@ function do_link() {
     (set -x; ln -s "$1" "$2")
 }
 
+function do_unlink() {
+    if [[ -L "$1" ]]; then
+        (set -x; unlink "$1")
+    fi
+}
+
 set -e
 
 # Dircolors
@@ -67,8 +73,10 @@ do_link ~/.dotfiles/vim ~/.vim
 do_link ~/.dotfiles/tmux.conf ~/.tmux.conf
 
 # GDB
-do_link ~/.dotfiles/gdb-dashboard/.gdbinit ~/.gdbinit
-do_link ~/.dotfiles/gdbinit.d ~/.gdbinit.d
+#do_link ~/.dotfiles/gdb-dashboard/.gdbinit ~/.gdbinit
+do_unlink ~/.gdbinit
+#do_link ~/.dotfiles/gdbinit.d ~/.gdbinit.d
+do_unlink ~/.gdbinit.d
 
 # ZSH
 do_link ~/.dotfiles/zsh/zshrc ~/.zshrc
