@@ -81,3 +81,8 @@ export PATH=$HOME/.dotfiles/bin:$PATH
 # Other local binaries
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
+
+# === Load nvm ===
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[[ $_INTERACTIVE_SHELL == "true" ]] && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
