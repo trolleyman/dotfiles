@@ -1,0 +1,44 @@
+#!/bin/bash
+# Finds a merge request that has changed a specified file
+# Takes a regex
+
+set -eo pipefail
+
+usage() {
+    echo "usage: $0 <regex>"
+    exit 1
+}
+
+if [[ $# -ne 1 ]]; then
+    usage
+fi
+file_regex="$1"
+
+remote_name=$(git remote | head -n 1)
+
+if [[ -z $remote_name ]]; then
+    echo "error: Remote not defined"
+    exit 1
+fi
+
+echo "Fetching MRs..."
+git fetch $remote_name +refs/merge-requests/*/head:refs/remotes/$remote_name/merge-requests/* 2>&1 >/dev/null
+
+merge_requests=$(git branch -r | grep "^  $remote_name/merge-requests/" | sed "s_  $remote_name/merge-requests/__" | tr '\n' ' ' )
+echo "MRs: $merge_requests"
+echo
+
+for mr in $merge_requests; do
+    mr_branch="$remote_name/merge-requests/$mr"
+    merge_base=$(git merge-base "$mr_branch" "origin/master")
+    #echo "MR: $mr: $merge_base"
+
+    matched_files=$(git diff --name-only "$merge_base" "$mr_branch" | grep -E --color=always "$file_regex" || [[ $? == 1 ]])
+    if [[ ! -z $matched_files ]]; then
+        echo "=== MR $mr ==="
+        while IFS= read -r file; do
+            printf "git diff %q %q -- '%s'\n" "$merge_base" "$mr_branch" "$file"
+        done <<< "$matched_files"
+        echo
+    fi
+done
