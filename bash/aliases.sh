@@ -68,6 +68,8 @@ alias gsl='git stash list'
 complete -F _complete_alias gsl
 alias gco='git checkout'
 complete -F _complete_alias gco
+alias gcom='git checkout master'
+complete -F _complete_alias gcom
 alias gpl='git pull'
 complete -F _complete_alias gpl
 alias gp='git push'
